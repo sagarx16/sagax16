@@ -152,37 +152,121 @@ const { company, nav } = siteData;
       <slot />
     </main>
 
-    <!-- Footer: Exactly as specified: logo, links Home, Our Work, Team, Contact, GitHub, LinkedIn, text "Bokaro Steel City, Jharkhand", text "© 2026 SAGA16", oversized SAGA16 type. Nothing else. -->
-    <footer class="relative w-full overflow-hidden bg-[#091414] text-white pt-20 pb-12 border-t border-white/10">
+    <!-- Footer: Multi-column structure inspired by reference with SAGA16 tokens, social pills, contact block and oversized watermark -->
+    <footer class="relative w-full overflow-hidden bg-[#091414] text-white pt-20 pb-8 border-t border-white/10">
       <div class="relative max-w-[1280px] mx-auto px-6 lg:px-12 z-10">
-        <!-- Top Row: Logo & Links -->
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-12 border-b border-white/10">
-          <a
-            href="/"
-            class="font-black italic uppercase tracking-widest text-2xl lg:text-3xl text-white select-none hover:text-[#6BBF9A] transition-colors"
-          >
-            SAGA16
-          </a>
+        <!-- Main Footer Columns -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14">
+          <!-- Col 1: Brand & Bio & Socials (5 cols) -->
+          <div class="lg:col-span-5 flex flex-col items-start gap-5">
+            <a
+              href="/"
+              class="font-black italic uppercase tracking-widest text-2xl lg:text-3xl text-white select-none hover:text-[#6BBF9A] transition-colors"
+              aria-label="SAGA16 Home"
+            >
+              SAGA16
+            </a>
+            <p class="text-sm sm:text-base text-[#A9B5B4] font-normal leading-relaxed max-w-sm">
+              We design and build fast, polished, mobile-ready websites for institutions, businesses, civic bodies and celebrations.
+            </p>
 
-          <nav class="flex flex-wrap items-center gap-6 text-sm text-[#A9B5B4]" aria-label="Footer Navigation">
-            <a href="/" class="hover:text-white transition-colors">Home</a>
-            <a href="/our-work" class="hover:text-white transition-colors">Our Work</a>
-            <a href="/team" class="hover:text-white transition-colors">Team</a>
-            <a href="/contact" class="hover:text-white transition-colors">Contact</a>
-            <a href={company.github} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">GitHub</a>
-            <a href={company.linkedin} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>
-          </nav>
+            <!-- Pill Social Container (matching reference screenshot) -->
+            <div class="inline-flex items-center gap-4 px-5 py-2.5 rounded-full border border-white/15 bg-white/5 backdrop-blur-sm">
+              <!-- LinkedIn -->
+              <a
+                href={company.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-[#A9B5B4] hover:text-[#6BBF9A] transition-colors"
+                aria-label="LinkedIn"
+              >
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                </svg>
+              </a>
+
+              <!-- GitHub -->
+              <a
+                href={company.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-[#A9B5B4] hover:text-[#6BBF9A] transition-colors"
+                aria-label="GitHub"
+              >
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                </svg>
+              </a>
+
+              <!-- WhatsApp -->
+              <a
+                href={company.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-[#A9B5B4] hover:text-[#6BBF9A] transition-colors"
+                aria-label="WhatsApp"
+              >
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 012.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 01-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.24-.74-.66-1.25-1.48-1.39-1.73-.15-.25-.02-.39.11-.51.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.48c-.16 0-.43.06-.66.31-.22.25-.86.84-.86 2.05s.88 2.38 1 2.55c.13.16 1.74 2.65 4.21 3.72.59.25 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.1-.23-.17-.48-.29z" />
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Col 2: Navigation Links (3 cols) -->
+          <div class="lg:col-span-3 flex flex-col gap-3">
+            <span class="text-xs uppercase tracking-widest text-[#6BBF9A] font-bold mb-1">
+              Company
+            </span>
+            <a href="/" class="text-sm text-[#A9B5B4] hover:text-white transition-colors">Home</a>
+            <a href="/our-work" class="text-sm text-[#A9B5B4] hover:text-white transition-colors">Our Work</a>
+            <a href="/team" class="text-sm text-[#A9B5B4] hover:text-white transition-colors">Team</a>
+            <a href="/contact" class="text-sm text-[#A9B5B4] hover:text-white transition-colors">Contact</a>
+          </div>
+
+          <!-- Col 3: Direct Contact & Action Pill (4 cols, matching reference) -->
+          <div class="lg:col-span-4 flex flex-col items-start gap-4">
+            <!-- Pill Button -->
+            <a
+              href={company.tel}
+              class="inline-flex items-center justify-center px-7 py-3 rounded-full bg-[#326262] hover:bg-[#3E6161] text-white text-sm font-semibold transition-all shadow-md hover:-translate-y-0.5 active:translate-y-0"
+            >
+              Call Now
+            </a>
+
+            <!-- Phone Number -->
+            <a
+              href={company.tel}
+              class="text-sm font-semibold text-white hover:text-[#6BBF9A] transition-colors"
+            >
+              {company.phone}
+            </a>
+
+            <!-- Email -->
+            <a
+              href={company.mailto}
+              class="text-sm text-[#A9B5B4] hover:text-white transition-colors underline underline-offset-4 decoration-white/20"
+            >
+              {company.email}
+            </a>
+
+            <!-- Location -->
+            <span class="text-xs text-[#A9B5B4] font-medium">
+              {company.location}
+            </span>
+          </div>
         </div>
 
-        <!-- Middle Row: Location and Copyright -->
-        <div class="py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-sm text-[#A9B5B4]">
-          <span>{company.location}</span>
-          <span>{company.copyright}</span>
+        <!-- Hairline Divider (matching reference) -->
+        <div class="border-t border-white/10 pt-8 pb-4 text-center">
+          <p class="text-xs sm:text-sm text-[#A9B5B4] font-normal">
+            {company.copyright}. All rights reserved.
+          </p>
         </div>
       </div>
 
-      <!-- Effect 8: Oversized Brand Typography fitted to full page width, partly cropped at bottom edge -->
-      <div class="relative w-full overflow-hidden pointer-events-none select-none flex justify-center -mb-8 lg:-mb-16 pt-6">
+      <!-- Effect 8: Giant Oversized Brand Watermark Typography at bottom (matching reference) -->
+      <div class="relative w-full overflow-hidden pointer-events-none select-none flex justify-center -mb-6 lg:-mb-14 pt-4">
         <span
           data-reveal="letters"
           class="font-black italic uppercase tracking-tighter text-[22vw] leading-none text-transparent bg-clip-text bg-gradient-to-b from-white/[0.08] to-transparent whitespace-nowrap block"
