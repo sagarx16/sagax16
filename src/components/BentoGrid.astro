@@ -152,16 +152,12 @@ const projectThemes = [
   </div>
 
   <!-- Stripe / Keynote Gradient Stage Bento Grid -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 auto-rows-[390px] lg:auto-rows-[430px]">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
     {projects.map((p, index) => {
-      // Bento layout spans
-      let colSpan = 'lg:col-span-6 row-span-1';
-      if (index === 0) colSpan = 'lg:col-span-8 row-span-2';
-      else if (index === 1) colSpan = 'lg:col-span-4 row-span-2';
-      else if (index === 2) colSpan = 'lg:col-span-6 row-span-1';
-      else if (index === 3) colSpan = 'lg:col-span-6 row-span-1';
-      else if (index === 4) colSpan = 'lg:col-span-6 row-span-1';
-      else if (index === 5) colSpan = 'lg:col-span-6 row-span-1';
+      // Bento layout spans & heights
+      let cardClasses = 'lg:col-span-6 min-h-[480px] sm:min-h-[520px] lg:min-h-[550px]';
+      if (index === 0) cardClasses = 'lg:col-span-8 min-h-[580px] lg:min-h-[660px]';
+      else if (index === 1) cardClasses = 'lg:col-span-4 min-h-[580px] lg:min-h-[660px]';
 
       const theme = projectThemes[index] || projectThemes[0];
 
@@ -176,7 +172,7 @@ const projectThemes = [
             theme.cardBg,
             theme.borderColor,
             theme.shadowHover,
-            colSpan,
+            cardClasses,
           ]}
         >
           {/* Ambient Spotlight Glow Background */}
@@ -277,20 +273,20 @@ const projectThemes = [
             )}
 
             {index > 1 && (
-              /* Cards 2-5: Floating Sleek Browser Windows with Theme Accents */
-              <div class="w-full h-full max-h-[255px] rounded-xl sm:rounded-2xl border border-white/20 bg-black/40 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.85)] overflow-hidden flex flex-col transition-all duration-500 ease-out group-hover:-translate-y-1.5 group-hover:scale-[1.02]">
+              /* Cards 2-5: Floating Sleek Browser Windows with Theme Accents (Expanded Size) */
+              <div class="w-full h-full max-h-[360px] sm:max-h-[380px] lg:max-h-[410px] rounded-xl sm:rounded-2xl border border-white/20 bg-black/40 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.85)] overflow-hidden flex flex-col transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-[1.02]">
                 <!-- Browser Bar -->
-                <div class="px-3.5 py-1.5 bg-black/60 border-b border-white/10 flex items-center justify-between shrink-0">
+                <div class="px-4 py-2 bg-black/70 border-b border-white/10 flex items-center justify-between shrink-0">
                   <div class="flex items-center gap-1.5">
                     <span class="w-2.5 h-2.5 rounded-full bg-[#EF4444]/90"></span>
                     <span class="w-2.5 h-2.5 rounded-full bg-[#F59E0B]/90"></span>
                     <span class="w-2.5 h-2.5 rounded-full bg-[#10B981]/90"></span>
                   </div>
-                  <div class="px-3 py-0.5 rounded-full bg-white/10 text-[11px] text-white/85 font-mono tracking-tight flex items-center gap-1.5 border border-white/5">
+                  <div class="px-3.5 py-0.5 rounded-full bg-white/10 text-[11px] text-white/85 font-mono tracking-tight flex items-center gap-1.5 border border-white/5">
                     <span class:list={['w-1.5 h-1.5 rounded-full', theme.accentDot]}></span>
                     <span>{theme.mockUrl}</span>
                   </div>
-                  <span class="text-[10px] text-white/50 font-mono uppercase font-semibold">{p.tech[0]}</span>
+                  <span class="text-[11px] text-white/50 font-mono uppercase font-semibold">{p.tech[0]}</span>
                 </div>
                 <!-- Screen Content -->
                 <div class="w-full flex-1 relative overflow-hidden bg-black">
