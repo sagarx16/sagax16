@@ -210,7 +210,7 @@ export const siteData = {
       ],
       tech: ['Astro'],
       liveUrl: 'https://invifestx16.vercel.app',
-      image: '/projects/royal-wedding-mobile.png',
+      image: '/projects/royal-wedding.png',
     },
     {
       id: 'civic-voice',

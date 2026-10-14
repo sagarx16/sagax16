@@ -37,13 +37,11 @@ const { projects } = siteData;
           class="bg-white rounded-[24px] p-6 border border-[#326262]/10 shadow-[0_4px_20px_-2px_rgba(50,98,98,0.06)] hover:border-[#6BBF9A]/40 transition-colors flex flex-col justify-between"
         >
           <div>
-            <!-- Live Project Screenshot with Box Reveal (Effect 2) -->
+            <!-- Live Project Screenshot in Sleek Browser Frame -->
             <div
-              data-reveal="box"
-              data-box-color={idx % 2 === 0 ? 'teal' : 'green'}
-              class="w-full h-52 bg-[#0E1216] rounded-2xl mb-6 overflow-hidden relative group/img border border-[#326262]/15 shadow-md flex flex-col"
+              class="w-full h-56 bg-[#0E1216] rounded-2xl mb-6 overflow-hidden relative group/img border border-[#326262]/15 shadow-md flex flex-col"
             >
-              <div class="box-content w-full h-full relative flex flex-col bg-[#14181D]">
+              <div class="w-full h-full relative flex flex-col bg-[#14181D]">
                 <!-- Browser Bar Overlay -->
                 <div class="w-full px-3.5 py-2 bg-[#101418] border-b border-white/10 flex items-center justify-between z-10 shrink-0">
                   <div class="flex items-center gap-1.5">
@@ -57,7 +55,7 @@ const { projects } = siteData;
                 </div>
 
                 <!-- Real Screenshot -->
-                <div class="w-full h-full relative overflow-hidden bg-black">
+                <div class="w-full flex-1 relative overflow-hidden bg-black">
                   <img
                     src={project.image}
                     alt={project.title}
@@ -87,9 +85,13 @@ const { projects } = siteData;
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center justify-center w-full py-2.5 rounded-full border border-[#326262]/20 hover:bg-[#326262] hover:text-white text-[#326262] text-sm font-semibold transition-colors"
+              class="group/btn inline-flex items-center justify-center gap-2 w-full py-2.5 rounded-full border border-[#326262]/20 hover:bg-[#326262] hover:text-white text-[#326262] text-sm font-semibold transition-all shadow-sm"
             >
-              View live site
+              <span>View live site</span>
+              <svg class="w-4 h-4 fill-none stroke-current stroke-2 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" viewBox="0 0 24 24">
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
             </a>
           </div>
         </div>
