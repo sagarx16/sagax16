@@ -3,6 +3,100 @@ import { siteData } from '../data/site';
 const { projects } = siteData;
 
 const featuredProject = projects[0]; // S.N. Public School & Tuition Center
+
+// Keynote Ambient Stage Themes per project
+const projectThemes = [
+  {
+    // Project 0: S.N. Public School & Tuition Center (8 cols, 2 rows)
+    tag: 'Institutional & Business',
+    mockUrl: 'sn-public-school.edu.in',
+    imgSrc: '/projects/sn-public-school.png',
+    cardBg: 'from-[#1C1513] via-[#120F0E] to-[#0A0808]',
+    spotlight: 'radial-gradient(circle at 70% 35%, rgba(245, 158, 11, 0.22) 0%, rgba(220, 38, 38, 0.08) 45%, transparent 70%)',
+    borderColor: 'border-amber-500/25 hover:border-amber-400/70',
+    shadowHover: 'hover:shadow-[0_25px_65px_-12px_rgba(245,158,11,0.28)]',
+    pillBg: 'bg-amber-400/15 text-amber-300 border-amber-400/30',
+    titleHover: 'group-hover:text-amber-200',
+    arrowHover: 'group-hover:bg-amber-400 group-hover:text-black group-hover:border-amber-400',
+    summary: 'Full-fledged CBSE academy platform with interactive curriculum wings & real admissions.',
+    accentDot: 'bg-amber-400'
+  },
+  {
+    // Project 1: Royal Wedding Invitation (4 cols, 2 rows)
+    tag: 'Celebration & Luxury',
+    mockUrl: 'invifest.royal-invitation',
+    imgSrc: '/projects/royal-wedding-mobile.png',
+    cardBg: 'from-[#2B0E14] via-[#19080C] to-[#0B0406]',
+    spotlight: 'radial-gradient(circle at 50% 45%, rgba(212, 175, 55, 0.28) 0%, rgba(180, 83, 9, 0.12) 42%, transparent 70%)',
+    borderColor: 'border-[#D4AF37]/40 hover:border-[#D4AF37]/90',
+    shadowHover: 'hover:shadow-[0_25px_65px_-12px_rgba(212,175,55,0.3)]',
+    pillBg: 'bg-[#D4AF37]/20 text-[#F5E6BE] border-[#D4AF37]/40',
+    titleHover: 'group-hover:text-[#F5E6BE]',
+    arrowHover: 'group-hover:bg-[#D4AF37] group-hover:text-black group-hover:border-[#D4AF37]',
+    summary: 'Velvet maroon envelope with gold wax seal, animated music & guest RSVP ceremony.',
+    accentDot: 'bg-[#D4AF37]'
+  },
+  {
+    // Project 2: CivicVoice (6 cols, 1 row)
+    tag: 'Civic & Government',
+    mockUrl: 'civicvoice.platform',
+    imgSrc: '/projects/civic-voice.png',
+    cardBg: 'from-[#0C1B33] via-[#071124] to-[#030814]',
+    spotlight: 'radial-gradient(circle at 65% 40%, rgba(56, 189, 248, 0.24) 0%, rgba(37, 99, 235, 0.08) 45%, transparent 70%)',
+    borderColor: 'border-sky-500/30 hover:border-sky-400/80',
+    shadowHover: 'hover:shadow-[0_22px_55px_-12px_rgba(56,189,248,0.28)]',
+    pillBg: 'bg-sky-500/15 text-sky-300 border-sky-500/30',
+    titleHover: 'group-hover:text-sky-200',
+    arrowHover: 'group-hover:bg-sky-400 group-hover:text-black group-hover:border-sky-400',
+    summary: 'Democratic civic participation hub for reporting issues, voting on budgets & city forums.',
+    accentDot: 'bg-sky-400'
+  },
+  {
+    // Project 3: PocketBank (6 cols, 1 row)
+    tag: 'Fintech & Banking',
+    mockUrl: 'pocketbank.app',
+    imgSrc: '/projects/pocketbank.png',
+    cardBg: 'from-[#082218] via-[#051710] to-[#020A07]',
+    spotlight: 'radial-gradient(circle at 65% 40%, rgba(52, 211, 153, 0.24) 0%, rgba(16, 185, 129, 0.08) 45%, transparent 70%)',
+    borderColor: 'border-emerald-500/30 hover:border-emerald-400/80',
+    shadowHover: 'hover:shadow-[0_22px_55px_-12px_rgba(52,211,153,0.28)]',
+    pillBg: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30',
+    titleHover: 'group-hover:text-emerald-200',
+    arrowHover: 'group-hover:bg-emerald-400 group-hover:text-black group-hover:border-emerald-400',
+    summary: 'Next-gen student banking ecosystem with high-yield savings & instant parent allowances.',
+    accentDot: 'bg-emerald-400'
+  },
+  {
+    // Project 4: Sachet (6 cols, 1 row)
+    tag: 'Disaster Intelligence',
+    mockUrl: 'sachet.disaster-grid',
+    imgSrc: '/projects/sachet.png',
+    cardBg: 'from-[#101E38] via-[#0A1325] to-[#040812]',
+    spotlight: 'radial-gradient(circle at 65% 40%, rgba(99, 102, 241, 0.24) 0%, rgba(59, 130, 246, 0.08) 45%, transparent 70%)',
+    borderColor: 'border-indigo-500/30 hover:border-indigo-400/80',
+    shadowHover: 'hover:shadow-[0_22px_55px_-12px_rgba(99,102,241,0.28)]',
+    pillBg: 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30',
+    titleHover: 'group-hover:text-indigo-200',
+    arrowHover: 'group-hover:bg-indigo-400 group-hover:text-black group-hover:border-indigo-400',
+    summary: 'Unified flood forecast grid & cross-border crisis coordination across India & Nepal.',
+    accentDot: 'bg-indigo-400'
+  },
+  {
+    // Project 5: Studio Ghibli Tribute (6 cols, 1 row)
+    tag: 'Cinematic Tribute',
+    mockUrl: 'ghibli.cinema/dark',
+    imgSrc: '/projects/ghibli-tribute.png',
+    cardBg: 'from-[#220F3A] via-[#150926] to-[#090412]',
+    spotlight: 'radial-gradient(circle at 65% 40%, rgba(192, 132, 252, 0.26) 0%, rgba(147, 51, 234, 0.08) 45%, transparent 70%)',
+    borderColor: 'border-purple-500/30 hover:border-purple-400/80',
+    shadowHover: 'hover:shadow-[0_22px_55px_-12px_rgba(192,132,252,0.3)]',
+    pillBg: 'bg-purple-500/15 text-purple-300 border-purple-500/30',
+    titleHover: 'group-hover:text-purple-200',
+    arrowHover: 'group-hover:bg-purple-400 group-hover:text-black group-hover:border-purple-400',
+    summary: 'Dark-mode interactive cinematic archive honoring Hayao Miyazaki’s 23 timeless films.',
+    accentDot: 'bg-purple-400'
+  }
+];
 ---
 
 <div class="w-full">
@@ -57,28 +151,19 @@ const featuredProject = projects[0]; // S.N. Public School & Tuition Center
     </div>
   </div>
 
-  <!-- Effect 7: Full-bleed masonry/bento grid with aesthetic device and browser mockups -->
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 auto-rows-[300px] lg:auto-rows-[320px]">
+  <!-- Stripe / Keynote Gradient Stage Bento Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 auto-rows-[390px] lg:auto-rows-[430px]">
     {projects.map((p, index) => {
       // Bento layout spans
-      let colSpan = 'lg:col-span-4 row-span-1';
+      let colSpan = 'lg:col-span-6 row-span-1';
       if (index === 0) colSpan = 'lg:col-span-8 row-span-2';
       else if (index === 1) colSpan = 'lg:col-span-4 row-span-2';
-      else if (index === 2) colSpan = 'lg:col-span-4 row-span-1';
-      else if (index === 3) colSpan = 'lg:col-span-4 row-span-1';
+      else if (index === 2) colSpan = 'lg:col-span-6 row-span-1';
+      else if (index === 3) colSpan = 'lg:col-span-6 row-span-1';
       else if (index === 4) colSpan = 'lg:col-span-6 row-span-1';
       else if (index === 5) colSpan = 'lg:col-span-6 row-span-1';
 
-      // Specific mock URL per project
-      const mockUrls = [
-        'sn-public-school.edu.in',
-        'invifest.royal-invitation',
-        'civicvoice.platform',
-        'pocketbank.app',
-        'sachet.disaster-grid',
-        'ghibli.cinema/dark'
-      ];
-      const mockUrl = mockUrls[index] || 'saga16.live';
+      const theme = projectThemes[index] || projectThemes[0];
 
       return (
         <a
@@ -86,120 +171,138 @@ const featuredProject = projects[0]; // S.N. Public School & Tuition Center
           target="_blank"
           rel="noopener noreferrer"
           data-project-category={p.category}
-          data-reveal="box"
-          data-box-color={index % 2 === 0 ? 'teal' : 'green'}
           class:list={[
-            'group relative rounded-[28px] overflow-hidden border border-[#326262]/15 bg-[#0C1013] shadow-[0_4px_24px_-2px_rgba(50,98,98,0.08)] hover:border-[#6BBF9A]/60 hover:shadow-[0_16px_40px_-6px_rgba(50,98,98,0.22)] transition-all duration-500 flex flex-col justify-between p-6',
+            'group relative rounded-[28px] overflow-hidden border bg-gradient-to-br transition-all duration-500 flex flex-col justify-between p-6 sm:p-8',
+            theme.cardBg,
+            theme.borderColor,
+            theme.shadowHover,
             colSpan,
           ]}
         >
-          {/* Card Mockup Visual Container */}
-          <div class="box-content absolute inset-0 w-full h-full overflow-hidden pointer-events-none">
-            {index === 0 && (
-              /* Card 0: S.N. Public School - Large Floating Desktop Browser */
-              <div class="w-full h-full bg-gradient-to-br from-[#161B20] via-[#0E1216] to-[#0A0D10] p-4 sm:p-6 flex flex-col justify-start">
-                <div class="w-full max-w-[96%] mx-auto rounded-xl sm:rounded-2xl border border-white/15 bg-[#1A1E24] shadow-[0_20px_50px_rgba(0,0,0,0.8)] overflow-hidden transition-transform duration-700 ease-out group-hover:scale-[1.02] group-hover:-translate-y-1">
-                  <!-- Browser Window Bar -->
-                  <div class="px-4 py-2.5 bg-[#14171B] border-b border-white/10 flex items-center justify-between">
-                    <div class="flex items-center gap-1.5">
-                      <span class="w-2.5 h-2.5 rounded-full bg-[#EF4444]/90"></span>
-                      <span class="w-2.5 h-2.5 rounded-full bg-[#F59E0B]/90"></span>
-                      <span class="w-2.5 h-2.5 rounded-full bg-[#10B981]/90"></span>
-                    </div>
-                    <div class="px-3 py-0.5 rounded-full bg-white/10 text-[11px] text-white/70 font-mono tracking-tight flex items-center gap-1.5 border border-white/5">
-                      <svg class="w-2.5 h-2.5 text-[#6BBF9A]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                        <path d="M7 11V7a5 5 0 0110 0v4"></path>
-                      </svg>
-                      <span>{mockUrl}</span>
-                    </div>
-                    <span class="text-[10px] text-white/40 font-mono uppercase tracking-wider">{p.tech[0]}</span>
-                  </div>
-                  <!-- Browser Content -->
-                  <div class="w-full aspect-[16/9] sm:aspect-[16/10] overflow-hidden bg-black">
-                    <img
-                      src="/projects/sn-public-school.png"
-                      alt={p.title}
-                      class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
-                </div>
+          {/* Ambient Spotlight Glow Background */}
+          <div
+            class="pointer-events-none absolute inset-0 opacity-80 group-hover:opacity-100 transition-opacity duration-700"
+            style={`background: ${theme.spotlight};`}
+          ></div>
+
+          {/* Subtle Keynote Grid Pattern Overlay */}
+          <div
+            class="pointer-events-none absolute inset-0 opacity-[0.12] group-hover:opacity-[0.18] transition-opacity duration-700"
+            style="background-image: radial-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px); background-size: 24px 24px;"
+          ></div>
+
+          {/* Top Header: Tag Pill, Tech Chip, Arrow Button, Title, Subtitle */}
+          <div class="relative z-10 flex flex-col gap-2 mb-4 shrink-0">
+            <div class="flex items-center justify-between gap-3">
+              <div class="flex items-center gap-2">
+                <span class:list={['px-3 py-1 rounded-full text-xs font-mono font-medium tracking-tight border shadow-sm', theme.pillBg]}>
+                  {p.label}
+                </span>
+                <span class="hidden sm:inline-block px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 text-[11px] font-mono">
+                  {p.tech[0]}
+                </span>
               </div>
-            )}
-
-            {index === 1 && (
-              /* Card 1: Royal Wedding - Floating Luxury Smartphone Mockup */
-              <div class="w-full h-full bg-gradient-to-br from-[#24171B] via-[#160E12] to-[#0A0709] p-4 flex flex-col items-center justify-start">
-                <div class="w-[210px] sm:w-[230px] rounded-t-[2.8rem] p-2 bg-[#1C1619] border-t-2 border-x-2 border-[#D4AF37]/30 shadow-[0_25px_60px_rgba(0,0,0,0.85)] transition-transform duration-700 ease-out group-hover:-translate-y-2 mt-2">
-                  <!-- Dynamic Island -->
-                  <div class="w-14 h-3.5 bg-black rounded-full mx-auto mb-2 flex items-center justify-between px-2 ring-1 ring-white/10">
-                    <span class="w-1.5 h-1.5 rounded-full bg-[#1b2a3a]"></span>
-                    <span class="w-1 h-1 rounded-full bg-[#2a3b4c]"></span>
-                  </div>
-                  <!-- Phone Screen with Royal Wedding Mobile Screenshot -->
-                  <div class="w-full rounded-t-[2.1rem] overflow-hidden aspect-[9/18] relative bg-black shadow-inner">
-                    <img
-                      src="/projects/royal-wedding-mobile.png"
-                      alt={p.title}
-                      class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
-                      loading="lazy"
-                    />
-                    <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-white/[0.12] pointer-events-none"></div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {index > 1 && (
-              /* Cards 2-5: Floating Sleek Browser Windows with Theme Accents */
-              <div class="w-full h-full bg-gradient-to-br from-[#14181D] via-[#0E1216] to-[#080B0D] p-3 sm:p-4 flex flex-col justify-start">
-                <div class="w-full h-full rounded-2xl border border-white/15 bg-[#161A20] shadow-[0_16px_40px_rgba(0,0,0,0.7)] overflow-hidden transition-transform duration-700 ease-out group-hover:scale-[1.02] group-hover:-translate-y-1">
-                  <!-- Browser Bar -->
-                  <div class="px-3.5 py-2 bg-[#121519] border-b border-white/10 flex items-center justify-between">
-                    <div class="flex items-center gap-1.5">
-                      <span class="w-2.5 h-2.5 rounded-full bg-[#EF4444]/90"></span>
-                      <span class="w-2.5 h-2.5 rounded-full bg-[#F59E0B]/90"></span>
-                      <span class="w-2.5 h-2.5 rounded-full bg-[#10B981]/90"></span>
-                    </div>
-                    <div class="px-2.5 py-0.5 rounded-full bg-white/10 text-[10px] text-white/70 font-mono tracking-tight flex items-center gap-1 border border-white/5">
-                      <span>{mockUrl}</span>
-                    </div>
-                    <span class="text-[9px] text-[#6BBF9A] font-mono font-semibold uppercase">{p.tech[0]}</span>
-                  </div>
-                  <!-- Screen -->
-                  <div class="w-full h-full relative overflow-hidden bg-black">
-                    <img
-                      src={p.image}
-                      alt={p.title}
-                      class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
-
-            <!-- Protective Gradient Overlay for Bottom Caption Readability -->
-            <div class="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#090D10] via-[#090D10]/90 to-transparent pointer-events-none"></div>
-          </div>
-
-          <!-- Visible Caption: Label Pill, Arrow CTA and Title -->
-          <div class="relative z-10 flex flex-col gap-2 mt-auto">
-            <div class="flex items-center justify-between gap-2">
-              <span class="px-3 py-1 rounded-full bg-[#E5F0E1]/90 backdrop-blur-md text-[#326262] text-xs font-semibold shadow-sm">
-                {p.label}
-              </span>
-              <span class="w-8 h-8 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white flex items-center justify-center opacity-85 group-hover:opacity-100 group-hover:bg-[#6BBF9A] group-hover:text-[#091414] group-hover:border-[#6BBF9A] transition-all duration-300 shadow-lg">
+              <span class:list={[
+                'w-9 h-9 rounded-full bg-white/5 border border-white/10 text-white/80 flex items-center justify-center transition-all duration-300 shadow-sm shrink-0',
+                theme.arrowHover
+              ]}>
                 <svg class="w-4 h-4 fill-none stroke-current stroke-2 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>
               </span>
             </div>
 
-            <h3 class="text-lg sm:text-xl font-medium text-white group-hover:text-[#6BBF9A] transition-colors leading-snug drop-shadow-md">
-              {p.title}
-            </h3>
+            <div>
+              <h3 class:list={['text-2xl sm:text-3xl font-semibold text-white transition-colors leading-snug', theme.titleHover]}>
+                {p.title}
+              </h3>
+              <p class="text-xs sm:text-sm text-white/60 mt-1 line-clamp-1 font-normal leading-relaxed">
+                {theme.summary}
+              </p>
+            </div>
+          </div>
+
+          {/* Centered Floating Mockup Stage */}
+          <div class="relative w-full flex-1 flex items-center justify-center overflow-hidden">
+            {index === 0 && (
+              /* Card 0: S.N. Public School - Large Floating Desktop Browser on Ambient Stage */
+              <div class="w-full h-full max-h-[540px] rounded-2xl border border-white/20 bg-[#141012] shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-[1.01]">
+                <!-- Browser Bar -->
+                <div class="px-4 py-2.5 bg-[#181315] border-b border-white/10 flex items-center justify-between shrink-0">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-3 h-3 rounded-full bg-[#EF4444]/90"></span>
+                    <span class="w-3 h-3 rounded-full bg-[#F59E0B]/90"></span>
+                    <span class="w-3 h-3 rounded-full bg-[#10B981]/90"></span>
+                  </div>
+                  <div class="px-3.5 py-1 rounded-full bg-white/10 text-xs text-white/85 font-mono tracking-tight flex items-center gap-2 border border-white/5">
+                    <svg class="w-3 h-3 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                      <path d="M7 11V7a5 5 0 0110 0v4"></path>
+                    </svg>
+                    <span>{theme.mockUrl}</span>
+                  </div>
+                  <span class="px-2.5 py-0.5 rounded text-[11px] font-mono text-amber-300 bg-amber-400/15 border border-amber-400/30">CBSE PORTAL</span>
+                </div>
+                <!-- Clean UI Screenshot -->
+                <div class="w-full flex-1 overflow-hidden bg-white">
+                  <img
+                    src={theme.imgSrc}
+                    alt={p.title}
+                    class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            )}
+
+            {index === 1 && (
+              /* Card 1: Royal Wedding - Floating Luxury Smartphone Mockup with Ambient Halo */
+              <div class="w-[235px] sm:w-[255px] rounded-[3rem] p-3 bg-gradient-to-b from-[#2B151C] to-[#12070A] border-2 border-[#D4AF37]/50 shadow-[0_30px_70px_-15px_rgba(0,0,0,0.95)] flex flex-col transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-[1.03] my-auto">
+                <!-- Dynamic Island -->
+                <div class="w-20 h-4 bg-black rounded-full mx-auto mb-2 flex items-center justify-between px-2.5 ring-1 ring-white/10 shrink-0">
+                  <span class="w-2 h-2 rounded-full bg-[#1b2a3a]"></span>
+                  <span class="w-1.5 h-1.5 rounded-full bg-[#2a3b4c]"></span>
+                </div>
+                <!-- Phone Screen with Royal Wedding Mobile Screenshot -->
+                <div class="w-full rounded-[2.3rem] overflow-hidden aspect-[9/17] relative bg-black shadow-inner">
+                  <img
+                    src={theme.imgSrc}
+                    alt={p.title}
+                    class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.05] to-white/[0.15] pointer-events-none"></div>
+                </div>
+              </div>
+            )}
+
+            {index > 1 && (
+              /* Cards 2-5: Floating Sleek Browser Windows with Theme Accents */
+              <div class="w-full h-full max-h-[255px] rounded-xl sm:rounded-2xl border border-white/20 bg-black/40 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.85)] overflow-hidden flex flex-col transition-all duration-500 ease-out group-hover:-translate-y-1.5 group-hover:scale-[1.02]">
+                <!-- Browser Bar -->
+                <div class="px-3.5 py-1.5 bg-black/60 border-b border-white/10 flex items-center justify-between shrink-0">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#EF4444]/90"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#F59E0B]/90"></span>
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#10B981]/90"></span>
+                  </div>
+                  <div class="px-3 py-0.5 rounded-full bg-white/10 text-[11px] text-white/85 font-mono tracking-tight flex items-center gap-1.5 border border-white/5">
+                    <span class:list={['w-1.5 h-1.5 rounded-full', theme.accentDot]}></span>
+                    <span>{theme.mockUrl}</span>
+                  </div>
+                  <span class="text-[10px] text-white/50 font-mono uppercase font-semibold">{p.tech[0]}</span>
+                </div>
+                <!-- Screen Content -->
+                <div class="w-full flex-1 relative overflow-hidden bg-black">
+                  <img
+                    src={theme.imgSrc}
+                    alt={p.title}
+                    class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </a>
       );
