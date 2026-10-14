@@ -2,7 +2,7 @@
 import Base from '../layouts/Base.astro';
 import BentoGrid from '../components/BentoGrid.astro';
 import ProcessSection from '../components/ProcessSection.astro';
-import TechRibbon from '../components/TechRibbon.astro';
+import TechStack from '../components/TechStack.astro';
 import ContactBand from '../components/ContactBand.astro';
 import { siteData } from '../data/site';
 
@@ -87,8 +87,8 @@ const { categories, contactBands } = siteData;
   <!-- Process (Sticky Column Layout) -->
   <ProcessSection />
 
-  <!-- Tech Ribbon (Two-Row Opposite-Direction Carousel) -->
-  <TechRibbon />
+  <!-- Tech Stack (Two-Row Opposite-Direction Carousel) -->
+  <TechStack showButton={false} variant="marquee" />
 
   <!-- Closing CTA Band with Oversized Brand Type Behind -->
   <ContactBand

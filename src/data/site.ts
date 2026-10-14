@@ -72,16 +72,28 @@ export const siteData = {
     description: 'From schools and civic bodies to weddings and birthdays, we design and build the website that fits.',
     rows: [
       {
-        title: 'Institutional & Business Websites',
-        description: 'School, college, institute and company websites with admissions, programmes, galleries, notices and enquiry forms. Starting at ₹5,999.',
+        title: 'Wedding Invitation Websites',
+        text: 'Wedding and anniversary invitation sites with schedules, countdowns, galleries and WhatsApp sharing. Starting at ₹1,600.',
       },
       {
-        title: 'Civic & Government Platforms',
-        description: 'Issue reporting, polls, public dashboards and role-based access for civic bodies and community organisations. Starting at ₹5,999.',
+        title: 'Birthday and Event Invitations',
+        text: 'Birthday and event invitation sites with details, countdowns, galleries and WhatsApp sharing. Birthday sites start at ₹599. Event pricing is as per your requirements.',
       },
       {
-        title: 'Celebration Websites',
-        description: 'Wedding, anniversary and birthday invitation sites with schedules, countdowns, galleries and WhatsApp sharing. Wedding from ₹1,600, birthday from ₹599.',
+        title: 'Business Websites',
+        text: 'Company, school, college and institute websites with programmes, galleries, notices and enquiry forms. Institutional sites start at ₹5,999. Business sites are priced as per your requirements.',
+      },
+      {
+        title: 'Personal Portfolio Websites',
+        text: 'Clean, fast portfolio websites that present your work, skills and contact details. Priced as per your requirements.',
+      },
+      {
+        title: 'Small-Business Websites',
+        text: 'Simple, mobile-ready websites for local and small businesses. Priced as per your requirements.',
+      },
+      {
+        title: 'Custom Branding and Graphic Design',
+        text: 'Logos, brand identity and graphics that match your website. Priced as per your requirements.',
       },
     ],
     marqueeLabel: 'WEBSITES WE HAVE BUILT AND LAUNCHED',
@@ -116,7 +128,7 @@ export const siteData = {
 
   facts: [
     { value: '6', label: 'live projects' },
-    { value: '3', label: 'website categories' },
+    { value: '6', label: 'website categories' },
     { value: '₹599', label: 'starting price' },
   ],
 
@@ -341,7 +353,7 @@ export const siteData = {
 
   faq: [
     {
-      question: 'What websites do you build?',
+      question: 'What websites do we build?',
       answer: 'School and institute sites, company sites, civic and government-type platforms, and birthday, wedding and anniversary invitation sites.',
     },
     {
@@ -349,11 +361,11 @@ export const siteData = {
       answer: 'Birthday from ₹599, wedding from ₹1,600, school or civic platform from ₹5,999. The final price depends on your pages and features.',
     },
     {
-      question: 'Can I see your work?',
+      question: 'Where can you see our work?',
       answer: 'Yes. Every project in Our Work has a live link.',
     },
     {
-      question: 'How do I start?',
+      question: 'How do we start working together?',
       answer: 'Call or WhatsApp us, tell us what you need, and we will share the exact price.',
     },
   ] as FaqItem[],

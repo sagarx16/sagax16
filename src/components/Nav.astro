@@ -1,0 +1,137 @@
+---
+import { siteData } from '../data/site';
+
+interface Props {
+  currentPage?: 'home' | 'our-work' | 'team' | 'contact';
+}
+
+const { currentPage = 'home' } = Astro.props;
+const { company, nav } = siteData;
+---
+
+<!-- Sticky Navbar -->
+<header
+  data-site-header
+  class="site-nav fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300"
+>
+  <div class="max-w-[1280px] mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+    <!-- Logo: SAGA16 in bold italic style -->
+    <a
+      href="/"
+      class="nav-logo text-2xl lg:text-3xl text-[#326262] hover:text-[#1c4e4e] transition-colors select-none"
+      aria-label="SAGA16 Home"
+    >
+      SAGA16
+    </a>
+
+    <!-- Desktop Navigation: Pill container -->
+    <nav class="nav-pill-container hidden md:flex items-center gap-1.5 p-1 rounded-full" aria-label="Main Navigation">
+      {nav.map((item) => {
+        const isActive =
+          (item.href === '/' && currentPage === 'home') ||
+          (item.href === '/our-work' && currentPage === 'our-work') ||
+          (item.href === '/team' && currentPage === 'team') ||
+          (item.href === '/contact' && currentPage === 'contact');
+
+        return (
+          <a
+            href={item.href}
+            class:list={[
+              'px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200',
+              isActive
+                ? 'bg-[#2f5d62] text-white shadow-sm'
+                : 'text-[#4a5f5c] hover:text-[#101012] hover:bg-white/60',
+            ]}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            {item.title}
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- CTA & Mobile Toggle -->
+    <div class="flex items-center gap-3">
+      <a
+        href={company.tel}
+        class="hidden sm:inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-[#326262] text-white hover:bg-[#3E6161] text-sm font-semibold transition-all shadow-[0_4px_14px_-2px_rgba(50,98,98,0.25)] hover:-translate-y-0.5 active:translate-y-0"
+      >
+        Call Now
+      </a>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button
+        type="button"
+        data-mobile-menu-toggle
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Toggle navigation menu"
+        class="md:hidden p-2.5 rounded-full bg-[#E5F0E1] text-[#326262] hover:bg-[#326262] hover:text-white transition-colors"
+      >
+        <svg class="w-6 h-6 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Dropdown -->
+  <div
+    id="mobile-menu"
+    data-mobile-menu
+    class="hidden md:hidden fixed inset-x-0 top-20 bg-[#FAF9F8] border-b border-[#326262]/10 shadow-xl px-6 py-6"
+  >
+    <nav class="nav-pill-mobile flex flex-col gap-2 p-2.5 rounded-2xl">
+      {nav.map((item) => {
+        const isActive =
+          (item.href === '/' && currentPage === 'home') ||
+          (item.href === '/our-work' && currentPage === 'our-work') ||
+          (item.href === '/team' && currentPage === 'team') ||
+          (item.href === '/contact' && currentPage === 'contact');
+
+        return (
+          <a
+            href={item.href}
+            class:list={[
+              'px-4 py-3 rounded-xl text-base font-semibold transition-colors',
+              isActive
+                ? 'bg-[#2f5d62] text-white'
+                : 'text-[#4a5f5c] hover:text-[#101012] hover:bg-white/60',
+            ]}
+            aria-current={isActive ? 'page' : undefined}
+          >
+            {item.title}
+          </a>
+        );
+      })}
+      <div class="pt-3 border-t border-[#2f5d62]/10">
+        <a
+          href={company.tel}
+          class="w-full flex items-center justify-center py-3 rounded-full bg-[#2f5d62] text-white font-semibold shadow-md"
+        >
+          Call Now
+        </a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .nav-logo {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 800;
+    font-style: italic;
+    letter-spacing: -0.04em;
+  }
+
+  .nav-pill-container {
+    background-color: #e8f0e6;
+    border: 1px solid rgba(47, 93, 98, 0.08);
+    box-shadow: none;
+  }
+
+  .nav-pill-mobile {
+    background-color: #e8f0e6;
+    border: 1px solid rgba(47, 93, 98, 0.08);
+  }
+</style>

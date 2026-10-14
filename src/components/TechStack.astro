@@ -1,0 +1,730 @@
+---
+import { siteData } from '../data/site';
+import { allTechnologies } from '../data/techStackData';
+
+interface Props {
+  showButton?: boolean;
+  variant?: '3d' | 'marquee';
+}
+
+const { showButton = true, variant = '3d' } = Astro.props;
+const { techStack } = siteData;
+
+const row1 = techStack.row1 || ['Next.js', 'React', 'TypeScript', 'Tailwind CSS', 'Node.js', 'Express', 'MongoDB'];
+const row2 = techStack.row2 || ['Redux Toolkit', 'Astro', 'JavaScript', 'HTML5', 'CSS3', 'Figma', 'Git & GitHub', 'Vercel'];
+
+// 20px line icon paths for the marquee variant (Our Work page)
+const getTechIcon = (name: string) => {
+  switch (name) {
+    case 'Next.js':
+      return 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5';
+    case 'React':
+      return 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h2v-6h-2v6zm0-8h2V7h-2v2z';
+    case 'TypeScript':
+      return 'M4 4h16v16H4V4zm8 10v-4m-3 0h6m2 4v-2c0-.5-.5-1-1-1h-1c-.5 0-1 .5-1 1v1c0 .5.5 1 1 1h1c.5 0 1 .5 1 1v1c0 .5-.5 1-1 1h-1c-.5 0-1-.5-1-1';
+    case 'Tailwind CSS':
+      return 'M12 4.5C7 4.5 3.75 7 2.25 12c1.5 5 4.75 7.5 9.75 7.5s8.25-2.5 9.75-7.5c-1.5-5-4.75-7.5-9.75-7.5z';
+    case 'Node.js':
+      return 'M12 2L3 7v10l9 5 9-5V7l-9-5zm0 2.2l6.8 3.8-6.8 3.8L5.2 8 12 4.2z';
+    case 'Express':
+      return 'M4 12h16M14 6l6 6-6 6';
+    case 'MongoDB':
+      return 'M12 2C8 6 6 9 6 13c0 4 3 7 6 9 3-2 6-5 6-9 0-4-2-7-6-11z';
+    case 'Redux Toolkit':
+      return 'M12 2l8 4.5v9L12 20l-8-4.5v-9L12 2z';
+    case 'Astro':
+      return 'M12 2.5l2.5 5.5H20l-4.5 3.5 1.7 5.5-5.2-3.8-5.2 3.8 1.7-5.5L4 8h5.5L12 2.5z';
+    case 'JavaScript':
+      return 'M3 3h18v18H3V3zm11 13h2.5c.8 0 1.5-.7 1.5-1.5v-2c0-.8-.7-1.5-1.5-1.5H14m-5 5v-3c0-.6-.4-1-1-1H7';
+    case 'HTML5':
+      return 'M4 3l1.5 17L12 22l6.5-2L20 3H4zm13 5H7l.3 3h9.4l-.5 5.5L12 17.5 7.8 16.5l-.2-2';
+    case 'CSS3':
+      return 'M4 3l1.5 17L12 22l6.5-2L20 3H4zm12 5H8l.2 3h7.6l-.6 6L12 18l-3.2-.8-.2-2.2';
+    case 'Figma':
+      return 'M8 4a3 3 0 0 1 3 3v2H8a3 3 0 0 1 0-6zm5 0h3a3 3 0 0 1 0 6h-3V4zm-5 5h3v3H8a3 3 0 0 1 0-3zm5 0h3a3 3 0 0 1 0 6h-3V9zm-5 5h3v3a3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3z';
+    case 'Git & GitHub':
+      return 'M12 2C6.47 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z';
+    case 'Vercel':
+      return 'M12 2L2 19.5h20L12 2z';
+    default:
+      return 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5';
+  }
+};
+
+/**
+ * 29 Explicit Tile Coordinates measured directly from reference (leveingroup.com):
+ * Reference viewport: 1190px.
+ * x: measured from horizontal center (negative = left, positive = right).
+ * y: measured from top edge of button to center of row.
+ * Widths scaled +7% per user instruction: 64, 70, 75, 81, 88.
+ */
+interface AbsoluteTile {
+  id: string;
+  x: number;
+  y: number;
+  row: number;
+  width: number;
+  height: number;
+  opacity: number;
+  side: 'left' | 'right' | 'center';
+}
+
+const tilesData: AbsoluteTile[] = [
+  // ROW 1: y = 40, size: 130x64, opacity: 0.85 (2 tiles) - Left [480], Right [1900]
+  { id: 'nextjs', x: 480, y: 40, row: 1, width: 130, height: 64, opacity: 0.85, side: 'left' },
+  { id: 'vercel', x: 1900, y: 40, row: 1, width: 130, height: 64, opacity: 0.85, side: 'right' },
+
+  // ROW 2: y = 140, size: 145x72, opacity: 0.90 (4 tiles) - Left [440, 625], Right [1755, 1940]
+  { id: 'postgres', x: 440, y: 140, row: 2, width: 145, height: 72, opacity: 0.90, side: 'left' },
+  { id: 'docker', x: 625, y: 140, row: 2, width: 145, height: 72, opacity: 0.90, side: 'left' },
+  { id: 'aws', x: 1755, y: 140, row: 2, width: 145, height: 72, opacity: 0.90, side: 'right' },
+  { id: 'python', x: 1940, y: 140, row: 2, width: 145, height: 72, opacity: 0.90, side: 'right' },
+
+  // ROW 3: y = 250, size: 160x82, opacity: 0.95 (6 tiles) - Left [390, 590, 790], Right [1590, 1790, 1990]
+  { id: 'nodejs', x: 390, y: 250, row: 3, width: 160, height: 82, opacity: 0.95, side: 'left' },
+  { id: 'express', x: 590, y: 250, row: 3, width: 160, height: 82, opacity: 0.95, side: 'left' },
+  { id: 'mongodb', x: 790, y: 250, row: 3, width: 160, height: 82, opacity: 0.95, side: 'left' },
+  { id: 'supabase', x: 1590, y: 250, row: 3, width: 160, height: 82, opacity: 0.95, side: 'right' },
+  { id: 'firebase', x: 1790, y: 250, row: 3, width: 160, height: 82, opacity: 0.95, side: 'right' },
+  { id: 'redux', x: 1990, y: 250, row: 3, width: 160, height: 82, opacity: 0.95, side: 'right' },
+
+  // ROW 4: y = 375, size: 168x92, opacity: 0.98 (8 tiles) - Left [335, 548, 760, 975], Right [1405, 1620, 1830, 2040]
+  { id: 'react', x: 335, y: 375, row: 4, width: 168, height: 92, opacity: 0.98, side: 'left' },
+  { id: 'tailwind', x: 548, y: 375, row: 4, width: 168, height: 92, opacity: 0.98, side: 'left' },
+  { id: 'astro', x: 760, y: 375, row: 4, width: 168, height: 92, opacity: 0.98, side: 'left' },
+  { id: 'github', x: 975, y: 375, row: 4, width: 168, height: 92, opacity: 0.98, side: 'left' },
+  { id: 'figma', x: 1405, y: 375, row: 4, width: 168, height: 92, opacity: 0.98, side: 'right' },
+  { id: 'vite', x: 1620, y: 375, row: 4, width: 168, height: 92, opacity: 0.98, side: 'right' },
+  { id: 'git', x: 1830, y: 375, row: 4, width: 168, height: 92, opacity: 0.98, side: 'right' },
+  { id: 'npm', x: 2040, y: 375, row: 4, width: 168, height: 92, opacity: 0.98, side: 'right' },
+
+  // ROW 5: y = 530, size: 186x104, opacity: 1.00 (9 tiles continuous) - [275, 495, 730, 960, 1190, 1420, 1650, 1880, 2105]
+  { id: 'typescript', x: 275, y: 530, row: 5, width: 186, height: 104, opacity: 1.00, side: 'left' },
+  { id: 'javascript', x: 495, y: 530, row: 5, width: 186, height: 104, opacity: 1.00, side: 'left' },
+  { id: 'html5', x: 730, y: 530, row: 5, width: 186, height: 104, opacity: 1.00, side: 'left' },
+  { id: 'css3', x: 960, y: 530, row: 5, width: 186, height: 104, opacity: 1.00, side: 'left' },
+  { id: 'vscode', x: 1190, y: 530, row: 5, width: 186, height: 104, opacity: 1.00, side: 'center' },
+  { id: 'postman', x: 1420, y: 530, row: 5, width: 186, height: 104, opacity: 1.00, side: 'right' },
+  { id: 'netlify', x: 1650, y: 530, row: 5, width: 186, height: 104, opacity: 1.00, side: 'right' },
+  { id: 'framermotion', x: 1880, y: 530, row: 5, width: 186, height: 104, opacity: 1.00, side: 'right' },
+  { id: 'threejs', x: 2105, y: 530, row: 5, width: 186, height: 104, opacity: 1.00, side: 'right' },
+];
+---
+
+{variant === 'marquee' ? (
+  /* ================= CLASSIC LIGHT MARQUEE (Our Work page) ================= */
+  <section class="w-full bg-[#FAF9F8] py-20 lg:py-28 overflow-hidden text-[#1C1B1B]">
+    <div class="max-w-[1280px] mx-auto px-6 lg:px-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <!-- Left Column: Content -->
+      <div class="lg:col-span-5 flex flex-col items-start">
+        <span class="text-xs uppercase tracking-widest text-[#326262] font-bold mb-3">
+          {techStack.eyebrow || 'MODERN STANDARDS'}
+        </span>
+        <h2
+          data-reveal="text"
+          class="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#1C1B1B] mb-4 leading-[1.1]"
+        >
+          {techStack.heading || 'Our Tech Stack'}
+        </h2>
+        <p
+          data-reveal="text"
+          class="text-base sm:text-lg text-[#586261] mb-8 max-w-md font-normal leading-relaxed"
+        >
+          {techStack.description || 'We build with modern, widely used tools, so your website is fast, easy to maintain and ready to grow.'}
+        </p>
+        {showButton && (
+          <a
+            href="/our-work"
+            class="inline-flex items-center gap-2 px-7 py-3 rounded-full bg-[#326262] hover:bg-[#3E6161] text-white font-semibold text-sm transition-all hover:-translate-y-0.5 active:translate-y-0 shadow-sm"
+          >
+            <span>View Our Work</span>
+            <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+          </a>
+        )}
+      </div>
+
+      <!-- Right Column: Two-row opposite-direction marquee -->
+      <div class="lg:col-span-7 flex flex-col gap-4 overflow-hidden tech-marquee py-4">
+        <!-- Row 1: Moves LEFT (40s) -->
+        <div class="tech-marquee-mask overflow-hidden">
+          <div class="tech-track track-left">
+            <div class="tech-group">
+              {row1.map((item) => (
+                <div class="tech-pill">
+                  <svg class="w-5 h-5 shrink-0 fill-none stroke-[#326262] stroke-2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d={getTechIcon(item)} />
+                  </svg>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+            <div class="tech-group" aria-hidden="true">
+              {row1.map((item) => (
+                <div class="tech-pill">
+                  <svg class="w-5 h-5 shrink-0 fill-none stroke-[#326262] stroke-2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d={getTechIcon(item)} />
+                  </svg>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2: Moves RIGHT (48s) -->
+        <div class="tech-marquee-mask overflow-hidden">
+          <div class="tech-track track-right">
+            <div class="tech-group">
+              {row2.map((item) => (
+                <div class="tech-pill">
+                  <svg class="w-5 h-5 shrink-0 fill-none stroke-[#326262] stroke-2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d={getTechIcon(item)} />
+                  </svg>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+            <div class="tech-group" aria-hidden="true">
+              {row2.map((item) => (
+                <div class="tech-pill">
+                  <svg class="w-5 h-5 shrink-0 fill-none stroke-[#326262] stroke-2" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d={getTechIcon(item)} />
+                  </svg>
+                  <span>{item}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+) : (
+  /* ================= LEVEIN-STYLE ABSOLUTE FIELD (Home page) ================= */
+  <section
+    id="tech-stack-section"
+    class="tech-stack-section select-none"
+    aria-label="Our Tech Stack"
+  >
+    <!-- Background subtle radial bloom -->
+    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_25%,rgba(91,191,148,0.06)_0%,transparent_70%)]"></div>
+
+    <div class="text-block">
+      <span class="inline-block text-xs sm:text-sm uppercase tracking-widest font-bold text-[#5bbf94] mb-3">
+        {techStack.eyebrow || 'MODERN STANDARDS'}
+      </span>
+
+      <h2 class="text-3xl sm:text-4xl lg:text-[46px] font-medium tracking-tight text-white mb-5 leading-[1.15]">
+        {techStack.heading || 'Our Tech Stack'}
+      </h2>
+
+      <p class="text-base sm:text-[17px] font-normal leading-relaxed text-white/[0.92]" style="color: rgba(255, 255, 255, 0.92);">
+        {techStack.description || 'We build with modern, widely used tools, so your website is fast, easy to maintain and ready to grow.'}
+      </p>
+
+      {showButton && (
+        <div class="tech-cta-wrapper" style="margin-top: 40px;">
+          <a
+            href="/our-work"
+            class="tech-cta-button inline-flex items-center justify-center gap-2.5 px-7 py-2 sm:px-8 sm:py-2.5 rounded-full bg-[#8fd3b0] hover:bg-[#a2ddbe] text-[#061414] font-bold text-[15px] sm:text-base min-h-[40px] transition-all duration-200 hover:scale-105 shadow-none"
+          >
+            <span>View Our Work</span>
+            <span class="flex items-center justify-center w-5 h-5 rounded-full border border-[#061414]/30">
+              <svg class="w-3 h-3 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </span>
+          </a>
+        </div>
+      )}
+    </div>
+
+    <!-- Tile Stage 3D perspective wrapper -->
+    <div class="stage-3d">
+      <div id="tech-3d-field" class="stage">
+        {tilesData.map((tile, idx) => {
+          const tech = allTechnologies[tile.id];
+          return tech ? (
+            <div
+              class={`tech-tile-anchor row-${tile.row}`}
+              style={`
+                --x: ${tile.x};
+                --y: ${tile.y};
+                --w: ${tile.width};
+                --h: ${tile.height};
+                --op: ${tile.opacity};
+                --tile-index: ${idx};
+              `}
+            >
+              <div
+                class="tech-tile"
+                data-row={tile.row}
+                data-side={tile.side}
+              >
+                <div class="tech-tile-inner">
+                  <div class="tech-icon-container" set:html={tech.svg} />
+                  <span class="tech-tooltip">{tech.name}</span>
+                </div>
+              </div>
+            </div>
+          ) : null;
+        })}
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  :root {
+    --s: 0.5;
+    --rx: 0deg;
+    --ry: 0deg;
+    --sx: 0;
+    --dx: 0px;
+    --dy: 0px;
+    --dz: 0px;
+  }
+
+  /* ================= MARQUEE STYLES (Light variant) ================= */
+  .tech-marquee-mask {
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .tech-track {
+    display: flex;
+    width: max-content;
+    user-select: none;
+    will-change: transform;
+  }
+
+  .tech-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-right: 1rem;
+    flex-shrink: 0;
+  }
+
+  .tech-pill {
+    background: #ffffff;
+    border: 1px solid rgba(16, 16, 18, 0.06);
+    border-radius: 999px;
+    padding: 14px 24px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    font-weight: 500;
+    color: #101012;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  @keyframes marquee-left {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes marquee-right {
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  .track-left {
+    animation: marquee-left 40s linear infinite;
+  }
+
+  .track-right {
+    animation: marquee-right 48s linear infinite;
+  }
+
+  .tech-marquee:hover .tech-track {
+    animation-play-state: paused;
+  }
+
+  /* ================= LEVEIN-STYLE FIELD STYLES ================= */
+  
+  .tech-stack-section {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #061414;
+    color: #ffffff;
+    padding: 64px 0 300px;
+  }
+
+  .text-block {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    max-width: 720px;
+    padding: 0 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* 3D Perspective Container - 2380x760 box */
+  .stage-3d {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 2380px;
+    height: 760px;
+    margin-left: -1190px;
+    z-index: 1;
+    pointer-events: none;
+    transform-origin: bottom center;
+    transform: scale(var(--s));
+    perspective: 1200px;
+    perspective-origin: 50% 80%;
+    overflow: visible;
+  }
+
+  /* 3D Stage with smooth 3D tilt & translation */
+  .stage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    left: 0;
+    pointer-events: none;
+    transform-origin: 50% 80%;
+    transform-style: preserve-3d;
+    transform: 
+      rotateX(var(--rx, 0deg)) 
+      rotateY(var(--ry, 0deg))
+      translate3d(calc(var(--tx, 0) * 1px), calc(var(--ty, 0) * 1px), 0);
+    overflow: visible;
+    will-change: transform;
+  }
+
+  /* Absolute Tile Positioning (Centered exactly at x, y) */
+  .tech-tile-anchor {
+    position: absolute;
+    left: calc(var(--x) * 1px);
+    top: calc(var(--y) * 1px);
+    width: 0;
+    height: 0;
+    opacity: var(--op);
+    pointer-events: auto;
+    transform-style: preserve-3d;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  /* Scroll-in stagger */
+  .tech-tile-anchor .tech-tile {
+    opacity: 0;
+    transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                outline 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+    transition-delay: calc(var(--tile-index, 0) * 16ms);
+  }
+
+  .tech-stack-section.is-revealed .tech-tile-anchor .tech-tile {
+    opacity: 1;
+  }
+
+  @property --dz {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 0px;
+  }
+
+  /* Parallelogram 3D Tile: Rich dark glass plaque with inset bevel and deep shadow */
+  .tech-tile {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(var(--w) * 1px);
+    height: calc(var(--h) * 1px);
+    transform-style: preserve-3d;
+    transform: translate(-50%, -50%) translate3d(var(--dx, 0px), var(--dy, 0px), var(--dz, 0px)) skewX(-12deg);
+    background: linear-gradient(145deg, #091a1b 0%, #030a0b 100%);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 26px;
+    box-shadow: 
+      calc(var(--sx, 0) * 1px) 20px 36px rgba(0, 0, 0, 0.7),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12),
+      inset 0 -1px 2px rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    will-change: transform;
+    transition: 
+      --dz 200ms ease,
+      outline 200ms ease,
+      border-color 200ms ease,
+      box-shadow 200ms ease,
+      background 200ms ease;
+  }
+
+  /* Inner wrapper for scale on hover */
+  .tech-tile-inner {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(1);
+    transform-origin: center center;
+    transition: transform 200ms ease;
+  }
+
+  /* Logo inside: centered, counter-skewed skewX(12deg), height = 50% of tile height */
+  .tech-icon-container {
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    transform: skewX(12deg);
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.5));
+  }
+
+  .tech-icon-container :global(svg) {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  /* Tooltip */
+  .tech-tooltip {
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%) skewX(12deg) translateY(4px);
+    background: #040909;
+    color: #e5f0e1;
+    border: 1px solid rgba(91, 191, 148, 0.35);
+    padding: 3px 8px;
+    border-radius: 9999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.7);
+    z-index: 50;
+  }
+
+  /* Individual Hover State: pops forward in 3D, scale 1.06, soft green border glow */
+  .tech-tile:hover {
+    --dz: 48px !important;
+    outline: 1px solid rgba(91, 191, 148, 0.7);
+    border-color: rgba(91, 191, 148, 0.4);
+    box-shadow: 
+      calc(var(--sx, 0) * 1px) 26px 44px rgba(0, 0, 0, 0.8),
+      0 0 20px rgba(91, 191, 148, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    z-index: 50;
+  }
+
+  .tech-tile:hover .tech-tile-inner {
+    transform: scale(1.06);
+  }
+
+  .tech-tile:hover .tech-tooltip {
+    opacity: 1;
+    transform: translateX(-50%) skewX(12deg) translateY(0);
+  }
+
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    .tech-track {
+      animation: none !important;
+      flex-wrap: wrap;
+      width: 100%;
+    }
+    .tech-group {
+      flex-wrap: wrap;
+      padding-right: 0;
+    }
+    .tech-group[aria-hidden="true"] {
+      display: none;
+    }
+    .tech-tile {
+      animation: none !important;
+      transition: none !important;
+      opacity: 1 !important;
+    }
+    .stage {
+      transform: none !important;
+    }
+  }
+</style>
+
+<script>
+  const initTechStack = () => {
+    const section = document.getElementById('tech-stack-section');
+    if (!section) return;
+
+    // 1. Scale stage: --s = Math.min(1, window.innerWidth / 2380) on load and resize
+    const updateStageScale = () => {
+      const s = Math.min(1, window.innerWidth / 2380);
+      document.documentElement.style.setProperty('--s', s.toString());
+    };
+
+    window.addEventListener('resize', updateStageScale, { passive: true });
+    updateStageScale();
+
+    // 2. Entrance Animation: IntersectionObserver with threshold 0.25 (Play once)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            section.classList.add('is-revealed');
+            // After staggered entrance completes (500ms + 280ms delay = 780ms), remove stagger delays
+            setTimeout(() => {
+              section.classList.add('is-revealed-settled');
+            }, 850);
+            observer.unobserve(section);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(section);
+
+    // 3. Subtle 3D Tilt (skip if prefers-reduced-motion or touch/no-hover)
+    if (
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+      window.matchMedia('(hover: none)').matches
+    ) {
+      return;
+    }
+
+    const stage = document.getElementById('tech-3d-field');
+    if (!stage) return;
+
+    // Small horizontal parallax per row (px): row1 = 3, row2 = 5, row3 = 8, row4 = 11, row5 = 14
+    const rowStrength: Record<string, number> = {
+      '1': 3,
+      '2': 5,
+      '3': 8,
+      '4': 11,
+      '5': 14,
+    };
+
+    let targetNx = 0;
+    let targetNy = 0;
+    let cx = 0;
+    let cy = 0;
+    let rafId: number | null = null;
+    let moveTimer: number | null = null;
+
+    const tiles = section.querySelectorAll<HTMLElement>('.tech-tile');
+
+    // Hover listeners for neighbour dimming fallback and idle bob pause
+    tiles.forEach((tile) => {
+      const anchor = tile.closest('.tech-tile-anchor');
+      const bob = tile.closest('.tech-tile-bob');
+
+      tile.addEventListener('pointerenter', () => {
+        stage.classList.add('has-hovered-tile');
+        if (anchor) anchor.classList.add('is-hovered');
+        if (bob) bob.classList.add('is-hovered');
+      });
+
+      tile.addEventListener('pointerleave', () => {
+        stage.classList.remove('has-hovered-tile');
+        if (anchor) anchor.classList.remove('is-hovered');
+        if (bob) bob.classList.remove('is-hovered');
+      });
+    });
+
+    const updateTilt = () => {
+      cx += (targetNx - cx) * 0.07;
+      cy += (targetNy - cy) * 0.07;
+
+      // Stage rotation: rotateY(cx * 5deg) rotateX(cy * -3deg), max 5deg and 3deg
+      const ry = cx * 5;
+      const rx = cy * -3;
+      stage.style.setProperty('--ry', `${ry.toFixed(3)}deg`);
+      stage.style.setProperty('--rx', `${rx.toFixed(3)}deg`);
+
+      // Parallax and depth per row: --dz = Math.abs(cx) * -12px * (5 - row)
+      const absCx = Math.abs(cx);
+      tiles.forEach((tile) => {
+        const row = tile.getAttribute('data-row') || '1';
+        const rowNum = parseInt(row, 10) || 1;
+        const strength = rowStrength[row] || 8;
+
+        const dx = cx * strength;
+        const dz = absCx * -12 * (5 - rowNum);
+
+        tile.style.setProperty('--dx', `${dx.toFixed(2)}px`);
+        tile.style.setProperty('--dz', `${dz.toFixed(2)}px`);
+      });
+
+      // Stop loop once everything is within 0.001 of 0 and target is 0
+      if (
+        Math.abs(cx) < 0.001 &&
+        Math.abs(cy) < 0.001 &&
+        targetNx === 0 &&
+        targetNy === 0
+      ) {
+        cx = 0;
+        cy = 0;
+        stage.style.setProperty('--ry', '0deg');
+        stage.style.setProperty('--rx', '0deg');
+        tiles.forEach((tile) => {
+          tile.style.setProperty('--dx', '0px');
+          tile.style.setProperty('--dz', '0px');
+        });
+        rafId = null;
+      } else {
+        rafId = requestAnimationFrame(updateTilt);
+      }
+    };
+
+    const startTiltLoop = () => {
+      if (rafId === null) {
+        rafId = requestAnimationFrame(updateTilt);
+      }
+    };
+
+    const handlePointerMove = (e: PointerEvent) => {
+      // Pause idle bob while mouse is moving
+      section.classList.add('is-moving');
+      if (moveTimer) clearTimeout(moveTimer);
+      moveTimer = window.setTimeout(() => {
+        section.classList.remove('is-moving');
+      }, 250);
+
+      const rect = section.getBoundingClientRect();
+      targetNx = Math.max(-1, Math.min(1, ((e.clientX - rect.left) / rect.width) * 2 - 1));
+      targetNy = Math.max(-1, Math.min(1, ((e.clientY - rect.top) / rect.height) * 2 - 1));
+      startTiltLoop();
+    };
+
+    const handlePointerLeave = () => {
+      section.classList.remove('is-moving');
+      targetNx = 0;
+      targetNy = 0;
+      startTiltLoop();
+    };
+
+    section.addEventListener('pointermove', handlePointerMove, { passive: true });
+    section.addEventListener('pointerleave', handlePointerLeave, { passive: true });
+  };
+
+  document.addEventListener('DOMContentLoaded', initTechStack);
+  document.addEventListener('astro:page-load', initTechStack);
+</script>
