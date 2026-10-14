@@ -4,25 +4,25 @@ const { hero } = siteData;
 ---
 
 <section
-  class="relative w-full overflow-hidden bg-[#101012] text-white py-20 lg:py-32"
+  class="relative w-full overflow-hidden bg-[#101012] text-white py-14 sm:py-20 lg:py-32"
 >
   <!-- Soft Teal Radial Glow Overlay -->
   <div
     class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-70"
   >
     <div
-      class="w-[600px] h-[600px] lg:w-[960px] lg:h-[960px] rounded-full bg-[radial-gradient(circle,rgba(50,98,98,0.4)_0%,rgba(16,16,18,0)_70%)]"
+      class="w-[360px] h-[360px] sm:w-[600px] sm:h-[600px] lg:w-[960px] lg:h-[960px] rounded-full bg-[radial-gradient(circle,rgba(50,98,98,0.4)_0%,rgba(16,16,18,0)_70%)]"
     >
     </div>
   </div>
 
   <div
-    class="relative max-w-[1280px] mx-auto px-6 lg:px-12 flex flex-col items-center text-center z-10"
+    class="relative max-w-[1280px] mx-auto px-5 sm:px-6 lg:px-12 flex flex-col items-center text-center z-10"
   >
     <!-- Main Headline with Effect 1: Scroll-triggered text reveal -->
     <h1
       data-reveal="text"
-      class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-white max-w-4xl leading-[1.1] mb-6"
+      class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-white max-w-4xl leading-[1.15] mb-5 sm:mb-6"
     >
       {hero.heading}
     </h1>
@@ -30,50 +30,50 @@ const { hero } = siteData;
     <!-- Subheading with text reveal -->
     <p
       data-reveal="text"
-      class="text-base sm:text-lg lg:text-xl text-[#A9B5B4] max-w-2xl mb-10 leading-relaxed font-normal"
+      class="text-sm sm:text-base lg:text-xl text-[#A9B5B4] max-w-2xl mb-8 sm:mb-10 leading-relaxed font-normal"
     >
       {hero.subheading}
     </p>
 
-    <!-- CTAs -->
-    <div class="flex flex-wrap items-center justify-center gap-4 mb-16">
+    <!-- CTAs: stacked full-width on mobile, side-by-side on tablet/desktop -->
+    <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4 w-full sm:w-auto max-w-xs sm:max-w-none mb-10 sm:mb-16">
       <a
         href={hero.primaryButton.href}
-        class="px-8 py-3.5 rounded-full bg-[#6BBF9A] hover:bg-[#92CDAB] text-[#091414] font-semibold text-base transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-[0_4px_20px_-2px_rgba(107,191,154,0.3)]"
+        class="w-full sm:w-auto text-center px-7 sm:px-8 py-3.5 rounded-full bg-[#6BBF9A] hover:bg-[#92CDAB] text-[#091414] font-semibold text-base transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-[0_4px_20px_-2px_rgba(107,191,154,0.3)] active:scale-[0.98]"
       >
         {hero.primaryButton.text}
       </a>
       <a
         href={hero.secondaryButton.href}
-        class="px-8 py-3.5 rounded-full border border-white/20 hover:border-white/60 hover:bg-white/5 text-white font-semibold text-base transition-all duration-200"
+        class="w-full sm:w-auto text-center px-7 sm:px-8 py-3.5 rounded-full border border-white/20 hover:border-white/60 hover:bg-white/5 text-white font-semibold text-base transition-all duration-200 active:scale-[0.98]"
       >
         {hero.secondaryButton.text}
       </a>
     </div>
 
-    <!-- Effect 2: Box Reveal for Project Mockups (Laptop and Phone) -->
+    <!-- Effect 2: Box Reveal for Project Mockups (Laptop and Phone - BOTH visible and beautifully balanced on mobile!) -->
     <div
-      class="w-full max-w-4xl flex items-end justify-center gap-4 sm:gap-6 pt-4"
+      class="w-full max-w-4xl flex items-end justify-center pt-2 sm:pt-4 relative"
     >
       <!-- Laptop Mockup (PocketBank) -->
       <div
         data-reveal="box"
         data-box-color="teal"
-        class="relative w-full max-w-[620px] rounded-t-2xl bg-[#1A1C1E] p-3 sm:p-4 border-t border-x border-white/10 shadow-2xl"
+        class="relative w-full max-w-[540px] sm:max-w-[620px] rounded-t-xl sm:rounded-t-2xl bg-[#1A1C1E] p-2.5 sm:p-4 border-t border-x border-white/10 shadow-2xl"
       >
         <div class="box-content">
           <!-- Window Controls & URL bar -->
-          <div class="flex items-center justify-between gap-2 mb-3 px-1">
-            <div class="flex items-center gap-1.5">
-              <span class="w-2.5 h-2.5 rounded-full bg-[#EF4444]/80"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-[#F59E0B]/80"></span>
-              <span class="w-2.5 h-2.5 rounded-full bg-[#10B981]/80"></span>
+          <div class="flex items-center justify-between gap-1.5 sm:gap-2 mb-2 sm:mb-3 px-1">
+            <div class="flex items-center gap-1 sm:gap-1.5">
+              <span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#EF4444]/80"></span>
+              <span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#F59E0B]/80"></span>
+              <span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#10B981]/80"></span>
             </div>
             <div
-              class="px-3 py-0.5 rounded-full bg-white/10 text-[11px] text-white/60 font-mono tracking-tight flex items-center gap-1.5"
+              class="px-2.5 sm:px-3 py-0.5 rounded-full bg-white/10 text-[10px] sm:text-[11px] text-white/70 font-mono tracking-tight flex items-center gap-1 sm:gap-1.5 border border-white/5"
             >
               <svg
-                class="w-3 h-3 text-[#6BBF9A]"
+                class="w-2.5 sm:w-3 h-2.5 sm:h-3 text-[#6BBF9A]"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -84,12 +84,12 @@ const { hero } = siteData;
               </svg>
               <span>pocketbank.app</span>
             </div>
-            <div class="w-12 sm:w-16"></div>
+            <div class="w-8 sm:w-16"></div>
           </div>
 
           <!-- Real Screenshot of PocketBank -->
           <div
-            class="w-full bg-[#121316] rounded-xl overflow-hidden aspect-[16/10] relative group"
+            class="w-full bg-[#121316] rounded-lg sm:rounded-xl overflow-hidden aspect-[16/10] relative group"
           >
             <img
               src="/projects/pocketbank.png"
@@ -100,29 +100,29 @@ const { hero } = siteData;
           </div>
 
           <!-- Base of Laptop -->
-          <div class="w-full h-2.5 bg-[#0D0E10] rounded-b-lg mt-2 mx-auto">
+          <div class="w-full h-2 sm:h-2.5 bg-[#0D0E10] rounded-b-md sm:rounded-b-lg mt-1.5 sm:mt-2 mx-auto">
           </div>
         </div>
       </div>
 
-      <!-- Phone Mockup (Ghibli Tribute Dark Mode Mobile) -->
+      <!-- Phone Mockup (Ghibli Tribute Dark Mode Mobile) - Scaled with elegant overlap on mobile -->
       <div
         data-reveal="box"
         data-box-color="green"
-        class="hidden sm:block w-[190px] lg:w-[224px] shrink-0 rounded-t-[2.8rem] bg-[#18191D] p-2.5 border-t-2 border-x-2 border-white/20 shadow-[0_-12px_45px_rgba(0,0,0,0.85)] relative z-20 sm:-ml-6 lg:-ml-10 transition-transform duration-500 hover:-translate-y-2 ring-1 ring-black/50"
+        class="w-[105px] xs:w-[130px] sm:w-[190px] lg:w-[224px] shrink-0 rounded-t-[1.6rem] sm:rounded-t-[2.8rem] bg-[#18191D] p-1.5 sm:p-2.5 border-t-2 border-x-2 border-white/20 shadow-[0_-12px_45px_rgba(0,0,0,0.85)] relative z-20 -ml-8 xs:-ml-12 sm:-ml-6 lg:-ml-10 transition-transform duration-500 hover:-translate-y-2 ring-1 ring-black/50"
       >
         <div class="box-content relative">
           <!-- Dynamic Island -->
           <div
-            class="w-16 h-4 bg-black rounded-full mx-auto mb-2 flex items-center justify-between px-2 shadow-inner ring-1 ring-white/10"
+            class="w-10 sm:w-16 h-2.5 sm:h-4 bg-black rounded-full mx-auto mb-1.5 sm:mb-2 flex items-center justify-between px-1.5 sm:px-2 shadow-inner ring-1 ring-white/10"
           >
-            <span class="w-1.5 h-1.5 rounded-full bg-[#162736]"></span>
-            <span class="w-1 h-1 rounded-full bg-[#233544]"></span>
+            <span class="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-[#162736]"></span>
+            <span class="w-0.5 sm:w-1 h-0.5 sm:h-1 rounded-full bg-[#233544]"></span>
           </div>
 
           <!-- Real Mobile Screenshot of Ghibli Tribute Dark Mode -->
           <div
-            class="w-full bg-[#1b122c] rounded-t-[2.2rem] overflow-hidden aspect-[9/18] relative group shadow-inner"
+            class="w-full bg-[#1b122c] rounded-t-[1.2rem] sm:rounded-t-[2.2rem] overflow-hidden aspect-[9/18] relative group shadow-inner"
           >
             <img
               src="/projects/ghibli-mobile-dark.png"
@@ -132,7 +132,7 @@ const { hero } = siteData;
             />
             <!-- Gloss / Sheen overlay -->
             <div
-              class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.12] rounded-t-[2.2rem]"
+              class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.12] rounded-t-[1.2rem] sm:rounded-t-[2.2rem]"
             >
             </div>
           </div>

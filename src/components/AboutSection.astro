@@ -6,19 +6,19 @@ const { about } = siteData;
 const icons = ['code', 'palette', 'chat'];
 ---
 
-<section class="w-full bg-[#FAF9F8] py-20 lg:py-28 text-[#1C1B1B]">
-  <div class="max-w-[1280px] mx-auto px-6 lg:px-12">
+<section class="w-full bg-[#FAF9F8] py-14 sm:py-20 lg:py-28 text-[#1C1B1B]">
+  <div class="max-w-[1280px] mx-auto px-5 sm:px-6 lg:px-12">
     <!-- Eyebrow -->
-    <span class="inline-block text-xs uppercase tracking-widest text-[#326262] font-bold mb-10">
+    <span class="inline-block text-xs uppercase tracking-widest text-[#326262] font-bold mb-6 sm:mb-10">
       {about.eyebrow}
     </span>
 
     <!-- Cards with Effect 6: 3D Tilt on hover -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
       {about.cards.map((card, i) => (
         <div
           data-tilt
-          class="bg-white rounded-[24px] p-8 border border-[#326262]/10 shadow-[0_4px_20px_-2px_rgba(50,98,98,0.06)] hover:border-[#6BBF9A]/40 transition-colors flex flex-col justify-between"
+          class="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 border border-[#326262]/10 shadow-[0_4px_20px_-2px_rgba(50,98,98,0.06)] hover:border-[#6BBF9A]/40 transition-colors flex flex-col justify-between"
         >
           <!-- Icon badge -->
           <div class="w-12 h-12 rounded-full bg-[#E5F0E1] flex items-center justify-center text-[#326262] mb-6">

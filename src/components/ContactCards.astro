@@ -4,11 +4,11 @@ const { contactPage } = siteData;
 ---
 
 <div class="w-full">
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 mb-8">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 mb-6 sm:mb-8">
     {contactPage.cards.map((card) => (
       <div
         data-tilt
-        class="bg-white rounded-[24px] p-8 border border-[#326262]/10 shadow-[0_4px_20px_-2px_rgba(50,98,98,0.06)] hover:border-[#6BBF9A]/40 transition-colors flex flex-col justify-between items-center text-center"
+        class="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 border border-[#326262]/10 shadow-[0_4px_20px_-2px_rgba(50,98,98,0.06)] hover:border-[#6BBF9A]/40 transition-colors flex flex-col justify-between items-center text-center"
       >
         <div class="w-14 h-14 rounded-full bg-[#E5F0E1] text-[#326262] flex items-center justify-center mb-6">
           {card.icon === 'phone' && (

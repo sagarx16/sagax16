@@ -109,6 +109,10 @@ const tilesData: AbsoluteTile[] = [
   { id: 'framermotion', x: 1880, y: 530, row: 5, width: 186, height: 104, opacity: 1.00, side: 'right' },
   { id: 'threejs', x: 2105, y: 530, row: 5, width: 186, height: 104, opacity: 1.00, side: 'right' },
 ];
+
+const mobileRow1 = ['nextjs', 'react', 'typescript', 'tailwind', 'nodejs', 'express', 'mongodb', 'docker', 'postgres', 'aws'];
+const mobileRow2 = ['astro', 'supabase', 'firebase', 'redux', 'figma', 'github', 'vercel', 'python', 'vite', 'git'];
+const mobileRow3 = ['javascript', 'html5', 'css3', 'vscode', 'postman', 'npm', 'netlify', 'framermotion', 'threejs'];
 ---
 
 {variant === 'marquee' ? (
@@ -241,7 +245,88 @@ const tilesData: AbsoluteTile[] = [
       )}
     </div>
 
-    <!-- Tile Stage 3D perspective wrapper -->
+    <!-- Mobile Tech Showcase (Rendered on screens < 768px: smooth multi-row dark glass marquees) -->
+    <div class="mobile-tech-field md:hidden w-full flex flex-col gap-3.5 mt-8 overflow-hidden tech-marquee-mask">
+      <!-- Mobile Row 1 (Moves Left) -->
+      <div class="tech-track track-left py-1">
+        <div class="flex items-center gap-2.5 pr-2.5">
+          {mobileRow1.map((id) => {
+            const tech = allTechnologies[id];
+            return tech ? (
+              <div class="mobile-tech-card">
+                <div class="mobile-tech-icon" set:html={tech.svg} />
+                <span class="mobile-tech-name">{tech.name}</span>
+              </div>
+            ) : null;
+          })}
+        </div>
+        <div class="flex items-center gap-2.5 pr-2.5" aria-hidden="true">
+          {mobileRow1.map((id) => {
+            const tech = allTechnologies[id];
+            return tech ? (
+              <div class="mobile-tech-card">
+                <div class="mobile-tech-icon" set:html={tech.svg} />
+                <span class="mobile-tech-name">{tech.name}</span>
+              </div>
+            ) : null;
+          })}
+        </div>
+      </div>
+
+      <!-- Mobile Row 2 (Moves Right) -->
+      <div class="tech-track track-right py-1">
+        <div class="flex items-center gap-2.5 pr-2.5">
+          {mobileRow2.map((id) => {
+            const tech = allTechnologies[id];
+            return tech ? (
+              <div class="mobile-tech-card">
+                <div class="mobile-tech-icon" set:html={tech.svg} />
+                <span class="mobile-tech-name">{tech.name}</span>
+              </div>
+            ) : null;
+          })}
+        </div>
+        <div class="flex items-center gap-2.5 pr-2.5" aria-hidden="true">
+          {mobileRow2.map((id) => {
+            const tech = allTechnologies[id];
+            return tech ? (
+              <div class="mobile-tech-card">
+                <div class="mobile-tech-icon" set:html={tech.svg} />
+                <span class="mobile-tech-name">{tech.name}</span>
+              </div>
+            ) : null;
+          })}
+        </div>
+      </div>
+
+      <!-- Mobile Row 3 (Moves Left) -->
+      <div class="tech-track track-left py-1" style="animation-duration: 36s;">
+        <div class="flex items-center gap-2.5 pr-2.5">
+          {mobileRow3.map((id) => {
+            const tech = allTechnologies[id];
+            return tech ? (
+              <div class="mobile-tech-card">
+                <div class="mobile-tech-icon" set:html={tech.svg} />
+                <span class="mobile-tech-name">{tech.name}</span>
+              </div>
+            ) : null;
+          })}
+        </div>
+        <div class="flex items-center gap-2.5 pr-2.5" aria-hidden="true">
+          {mobileRow3.map((id) => {
+            const tech = allTechnologies[id];
+            return tech ? (
+              <div class="mobile-tech-card">
+                <div class="mobile-tech-icon" set:html={tech.svg} />
+                <span class="mobile-tech-name">{tech.name}</span>
+              </div>
+            ) : null;
+          })}
+        </div>
+      </div>
+    </div>
+
+    <!-- Tile Stage 3D perspective wrapper (Desktop only) -->
     <div class="stage-3d">
       <div id="tech-3d-field" class="stage">
         {tilesData.map((tile, idx) => {
@@ -360,7 +445,13 @@ const tilesData: AbsoluteTile[] = [
     align-items: center;
     background: #061414;
     color: #ffffff;
-    padding: 64px 0 300px;
+    padding: 56px 0 64px;
+  }
+
+  @media (min-width: 768px) {
+    .tech-stack-section {
+      padding: 64px 0 300px;
+    }
   }
 
   .text-block {
@@ -368,27 +459,77 @@ const tilesData: AbsoluteTile[] = [
     z-index: 3;
     text-align: center;
     max-width: 720px;
-    padding: 0 24px;
+    padding: 0 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  /* 3D Perspective Container - 2380x760 box */
+  /* Mobile Tech Showcase Styling */
+  .mobile-tech-card {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 9px 18px;
+    border-radius: 9999px;
+    background: linear-gradient(145deg, #091a1b 0%, #030a0b 100%);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    white-space: nowrap;
+    user-select: none;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .mobile-tech-card:active {
+    transform: scale(0.96);
+    border-color: rgba(91, 191, 148, 0.6);
+    box-shadow: 0 0 16px rgba(91, 191, 148, 0.35);
+  }
+
+  .mobile-tech-icon {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .mobile-tech-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .mobile-tech-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #e5f0e1;
+    letter-spacing: -0.01em;
+  }
+
+  /* 3D Perspective Container - 2380x760 box (Desktop only) */
   .stage-3d {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 2380px;
-    height: 760px;
-    margin-left: -1190px;
-    z-index: 1;
-    pointer-events: none;
-    transform-origin: bottom center;
-    transform: scale(var(--s));
-    perspective: 1200px;
-    perspective-origin: 50% 80%;
-    overflow: visible;
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .stage-3d {
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 2380px;
+      height: 760px;
+      margin-left: -1190px;
+      z-index: 1;
+      pointer-events: none;
+      transform-origin: bottom center;
+      transform: scale(var(--s));
+      perspective: 1200px;
+      perspective-origin: 50% 80%;
+      overflow: visible;
+    }
   }
 
   /* 3D Stage with smooth 3D tilt & translation */
@@ -575,8 +716,9 @@ const tilesData: AbsoluteTile[] = [
     const section = document.getElementById('tech-stack-section');
     if (!section) return;
 
-    // 1. Scale stage: --s = Math.min(1, window.innerWidth / 2380) on load and resize
+    // 1. Scale stage: --s = Math.min(1, window.innerWidth / 2380) on load and resize (Desktop only)
     const updateStageScale = () => {
+      if (window.innerWidth < 768) return;
       const s = Math.min(1, window.innerWidth / 2380);
       document.documentElement.style.setProperty('--s', s.toString());
     };
@@ -602,8 +744,9 @@ const tilesData: AbsoluteTile[] = [
     );
     observer.observe(section);
 
-    // 3. Subtle 3D Tilt (skip if prefers-reduced-motion or touch/no-hover)
+    // 3. Subtle 3D Tilt (skip if prefers-reduced-motion, mobile, or touch/no-hover)
     if (
+      window.innerWidth < 768 ||
       window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
       window.matchMedia('(hover: none)').matches
     ) {

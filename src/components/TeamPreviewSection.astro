@@ -3,26 +3,26 @@ import { siteData } from '../data/site';
 const { team } = siteData;
 ---
 
-<section class="w-full bg-[#FFFFFF] py-20 lg:py-28 text-[#1C1B1B]">
-  <div class="max-w-[1280px] mx-auto px-6 lg:px-12">
-    <div class="mb-12 text-center sm:text-left">
-      <span class="inline-block text-xs uppercase tracking-widest text-[#326262] font-bold mb-3">
+<section class="w-full bg-[#FFFFFF] py-14 sm:py-20 lg:py-28 text-[#1C1B1B]">
+  <div class="max-w-[1280px] mx-auto px-5 sm:px-6 lg:px-12">
+    <div class="mb-8 sm:mb-12 text-center sm:text-left">
+      <span class="inline-block text-xs uppercase tracking-widest text-[#326262] font-bold mb-2 sm:mb-3">
         OUR PEOPLE
       </span>
       <h2
         data-reveal="text"
-        class="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#1C1B1B] leading-[1.1]"
+        class="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#1C1B1B] leading-[1.15]"
       >
         The team behind SAGA16
       </h2>
     </div>
 
     <!-- 3 Team Member Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-8">
       {team.map((member, idx) => (
         <div
           data-tilt
-          class="bg-[#FAF9F8] rounded-[24px] p-8 border border-[#326262]/10 shadow-[0_4px_20px_-2px_rgba(50,98,98,0.05)] flex flex-col items-center text-center hover:border-[#6BBF9A]/40 transition-colors"
+          class="bg-[#FAF9F8] rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 border border-[#326262]/10 shadow-[0_4px_20px_-2px_rgba(50,98,98,0.05)] flex flex-col items-center text-center hover:border-[#6BBF9A]/40 transition-colors"
         >
           <!-- Avatar Placeholder with Box Reveal (Effect 2) -->
           <!-- TODO: Replace placeholder with real photos of team members. No stock or AI photos. -->

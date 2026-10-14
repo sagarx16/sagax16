@@ -12,15 +12,15 @@ const { contactPage, contactBands } = siteData;
 
 <Base currentPage="contact" title="Contact | SAGA16 Studio">
   <!-- Contact Header (Dark cinematic teal with soft radial glow) -->
-  <section class="relative w-full overflow-hidden bg-[#091414] text-white py-20 lg:py-28">
+  <section class="relative w-full overflow-hidden bg-[#091414] text-white py-14 sm:py-20 lg:py-28">
     <div
       class="pointer-events-none absolute inset-0 opacity-40"
       style="background: radial-gradient(circle at 50% 30%, rgba(107, 191, 154, 0.3) 0%, rgba(9, 20, 20, 0) 70%);"
     ></div>
 
-    <div class="relative max-w-[1280px] mx-auto px-6 lg:px-12 flex flex-col items-center text-center z-10">
+    <div class="relative max-w-[1280px] mx-auto px-5 sm:px-6 lg:px-12 flex flex-col items-center text-center z-10">
       <!-- Eyebrow -->
-      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md mb-6">
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md mb-5 sm:mb-6">
         <span class="w-2 h-2 rounded-full bg-[#6BBF9A]"></span>
         <span class="text-xs uppercase tracking-widest text-[#6BBF9A] font-bold">{contactPage.eyebrow}</span>
       </div>
@@ -28,14 +28,14 @@ const { contactPage, contactBands } = siteData;
       <!-- Main Headline with text reveal -->
       <h1
         data-reveal="text"
-        class="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-white max-w-4xl mb-6 leading-[1.1]"
+        class="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-white max-w-4xl mb-4 sm:mb-6 leading-[1.15]"
       >
         {contactPage.heading}
       </h1>
 
       <p
         data-reveal="text"
-        class="text-base sm:text-lg text-[#A9B5B4] max-w-2xl font-normal leading-relaxed"
+        class="text-sm sm:text-base lg:text-lg text-[#A9B5B4] max-w-2xl font-normal leading-relaxed"
       >
         {contactPage.subheading}
       </p>
@@ -43,12 +43,12 @@ const { contactPage, contactBands } = siteData;
   </section>
 
   <!-- Contact Channels Cards (Call, WhatsApp, Email with 3D Tilt) -->
-  <section class="max-w-[1280px] mx-auto px-6 lg:px-12 pt-16 pb-8">
+  <section class="max-w-[1280px] mx-auto px-5 sm:px-6 lg:px-12 pt-10 sm:pt-16 pb-6 sm:pb-8">
     <ContactCards />
   </section>
 
   <!-- Form and Pricing Side-by-Side Section -->
-  <section class="max-w-[1280px] mx-auto px-6 lg:px-12 py-12">
+  <section class="max-w-[1280px] mx-auto px-5 sm:px-6 lg:px-12 py-8 sm:py-12">
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
       <!-- Left: Form -->
       <div class="lg:col-span-7">

@@ -3,19 +3,19 @@ import { siteData } from '../data/site';
 const { categories } = siteData;
 ---
 
-<section class="w-full bg-[#091414] text-white py-20 lg:py-28 border-t border-white/10">
-  <div class="max-w-[1280px] mx-auto px-6 lg:px-12">
+<section class="w-full bg-[#091414] text-white py-14 sm:py-20 lg:py-28 border-t border-white/10">
+  <div class="max-w-[1280px] mx-auto px-5 sm:px-6 lg:px-12">
     <!-- Header -->
-    <div class="mb-14">
+    <div class="mb-10 sm:mb-14">
       <h2
         data-reveal="text"
-        class="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-white mb-4 leading-[1.1]"
+        class="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-white mb-3 sm:mb-4 leading-[1.15]"
       >
         {categories.heading}
       </h2>
       <p
         data-reveal="text"
-        class="text-base sm:text-lg text-[#A9B5B4] max-w-2xl font-normal leading-relaxed"
+        class="text-sm sm:text-base lg:text-lg text-[#A9B5B4] max-w-2xl font-normal leading-relaxed"
       >
         {categories.description}
       </p>
@@ -24,11 +24,11 @@ const { categories } = siteData;
     <!-- Rows with hairline dividers -->
     <div class="flex flex-col border-t border-white/10">
       {categories.rows.map((row) => (
-        <div class="py-10 lg:py-12 border-b border-white/10 flex flex-col md:flex-row items-start justify-between gap-6">
+        <div class="py-6 sm:py-10 lg:py-12 border-b border-white/10 flex flex-col md:flex-row items-start justify-between gap-2 sm:gap-6">
           <div class="md:w-1/2">
             <h3
               data-reveal="text"
-              class="text-2xl sm:text-3xl font-medium tracking-tight text-white leading-tight"
+              class="text-xl sm:text-2xl lg:text-3xl font-medium tracking-tight text-white leading-snug"
             >
               {row.title}
             </h3>
@@ -36,7 +36,7 @@ const { categories } = siteData;
           <div class="md:w-1/2 flex md:justify-start">
             <p
               data-reveal="text"
-              class="text-base sm:text-lg text-[#A9B5B4] max-w-lg leading-relaxed font-normal"
+              class="text-sm sm:text-base lg:text-lg text-[#A9B5B4] max-w-lg leading-relaxed font-normal"
             >
               {row.text || row.description}
             </p>

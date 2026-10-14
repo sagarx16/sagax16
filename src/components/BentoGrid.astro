@@ -100,14 +100,14 @@ const projectThemes = [
 ---
 
 <div class="w-full">
-  <!-- Filter Chips (Real client-side filter with smooth transition) -->
+  <!-- Filter Chips (Horizontally scrollable on mobile without wrapping, smooth snap) -->
   <div class="flex items-center justify-between flex-wrap gap-4 mb-8">
-    <div class="flex items-center gap-2 flex-wrap" role="group" aria-label="Filter projects by category">
+    <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 -mx-5 px-5 sm:mx-0 sm:px-0 sm:flex-wrap w-full sm:w-auto" role="group" aria-label="Filter projects by category">
       <button
         type="button"
         data-filter-btn="all"
         aria-pressed="true"
-        class="active-filter-pill px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer bg-[#326262] text-white shadow-sm"
+        class="active-filter-pill shrink-0 px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer bg-[#326262] text-white shadow-sm"
       >
         All
       </button>
@@ -115,7 +115,7 @@ const projectThemes = [
         type="button"
         data-filter-btn="institutional-business"
         aria-pressed="false"
-        class="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer bg-[#E5F0E1] text-[#326262] hover:bg-[#d6e7d0]"
+        class="shrink-0 px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer bg-[#E5F0E1] text-[#326262] hover:bg-[#d6e7d0]"
       >
         Institutional &amp; Business
       </button>
@@ -123,7 +123,7 @@ const projectThemes = [
         type="button"
         data-filter-btn="civic-government"
         aria-pressed="false"
-        class="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer bg-[#E5F0E1] text-[#326262] hover:bg-[#d6e7d0]"
+        class="shrink-0 px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer bg-[#E5F0E1] text-[#326262] hover:bg-[#d6e7d0]"
       >
         Civic &amp; Government
       </button>
@@ -131,7 +131,7 @@ const projectThemes = [
         type="button"
         data-filter-btn="celebration"
         aria-pressed="false"
-        class="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer bg-[#E5F0E1] text-[#326262] hover:bg-[#d6e7d0]"
+        class="shrink-0 px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer bg-[#E5F0E1] text-[#326262] hover:bg-[#d6e7d0]"
       >
         Celebration
       </button>
@@ -139,25 +139,25 @@ const projectThemes = [
         type="button"
         data-filter-btn="fan-project"
         aria-pressed="false"
-        class="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer bg-[#E5F0E1] text-[#326262] hover:bg-[#d6e7d0]"
+        class="shrink-0 px-5 sm:px-6 py-2 sm:py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer bg-[#E5F0E1] text-[#326262] hover:bg-[#d6e7d0]"
       >
         Fan project
       </button>
     </div>
 
-    <div class="flex items-center gap-2 text-[#586261] text-xs font-semibold">
+    <div class="hidden sm:flex items-center gap-2 text-[#586261] text-xs font-semibold">
       <span class="w-2 h-2 rounded-full bg-[#6BBF9A] animate-pulse"></span>
       <span>Live Verified Links</span>
     </div>
   </div>
 
   <!-- Stripe / Keynote Gradient Stage Bento Grid -->
-  <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6">
     {projects.map((p, index) => {
-      // Bento layout spans & heights
-      let cardClasses = 'lg:col-span-6 min-h-[480px] sm:min-h-[520px] lg:min-h-[550px]';
-      if (index === 0) cardClasses = 'lg:col-span-8 min-h-[580px] lg:min-h-[660px]';
-      else if (index === 1) cardClasses = 'lg:col-span-4 min-h-[580px] lg:min-h-[660px]';
+      // Bento layout spans & heights optimized for mobile & desktop
+      let cardClasses = 'lg:col-span-6 min-h-[380px] xs:min-h-[420px] sm:min-h-[500px] lg:min-h-[550px]';
+      if (index === 0) cardClasses = 'lg:col-span-8 min-h-[440px] xs:min-h-[480px] sm:min-h-[580px] lg:min-h-[660px]';
+      else if (index === 1) cardClasses = 'lg:col-span-4 min-h-[440px] xs:min-h-[480px] sm:min-h-[580px] lg:min-h-[660px]';
 
       const theme = projectThemes[index] || projectThemes[0];
 
@@ -168,7 +168,7 @@ const projectThemes = [
           rel="noopener noreferrer"
           data-project-category={p.category}
           class:list={[
-            'group relative rounded-[28px] overflow-hidden border bg-gradient-to-br transition-all duration-500 flex flex-col justify-between p-6 sm:p-8',
+            'group relative rounded-[24px] sm:rounded-[28px] overflow-hidden border bg-gradient-to-br transition-all duration-500 flex flex-col justify-between p-5 xs:p-6 sm:p-8',
             theme.cardBg,
             theme.borderColor,
             theme.shadowHover,

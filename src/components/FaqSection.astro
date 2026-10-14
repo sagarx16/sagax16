@@ -3,26 +3,26 @@ import { siteData } from '../data/site';
 const { faq } = siteData;
 ---
 
-<section class="w-full bg-[#E5F0E1] py-20 lg:py-28 text-[#1C1B1B]">
-  <div class="max-w-[800px] mx-auto px-6 lg:px-12">
-    <div class="text-center mb-12">
-      <span class="inline-block text-xs uppercase tracking-widest text-[#326262] font-bold mb-3">
+<section class="w-full bg-[#E5F0E1] py-14 sm:py-20 lg:py-28 text-[#1C1B1B]">
+  <div class="max-w-[800px] mx-auto px-5 sm:px-6 lg:px-12">
+    <div class="text-center mb-8 sm:mb-12">
+      <span class="inline-block text-xs uppercase tracking-widest text-[#326262] font-bold mb-2 sm:mb-3">
         QUESTIONS
       </span>
       <h2
         data-reveal="text"
-        class="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#1C1B1B] leading-[1.1]"
+        class="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#1C1B1B] leading-[1.15]"
       >
         Frequently asked questions
       </h2>
     </div>
 
     <!-- Accordion Items List -->
-    <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-3.5 sm:gap-4">
       {faq.map((item, index) => (
         <div
           data-faq-item
-          class="bg-white rounded-[20px] p-6 border border-[#326262]/10 shadow-[0_2px_12px_-2px_rgba(50,98,98,0.04)] transition-all"
+          class="bg-white rounded-[18px] sm:rounded-[20px] p-5 sm:p-6 border border-[#326262]/10 shadow-[0_2px_12px_-2px_rgba(50,98,98,0.04)] transition-all"
         >
           <button
             type="button"
@@ -30,9 +30,9 @@ const { faq } = siteData;
             aria-expanded="false"
             aria-controls={`faq-answer-${index}`}
             id={`faq-question-${index}`}
-            class="w-full flex items-center justify-between gap-4 text-left cursor-pointer group"
+            class="w-full flex items-center justify-between gap-3 sm:gap-4 text-left cursor-pointer group"
           >
-            <h3 class="text-lg sm:text-xl font-medium text-[#1C1B1B] group-hover:text-[#326262] transition-colors leading-snug">
+            <h3 class="text-base sm:text-xl font-medium text-[#1C1B1B] group-hover:text-[#326262] transition-colors leading-snug">
               {item.question}
             </h3>
 

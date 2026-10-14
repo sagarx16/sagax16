@@ -51,10 +51,24 @@ html {
   color: #1C1B1B;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  width: 100%;
+  overflow-x: hidden;
 }
 
 body {
+  width: 100%;
   overflow-x: hidden;
+  position: relative;
+}
+
+/* Hide scrollbar utility for mobile filter pills */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Headings typography specification: medium weight (500), tracking -0.03em, line-height 1.1 */
