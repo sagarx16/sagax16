@@ -40,23 +40,23 @@ const { company, nav } = siteData;
       Skip to main content
     </a>
 
-    <!-- Sticky Navbar -->
+    <!-- Sticky Navbar (Clean design matching reference) -->
     <header
       data-site-header
-      class="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 bg-[#FAF9F8]/90 backdrop-blur-md border-b border-[#326262]/5"
+      class="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 bg-white/95 backdrop-blur-md border-b border-[#326262]/10"
     >
       <div class="max-w-[1280px] mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
-        <!-- Logo: SAGA16 in heavy, italic, uppercase, wide-tracked letters, shown ONCE -->
+        <!-- Logo: SAGA16 in heavy, italic, uppercase, wide-tracked letters -->
         <a
           href="/"
-          class="font-black italic uppercase tracking-widest text-2xl lg:text-3xl text-[#326262] hover:text-[#1c4e4e] transition-colors select-none"
+          class="font-black italic uppercase tracking-tight text-2xl lg:text-3xl text-[#111111] hover:text-[#326262] transition-colors select-none"
           aria-label="SAGA16 Home"
         >
           SAGA16
         </a>
 
-        <!-- Desktop Navigation -->
-        <nav class="hidden md:flex items-center gap-1.5 p-1 rounded-full bg-[#E5F0E1]/60 border border-[#326262]/10 shadow-sm" aria-label="Main Navigation">
+        <!-- Desktop Navigation: Clean text links with active bottom underline (matching reference) -->
+        <nav class="hidden md:flex items-center gap-8" aria-label="Main Navigation">
           {nav.map((item) => {
             const isActive =
               (item.href === '/' && currentPage === 'home') ||
@@ -68,10 +68,10 @@ const { company, nav } = siteData;
               <a
                 href={item.href}
                 class:list={[
-                  'px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200',
+                  'text-sm font-semibold transition-all duration-150 py-1',
                   isActive
-                    ? 'bg-[#326262] text-white shadow-sm'
-                    : 'text-[#586261] hover:text-[#1C1B1B] hover:bg-white/80',
+                    ? 'text-[#111111] border-b-2 border-[#111111]'
+                    : 'text-[#586261] hover:text-[#111111]',
                 ]}
                 aria-current={isActive ? 'page' : undefined}
               >
@@ -81,11 +81,11 @@ const { company, nav } = siteData;
           })}
         </nav>
 
-        <!-- CTA & Mobile Toggle -->
+        <!-- CTA & Mobile Toggle (matching reference pill button) -->
         <div class="flex items-center gap-3">
           <a
             href={company.tel}
-            class="hidden sm:inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-[#326262] text-white hover:bg-[#3E6161] text-sm font-semibold transition-all shadow-[0_4px_14px_-2px_rgba(50,98,98,0.25)] hover:-translate-y-0.5 active:translate-y-0"
+            class="hidden sm:inline-flex items-center justify-center px-7 py-2.5 rounded-full border border-[#111111] text-[#111111] hover:bg-[#111111] hover:text-white text-sm font-semibold transition-all shadow-sm hover:-translate-y-0.5 active:translate-y-0"
           >
             Call Now
           </a>
@@ -97,7 +97,7 @@ const { company, nav } = siteData;
             aria-expanded="false"
             aria-controls="mobile-menu"
             aria-label="Toggle navigation menu"
-            class="md:hidden p-2.5 rounded-full bg-[#E5F0E1] text-[#326262] hover:bg-[#326262] hover:text-white transition-colors"
+            class="md:hidden p-2.5 rounded-full bg-[#E4EFE6] text-[#111111] hover:bg-[#111111] hover:text-white transition-colors"
           >
             <svg class="w-6 h-6 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
@@ -110,7 +110,7 @@ const { company, nav } = siteData;
       <div
         id="mobile-menu"
         data-mobile-menu
-        class="hidden md:hidden fixed inset-x-0 top-20 bg-[#FAF9F8] border-b border-[#326262]/10 shadow-xl px-6 py-6"
+        class="hidden md:hidden fixed inset-x-0 top-20 bg-white border-b border-[#326262]/10 shadow-xl px-6 py-6"
       >
         <nav class="flex flex-col gap-2">
           {nav.map((item) => {
@@ -126,8 +126,8 @@ const { company, nav } = siteData;
                 class:list={[
                   'px-4 py-3 rounded-2xl text-base font-semibold transition-colors',
                   isActive
-                    ? 'bg-[#326262] text-white'
-                    : 'text-[#586261] hover:text-[#1C1B1B] hover:bg-[#E5F0E1]',
+                    ? 'bg-[#111111] text-white'
+                    : 'text-[#586261] hover:text-[#111111] hover:bg-[#E4EFE6]',
                 ]}
                 aria-current={isActive ? 'page' : undefined}
               >
@@ -138,7 +138,7 @@ const { company, nav } = siteData;
           <div class="pt-4 border-t border-[#326262]/10">
             <a
               href={company.tel}
-              class="w-full flex items-center justify-center py-3 rounded-full bg-[#326262] text-white font-semibold shadow-md"
+              class="w-full flex items-center justify-center py-3 rounded-full bg-[#111111] text-white font-semibold shadow-md"
             >
               Call Now
             </a>
@@ -152,32 +152,32 @@ const { company, nav } = siteData;
       <slot />
     </main>
 
-    <!-- Footer: Exact soft mint background & multi-column structure matching reference screenshot -->
-    <footer class="relative w-full overflow-hidden bg-[#E5F0E1] text-[#1C1B1B] pt-20 pb-8 border-t border-[#326262]/15">
+    <!-- Footer: Exact 5-column layout, soft mint background, social pill, contact group, divider, copyright, and giant white watermark -->
+    <footer class="relative w-full overflow-hidden bg-[#E4EFE6] text-[#111111] pt-20 pb-8 border-t border-[#2D5854]/15">
       <div class="relative max-w-[1280px] mx-auto px-6 lg:px-12 z-10">
-        <!-- Main Footer Columns -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-14">
-          <!-- Col 1: Brand & Bio & Socials (5 cols) -->
-          <div class="lg:col-span-5 flex flex-col items-start gap-5">
+        <!-- Main Footer 5-Column Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-8 pb-12 items-start">
+          <!-- Col 1: Brand Logo, Description & Social Pill Container (lg:col-span-4) -->
+          <div class="lg:col-span-4 flex flex-col items-start gap-4">
             <a
               href="/"
-              class="font-black italic uppercase tracking-widest text-2xl lg:text-3xl text-[#1C1B1B] select-none hover:text-[#326262] transition-colors"
+              class="font-black italic uppercase tracking-tight text-3xl text-[#111111] select-none hover:text-[#2D5854] transition-colors"
               aria-label="SAGA16 Home"
             >
               SAGA16
             </a>
-            <p class="text-sm sm:text-base text-[#326262] font-medium leading-relaxed max-w-sm">
-              We design and build fast, polished, mobile-ready websites for institutions, businesses, civic bodies and celebrations.
+            <p class="text-sm text-[#2D5854] font-medium leading-relaxed max-w-[320px]">
+              We're constantly seeking ambitious clients and partners who value precision engineering and refined UI/UX design for web platforms.
             </p>
 
             <!-- Pill Social Container (matching reference screenshot) -->
-            <div class="inline-flex items-center gap-4 px-5 py-2.5 rounded-full border border-[#326262]/20 bg-white/70 backdrop-blur-sm shadow-sm">
+            <div class="inline-flex items-center gap-5 px-5 py-2.5 rounded-full border border-[#2D5854]/30 bg-white/40 backdrop-blur-sm mt-2 shadow-xs">
               <!-- LinkedIn -->
               <a
                 href={company.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-[#326262] hover:text-[#091414] transition-colors"
+                class="text-[#2D5854] hover:text-[#111111] transition-colors"
                 aria-label="LinkedIn"
               >
                 <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -190,7 +190,7 @@ const { company, nav } = siteData;
                 href={company.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-[#326262] hover:text-[#091414] transition-colors"
+                class="text-[#2D5854] hover:text-[#111111] transition-colors"
                 aria-label="GitHub"
               >
                 <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -203,7 +203,7 @@ const { company, nav } = siteData;
                 href={company.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-[#326262] hover:text-[#091414] transition-colors"
+                class="text-[#2D5854] hover:text-[#111111] transition-colors"
                 aria-label="WhatsApp"
               >
                 <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
@@ -213,63 +213,83 @@ const { company, nav } = siteData;
             </div>
           </div>
 
-          <!-- Col 2: Navigation Links (3 cols) -->
-          <div class="lg:col-span-3 flex flex-col gap-3">
-            <span class="text-xs uppercase tracking-widest text-[#326262] font-bold mb-1">
+          <!-- Col 2: Company (lg:col-span-2) -->
+          <div class="lg:col-span-2 flex flex-col gap-3">
+            <span class="text-sm font-bold text-[#111111] mb-1">
               Company
             </span>
-            <a href="/" class="text-sm font-medium text-[#586261] hover:text-[#1C1B1B] transition-colors">Home</a>
-            <a href="/our-work" class="text-sm font-medium text-[#586261] hover:text-[#1C1B1B] transition-colors">Our Work</a>
-            <a href="/team" class="text-sm font-medium text-[#586261] hover:text-[#1C1B1B] transition-colors">Team</a>
-            <a href="/contact" class="text-sm font-medium text-[#586261] hover:text-[#1C1B1B] transition-colors">Contact</a>
+            <a href="/contact" class="text-sm font-medium text-[#2D5854] hover:text-[#111111] transition-colors">Contact</a>
+            <a href="/our-work" class="text-sm font-medium text-[#2D5854] hover:text-[#111111] transition-colors">Our Work</a>
+            <a href="/team" class="text-sm font-medium text-[#2D5854] hover:text-[#111111] transition-colors">About us</a>
+            <a href="/team" class="text-sm font-medium text-[#2D5854] hover:text-[#111111] transition-colors">Team</a>
           </div>
 
-          <!-- Col 3: Direct Contact & Action Pill (4 cols, matching reference) -->
-          <div class="lg:col-span-4 flex flex-col items-start gap-4">
+          <!-- Col 3: Services / Categories (lg:col-span-2) -->
+          <div class="lg:col-span-2 flex flex-col gap-3">
+            <span class="text-sm font-bold text-[#111111] mb-1">
+              Services
+            </span>
+            <a href="/our-work" class="text-sm font-medium text-[#2D5854] hover:text-[#111111] transition-colors">Institutional</a>
+            <a href="/our-work" class="text-sm font-medium text-[#2D5854] hover:text-[#111111] transition-colors">Civic Platforms</a>
+            <a href="/our-work" class="text-sm font-medium text-[#2D5854] hover:text-[#111111] transition-colors">Celebrations</a>
+          </div>
+
+          <!-- Col 4: Projects (lg:col-span-2) -->
+          <div class="lg:col-span-2 flex flex-col gap-3">
+            <span class="text-sm font-bold text-[#111111] mb-1">
+              Projects
+            </span>
+            <a href="/our-work" class="text-sm font-medium text-[#2D5854] hover:text-[#111111] transition-colors">S.N. Public School</a>
+            <a href="/our-work" class="text-sm font-medium text-[#2D5854] hover:text-[#111111] transition-colors">Royal Wedding</a>
+            <a href="/our-work" class="text-sm font-medium text-[#2D5854] hover:text-[#111111] transition-colors">CivicVoice</a>
+          </div>
+
+          <!-- Col 5: Request a call & Contact Info (lg:col-span-2, matching reference) -->
+          <div class="lg:col-span-2 flex flex-col items-start gap-3">
             <!-- Pill Button -->
             <a
               href={company.tel}
-              class="inline-flex items-center justify-center px-7 py-3 rounded-full bg-[#326262] hover:bg-[#3E6161] text-white text-sm font-semibold transition-all shadow-md hover:-translate-y-0.5 active:translate-y-0"
+              class="inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-[#2D5854] hover:bg-[#1D3E3A] text-white text-sm font-semibold transition-all shadow-sm hover:-translate-y-0.5 active:translate-y-0"
             >
-              Call Now
+              Request a call
             </a>
 
-            <!-- Phone Number -->
+            <!-- Phone Number (underlined as in screenshot) -->
             <a
               href={company.tel}
-              class="text-sm font-bold text-[#1C1B1B] hover:text-[#326262] transition-colors"
+              class="text-sm font-bold text-[#111111] hover:text-[#2D5854] transition-colors underline underline-offset-4 decoration-[#111111]/60"
             >
               {company.phone}
             </a>
 
-            <!-- Email -->
+            <!-- Email (underlined as in screenshot) -->
             <a
               href={company.mailto}
-              class="text-sm font-medium text-[#1C1B1B] hover:text-[#326262] transition-colors underline underline-offset-4 decoration-[#326262]/30"
+              class="text-sm font-medium text-[#111111] hover:text-[#2D5854] transition-colors underline underline-offset-4 decoration-[#111111]/60"
             >
               {company.email}
             </a>
 
-            <!-- Location -->
-            <span class="text-xs font-semibold text-[#586261]">
+            <!-- Location (underlined as in screenshot) -->
+            <span class="text-xs font-semibold text-[#111111] underline underline-offset-4 decoration-[#111111]/60">
               {company.location}
             </span>
           </div>
         </div>
 
         <!-- Hairline Divider (matching reference) -->
-        <div class="border-t border-[#326262]/15 pt-8 pb-4 text-center">
-          <p class="text-xs sm:text-sm text-[#586261] font-medium">
+        <div class="border-t border-[#2D5854]/20 pt-8 pb-4 text-center">
+          <p class="text-xs sm:text-sm text-[#111111] font-bold">
             {company.copyright}. All rights reserved.
           </p>
         </div>
       </div>
 
-      <!-- Effect 8: Giant Oversized Brand Watermark Typography at bottom in crisp white (matching reference) -->
-      <div class="relative w-full overflow-hidden pointer-events-none select-none flex justify-center -mb-6 lg:-mb-14 pt-4">
+      <!-- Effect 8: Giant Oversized Brand Watermark Typography at bottom in pure crisp white (exact match to LEVEIN watermark) -->
+      <div class="relative w-full overflow-hidden pointer-events-none select-none flex justify-center -mb-8 lg:-mb-16 pt-6">
         <span
           data-reveal="letters"
-          class="font-black italic uppercase tracking-tighter text-[22vw] leading-none text-white/75 select-none whitespace-nowrap block"
+          class="font-black italic uppercase tracking-tighter text-[26vw] leading-none text-white select-none whitespace-nowrap block drop-shadow-xs"
         >
           SAGA16
         </span>
