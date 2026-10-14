@@ -83,24 +83,29 @@ const { hero } = siteData;
         </div>
       </div>
 
-      <!-- Phone Mockup (Ghibli Tribute Dark Mode) -->
+      <!-- Phone Mockup (Ghibli Tribute Dark Mode Mobile) -->
       <div
         data-reveal="box"
         data-box-color="green"
-        class="hidden sm:block w-[180px] lg:w-[210px] shrink-0 rounded-t-[2.5rem] bg-[#1A1C1E] p-3 border-t border-x border-white/10 shadow-2xl"
+        class="hidden sm:block w-[190px] lg:w-[224px] shrink-0 rounded-t-[2.8rem] bg-[#18191D] p-2.5 border-t-2 border-x-2 border-white/20 shadow-[0_-12px_45px_rgba(0,0,0,0.85)] relative z-20 sm:-ml-6 lg:-ml-10 transition-transform duration-500 hover:-translate-y-2 ring-1 ring-black/50"
       >
-        <div class="box-content">
-          <!-- Notch -->
-          <div class="w-12 h-2.5 bg-white/20 rounded-full mx-auto mb-3"></div>
+        <div class="box-content relative">
+          <!-- Dynamic Island -->
+          <div class="w-16 h-4 bg-black rounded-full mx-auto mb-2 flex items-center justify-between px-2 shadow-inner ring-1 ring-white/10">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#162736]"></span>
+            <span class="w-1 h-1 rounded-full bg-[#233544]"></span>
+          </div>
 
-          <!-- Real Screenshot of Ghibli Tribute Dark Mode -->
-          <div class="w-full bg-[#121316] rounded-t-[1.8rem] overflow-hidden aspect-[9/16] relative group">
+          <!-- Real Mobile Screenshot of Ghibli Tribute Dark Mode -->
+          <div class="w-full bg-[#1b122c] rounded-t-[2.2rem] overflow-hidden aspect-[9/18] relative group shadow-inner">
             <img
-              src="/projects/ghibli-tribute.png"
-              alt="Studio Ghibli Tribute - Dark Mode by SAGA16"
+              src="/projects/ghibli-mobile-dark.png"
+              alt="Studio Ghibli Tribute - Mobile Dark Mode by SAGA16"
               class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
               loading="eager"
             />
+            <!-- Gloss / Sheen overlay -->
+            <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.12] rounded-t-[2.2rem]"></div>
           </div>
         </div>
       </div>
