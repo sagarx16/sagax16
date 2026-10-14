@@ -1,0 +1,55 @@
+---
+import { siteData } from '../data/site';
+const { facts } = siteData;
+---
+
+<section class="w-full bg-[#E5F0E1] py-16 lg:py-20 text-[#1C1B1B]">
+  <div class="max-w-[1280px] mx-auto px-6 lg:px-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 items-center">
+      <!-- Fact 1: 6 live projects -->
+      <div class="bg-white rounded-[24px] p-8 text-center border border-[#326262]/10 shadow-[0_4px_20px_-2px_rgba(50,98,98,0.06)]">
+        <span
+          data-counter
+          data-counter-target="6"
+          data-counter-prefix=""
+          class="block text-4xl sm:text-5xl lg:text-6xl font-bold text-[#326262] mb-2 leading-none"
+        >
+          6
+        </span>
+        <span class="text-base text-[#586261] font-medium">
+          {facts[0].label}
+        </span>
+      </div>
+
+      <!-- Fact 2: 3 website categories (slightly raised on desktop) -->
+      <div class="bg-white rounded-[24px] p-8 text-center border border-[#326262]/15 shadow-[0_12px_32px_-4px_rgba(50,98,98,0.12)] md:-translate-y-2">
+        <span
+          data-counter
+          data-counter-target="3"
+          data-counter-prefix=""
+          class="block text-4xl sm:text-5xl lg:text-6xl font-bold text-[#326262] mb-2 leading-none"
+        >
+          3
+        </span>
+        <span class="text-base text-[#586261] font-medium">
+          {facts[1].label}
+        </span>
+      </div>
+
+      <!-- Fact 3: ₹599 starting price (₹ prefix stays fixed) -->
+      <div class="bg-white rounded-[24px] p-8 text-center border border-[#326262]/10 shadow-[0_4px_20px_-2px_rgba(50,98,98,0.06)]">
+        <span
+          data-counter
+          data-counter-target="599"
+          data-counter-prefix="₹"
+          class="block text-4xl sm:text-5xl lg:text-6xl font-bold text-[#326262] mb-2 leading-none"
+        >
+          ₹599
+        </span>
+        <span class="text-base text-[#586261] font-medium">
+          {facts[2].label}
+        </span>
+      </div>
+    </div>
+  </div>
+</section>

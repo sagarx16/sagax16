@@ -1,0 +1,133 @@
+---
+import { siteData } from '../data/site';
+const { hero } = siteData;
+---
+
+<section class="relative w-full overflow-hidden bg-[#101012] text-white py-20 lg:py-32">
+  <!-- Soft Teal Radial Glow Overlay -->
+  <div class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-70">
+    <div class="w-[600px] h-[600px] lg:w-[960px] lg:h-[960px] rounded-full bg-[radial-gradient(circle,rgba(50,98,98,0.4)_0%,rgba(16,16,18,0)_70%)]"></div>
+  </div>
+
+  <div class="relative max-w-[1280px] mx-auto px-6 lg:px-12 flex flex-col items-center text-center z-10">
+    <!-- Main Headline with Effect 1: Scroll-triggered text reveal -->
+    <h1
+      data-reveal="text"
+      class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight text-white max-w-4xl leading-[1.1] mb-6"
+    >
+      {hero.heading}
+    </h1>
+
+    <!-- Subheading with text reveal -->
+    <p
+      data-reveal="text"
+      class="text-base sm:text-lg lg:text-xl text-[#A9B5B4] max-w-2xl mb-10 leading-relaxed font-normal"
+    >
+      {hero.subheading}
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-wrap items-center justify-center gap-4 mb-16">
+      <a
+        href={hero.primaryButton.href}
+        class="px-8 py-3.5 rounded-full bg-[#6BBF9A] hover:bg-[#92CDAB] text-[#091414] font-semibold text-base transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-[0_4px_20px_-2px_rgba(107,191,154,0.3)]"
+      >
+        {hero.primaryButton.text}
+      </a>
+      <a
+        href={hero.secondaryButton.href}
+        class="px-8 py-3.5 rounded-full border border-white/20 hover:border-white/60 hover:bg-white/5 text-white font-semibold text-base transition-all duration-200"
+      >
+        {hero.secondaryButton.text}
+      </a>
+    </div>
+
+    <!-- Effect 2: Box Reveal for Abstract Wireframe Mockups (Laptop and Phone) -->
+    <!-- TODO: Replace abstract wireframes with real screenshots of live client projects -->
+    <div class="w-full max-w-4xl flex items-end justify-center gap-4 sm:gap-6 pt-4">
+      <!-- Laptop Mockup -->
+      <div
+        data-reveal="box"
+        data-box-color="teal"
+        class="relative w-full max-w-[620px] rounded-t-2xl bg-[#1A1C1E] p-3 sm:p-4 border-t border-x border-white/10 shadow-2xl"
+      >
+        <div class="box-content">
+          <!-- Window Controls -->
+          <div class="flex items-center gap-1.5 mb-3 px-1">
+            <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+            <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+          </div>
+
+          <!-- Abstract Wireframe Screen Content -->
+          <div class="w-full bg-[#121316] rounded-xl p-4 sm:p-6 flex flex-col gap-4">
+            <div class="flex items-center justify-between pb-3 border-b border-white/5">
+              <div class="w-24 h-4 bg-white/20 rounded-full"></div>
+              <div class="flex gap-2">
+                <div class="w-12 h-3 bg-white/10 rounded-full"></div>
+                <div class="w-12 h-3 bg-white/10 rounded-full"></div>
+                <div class="w-12 h-3 bg-white/10 rounded-full"></div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 pt-1">
+              <div class="col-span-2 h-28 bg-white/5 rounded-lg flex flex-col justify-end p-3 gap-2">
+                <div class="w-3/4 h-3 bg-white/20 rounded"></div>
+                <div class="w-1/2 h-2.5 bg-white/10 rounded"></div>
+              </div>
+              <div class="col-span-1 h-28 bg-white/5 rounded-lg flex items-center justify-center">
+                <div class="w-12 h-12 rounded-full bg-[#6BBF9A]/30 flex items-center justify-center">
+                  <div class="w-6 h-6 rounded-full bg-[#6BBF9A]/60"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3">
+              <div class="h-16 bg-white/5 rounded-lg border border-white/5 p-2 flex flex-col justify-between">
+                <div class="w-10 h-2 bg-white/20 rounded"></div>
+                <div class="w-full h-1 bg-white/10 rounded"></div>
+              </div>
+              <div class="h-16 bg-white/5 rounded-lg border border-white/5 p-2 flex flex-col justify-between">
+                <div class="w-10 h-2 bg-white/20 rounded"></div>
+                <div class="w-full h-1 bg-white/10 rounded"></div>
+              </div>
+              <div class="h-16 bg-white/5 rounded-lg border border-white/5 p-2 flex flex-col justify-between">
+                <div class="w-10 h-2 bg-white/20 rounded"></div>
+                <div class="w-full h-1 bg-white/10 rounded"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Base of Laptop -->
+          <div class="w-full h-2.5 bg-[#0D0E10] rounded-b-lg mt-2 mx-auto"></div>
+        </div>
+      </div>
+
+      <!-- Phone Mockup -->
+      <div
+        data-reveal="box"
+        data-box-color="green"
+        class="hidden sm:block w-[180px] lg:w-[210px] shrink-0 rounded-t-[2.5rem] bg-[#1A1C1E] p-3 border-t border-x border-white/10 shadow-2xl"
+      >
+        <div class="box-content">
+          <!-- Notch -->
+          <div class="w-12 h-2.5 bg-white/20 rounded-full mx-auto mb-3"></div>
+
+          <!-- Abstract Phone Screen -->
+          <div class="w-full bg-[#121316] rounded-t-[1.8rem] p-3 flex flex-col gap-2.5">
+            <div class="w-14 h-3 bg-white/20 rounded-full"></div>
+            <div class="w-full h-20 bg-white/5 rounded-xl flex items-center justify-center">
+              <div class="w-8 h-8 rounded-full bg-[#326262]/40"></div>
+            </div>
+            <div class="w-full h-2 bg-white/15 rounded"></div>
+            <div class="w-4/5 h-2 bg-white/10 rounded"></div>
+            <div class="grid grid-cols-2 gap-2 pt-1">
+              <div class="h-10 bg-white/5 rounded-lg"></div>
+              <div class="h-10 bg-white/5 rounded-lg"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

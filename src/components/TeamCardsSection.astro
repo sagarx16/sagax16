@@ -1,0 +1,95 @@
+---
+import { siteData } from '../data/site';
+const { team } = siteData;
+---
+
+<section class="w-full bg-[#FAF9F8] py-20 lg:py-28 text-[#1C1B1B]">
+  <div class="max-w-[1280px] mx-auto px-6 lg:px-12">
+    <!-- 3 Detailed Team Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {team.map((member, idx) => (
+        <article
+          data-tilt
+          class="flex flex-col bg-white rounded-[24px] p-8 border border-[#326262]/10 shadow-[0_4px_24px_-2px_rgba(50,98,98,0.06)] hover:border-[#6BBF9A]/40 transition-colors"
+        >
+          <!-- Avatar Placeholder Frame with Box Reveal (Effect 2) -->
+          <!-- TODO: Replace placeholder with real photos of team members. Never generate or use photos of people. -->
+          <div
+            data-reveal="box"
+            data-box-color={idx % 2 === 0 ? 'teal' : 'green'}
+            class="relative w-full aspect-[4/3] rounded-[20px] overflow-hidden bg-[#F0EDED] mb-6 flex items-center justify-center"
+          >
+            <div class="box-content w-full h-full flex flex-col items-center justify-center bg-[#E5F0E1] text-[#326262] p-6 shadow-inner">
+              <div class="w-20 h-20 rounded-full bg-white/80 border border-[#326262]/15 flex items-center justify-center mb-2 shadow-sm">
+                <svg class="w-10 h-10 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                </svg>
+              </div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-[#326262]/70">
+                Team Member
+              </span>
+            </div>
+          </div>
+
+          <!-- Name & Role -->
+          <div class="flex flex-col items-start gap-2 mb-4">
+            <h3 class="text-2xl font-bold text-[#1C1B1B] tracking-tight">
+              {member.name}
+            </h3>
+            <span class="inline-flex items-center px-3.5 py-1 rounded-full bg-[#E5F0E1] text-[#326262] text-xs font-semibold">
+              {member.role}
+            </span>
+          </div>
+
+          <!-- Bio -->
+          <p class="text-base text-[#586261] leading-relaxed mb-6 flex-grow font-normal">
+            {member.bio}
+          </p>
+
+          <!-- Skills Pills -->
+          <div class="flex flex-wrap gap-2 mb-6">
+            {member.skills.map((skill) => (
+              <span class="px-3 py-1 rounded-full bg-[#FAF9F8] border border-[#326262]/10 text-[#1C1B1B] text-xs font-medium">
+                {skill}
+              </span>
+            ))}
+          </div>
+
+          <!-- Social Links (if present, e.g. Sagar Pathak) -->
+          {(member.github || member.linkedin) && (
+            <div class="pt-5 border-t border-[#326262]/10 flex items-center gap-3">
+              {member.github && (
+                <a
+                  href={member.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FAF9F8] hover:bg-[#E5F0E1] text-[#1C1B1B] text-xs font-semibold border border-[#326262]/10 transition-colors"
+                  aria-label={`${member.name} GitHub`}
+                >
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+                  </svg>
+                  <span>GitHub</span>
+                </a>
+              )}
+              {member.linkedin && (
+                <a
+                  href={member.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FAF9F8] hover:bg-[#E5F0E1] text-[#1C1B1B] text-xs font-semibold border border-[#326262]/10 transition-colors"
+                  aria-label={`${member.name} LinkedIn`}
+                >
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                  </svg>
+                  <span>LinkedIn</span>
+                </a>
+              )}
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

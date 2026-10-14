@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactCards from '../components/ContactCards.astro';
+import ContactForm from '../components/ContactForm.astro';
+import PricingList from '../components/PricingList.astro';
+import FaqSection from '../components/FaqSection.astro';
+import ContactBand from '../components/ContactBand.astro';
+import { siteData } from '../data/site';
+
+const { contactPage, contactBands } = siteData;
+---
+
+<Base currentPage="contact" title="Contact | SAGA16 Studio">
+  <!-- Contact Header (Dark cinematic teal with soft radial glow) -->
+  <section class="relative w-full overflow-hidden bg-[#091414] text-white py-20 lg:py-28">
+    <div
+      class="pointer-events-none absolute inset-0 opacity-40"
+      style="background: radial-gradient(circle at 50% 30%, rgba(107, 191, 154, 0.3) 0%, rgba(9, 20, 20, 0) 70%);"
+    ></div>
+
+    <div class="relative max-w-[1280px] mx-auto px-6 lg:px-12 flex flex-col items-center text-center z-10">
+      <!-- Eyebrow -->
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md mb-6">
+        <span class="w-2 h-2 rounded-full bg-[#6BBF9A]"></span>
+        <span class="text-xs uppercase tracking-widest text-[#6BBF9A] font-bold">{contactPage.eyebrow}</span>
+      </div>
+
+      <!-- Main Headline with text reveal -->
+      <h1
+        data-reveal="text"
+        class="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-white max-w-4xl mb-6 leading-[1.1]"
+      >
+        {contactPage.heading}
+      </h1>
+
+      <p
+        data-reveal="text"
+        class="text-base sm:text-lg text-[#A9B5B4] max-w-2xl font-normal leading-relaxed"
+      >
+        {contactPage.subheading}
+      </p>
+    </div>
+  </section>
+
+  <!-- Contact Channels Cards (Call, WhatsApp, Email with 3D Tilt) -->
+  <section class="max-w-[1280px] mx-auto px-6 lg:px-12 pt-16 pb-8">
+    <ContactCards />
+  </section>
+
+  <!-- Form and Pricing Side-by-Side Section -->
+  <section class="max-w-[1280px] mx-auto px-6 lg:px-12 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      <!-- Left: Form -->
+      <div class="lg:col-span-7">
+        <ContactForm />
+      </div>
+
+      <!-- Right: Pricing List -->
+      <div class="lg:col-span-5">
+        <PricingList />
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <FaqSection />
+
+  <!-- Closing CTA: "Ready to start?" with "Call +91 7050836284" and "WhatsApp Us" -->
+  <ContactBand
+    heading={contactBands.contact.heading}
+    showEmail={false}
+  />
+</Base>

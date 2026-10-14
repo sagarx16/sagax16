@@ -1,0 +1,270 @@
+---
+import { siteData } from '../data/site';
+const { projects } = siteData;
+
+const featuredProject = projects[0]; // S.N. Public School & Tuition Center
+---
+
+<div class="w-full">
+  <!-- Filter Chips (Real client-side filter with smooth transition) -->
+  <div class="flex items-center justify-between flex-wrap gap-4 mb-8">
+    <div class="flex items-center gap-2 flex-wrap" role="group" aria-label="Filter projects by category">
+      <button
+        type="button"
+        data-filter-btn="all"
+        aria-pressed="true"
+        class="active-filter-pill px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer bg-[#326262] text-white shadow-sm"
+      >
+        All
+      </button>
+      <button
+        type="button"
+        data-filter-btn="institutional-business"
+        aria-pressed="false"
+        class="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer bg-[#E5F0E1] text-[#326262] hover:bg-[#d6e7d0]"
+      >
+        Institutional &amp; Business
+      </button>
+      <button
+        type="button"
+        data-filter-btn="civic-government"
+        aria-pressed="false"
+        class="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer bg-[#E5F0E1] text-[#326262] hover:bg-[#d6e7d0]"
+      >
+        Civic &amp; Government
+      </button>
+      <button
+        type="button"
+        data-filter-btn="celebration"
+        aria-pressed="false"
+        class="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer bg-[#E5F0E1] text-[#326262] hover:bg-[#d6e7d0]"
+      >
+        Celebration
+      </button>
+      <button
+        type="button"
+        data-filter-btn="fan-project"
+        aria-pressed="false"
+        class="px-6 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer bg-[#E5F0E1] text-[#326262] hover:bg-[#d6e7d0]"
+      >
+        Fan project
+      </button>
+    </div>
+
+    <div class="flex items-center gap-2 text-[#586261] text-xs font-semibold">
+      <span class="w-2 h-2 rounded-full bg-[#6BBF9A] animate-pulse"></span>
+      <span>Live Verified Links</span>
+    </div>
+  </div>
+
+  <!-- Effect 7: Full-bleed masonry/bento photo grid of project tiles in varied sizes (S.N. Public School tile is the largest) -->
+  <!-- No photos of people anywhere: abstract wireframe mockups with NO readable text, made with CSS / inline SVG -->
+  <!-- TODO: Replace abstract wireframes with real screenshots of the live sites -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 auto-rows-[280px] lg:auto-rows-[300px]">
+    {projects.map((p, index) => {
+      // Varied bento sizes: p[0] (S.N. Public School) is largest (col-span-12 lg:col-span-8 row-span-2)
+      let colSpan = 'lg:col-span-4 row-span-1';
+      if (index === 0) colSpan = 'lg:col-span-8 row-span-2';
+      else if (index === 1) colSpan = 'lg:col-span-4 row-span-2';
+      else if (index === 2) colSpan = 'lg:col-span-4 row-span-1';
+      else if (index === 3) colSpan = 'lg:col-span-4 row-span-1';
+      else if (index === 4) colSpan = 'lg:col-span-6 row-span-1';
+      else if (index === 5) colSpan = 'lg:col-span-6 row-span-1';
+
+      return (
+        <a
+          href={p.liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-project-category={p.category}
+          data-reveal="box"
+          data-box-color={index % 2 === 0 ? 'teal' : 'green'}
+          class:list={[
+            'group relative rounded-[24px] overflow-hidden border border-[#326262]/10 bg-white shadow-[0_4px_24px_-2px_rgba(50,98,98,0.06)] hover:border-[#6BBF9A] hover:shadow-[0_12px_32px_-4px_rgba(50,98,98,0.14)] transition-all duration-300 flex flex-col justify-end p-6',
+            colSpan,
+          ]}
+        >
+          <!-- Mockup Background with Box Reveal Content Container -->
+          <div class="box-content absolute inset-0 w-full h-full bg-[#121316] p-4 flex flex-col justify-between overflow-hidden">
+            <!-- Browser Header -->
+            <div class="flex items-center justify-between pb-2 border-b border-white/10 z-10">
+              <div class="flex items-center gap-1.5">
+                <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+                <span class="w-2.5 h-2.5 rounded-full bg-white/20"></span>
+              </div>
+              <div class="px-3 py-0.5 rounded-full bg-white/10 text-[10px] text-white/40 font-mono tracking-tight flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#6BBF9A]"></span>
+                <span>app</span>
+              </div>
+            </div>
+
+            <!-- Abstract Wireframe Visuals (Varied layouts, NO readable text) -->
+            <div class="relative w-full h-full flex flex-col justify-center items-center py-4">
+              {index === 0 && (
+                <div class="w-full max-w-lg bg-[#1a1c1e] rounded-xl p-4 border border-white/5 flex flex-col gap-3">
+                  <div class="flex justify-between items-center pb-2 border-b border-white/5">
+                    <div class="w-28 h-4 bg-white/20 rounded"></div>
+                    <div class="w-16 h-3 bg-[#6BBF9A]/30 rounded"></div>
+                  </div>
+                  <div class="w-full h-32 bg-white/5 rounded-lg flex items-center justify-center">
+                    <div class="w-12 h-12 rounded-full bg-[#326262]/30 flex items-center justify-center">
+                      <div class="w-6 h-6 rounded-full bg-[#6BBF9A]/40"></div>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-3 gap-2">
+                    <div class="h-10 bg-white/5 rounded"></div>
+                    <div class="h-10 bg-white/5 rounded"></div>
+                    <div class="h-10 bg-white/5 rounded"></div>
+                  </div>
+                </div>
+              )}
+
+              {index === 1 && (
+                <div class="w-full h-full flex flex-col items-center justify-center gap-3">
+                  <div class="w-16 h-16 rounded-full border-2 border-[#6BBF9A]/40 flex items-center justify-center bg-white/5">
+                    <div class="w-8 h-8 rounded-full bg-[#6BBF9A]/30"></div>
+                  </div>
+                  <div class="w-32 h-3 bg-white/20 rounded"></div>
+                  <div class="w-20 h-2 bg-white/10 rounded"></div>
+                  <div class="w-24 h-6 rounded-full bg-white/10 mt-2"></div>
+                </div>
+              )}
+
+              {index === 2 && (
+                <div class="w-full flex flex-col gap-2 p-2 bg-[#1a1c1e] rounded-lg">
+                  <div class="flex justify-between items-center">
+                    <div class="w-20 h-3 bg-white/20 rounded"></div>
+                    <div class="w-6 h-6 rounded bg-[#6BBF9A]/30"></div>
+                  </div>
+                  <div class="grid grid-cols-2 gap-2 mt-1">
+                    <div class="h-12 bg-white/5 rounded p-1 flex flex-col justify-between">
+                      <div class="w-10 h-2 bg-white/15 rounded"></div>
+                      <div class="w-full h-1 bg-white/10 rounded"></div>
+                    </div>
+                    <div class="h-12 bg-white/5 rounded p-1 flex flex-col justify-between">
+                      <div class="w-10 h-2 bg-white/15 rounded"></div>
+                      <div class="w-full h-1 bg-white/10 rounded"></div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {index === 3 && (
+                <div class="w-full flex flex-col gap-2 p-3 bg-[#1a1c1e] rounded-lg">
+                  <div class="w-24 h-3 bg-white/20 rounded"></div>
+                  <div class="w-full h-10 bg-white/5 rounded flex items-center px-3 gap-2">
+                    <div class="w-4 h-4 rounded-full bg-[#6BBF9A]/40"></div>
+                    <div class="w-16 h-2 bg-white/15 rounded"></div>
+                  </div>
+                </div>
+              )}
+
+              {index === 4 && (
+                <div class="w-full flex flex-col gap-2 p-3 bg-[#1a1c1e] rounded-lg">
+                  <div class="flex justify-between">
+                    <div class="w-24 h-3 bg-white/20 rounded"></div>
+                    <div class="w-12 h-3 bg-[#6BBF9A]/40 rounded"></div>
+                  </div>
+                  <div class="w-full h-12 bg-white/5 rounded flex items-center justify-center">
+                    <div class="w-24 h-2 bg-white/20 rounded"></div>
+                  </div>
+                </div>
+              )}
+
+              {index === 5 && (
+                <div class="w-full flex flex-col gap-2 p-3 bg-[#1a1c1e] rounded-lg">
+                  <div class="w-full h-16 bg-white/5 rounded flex items-center justify-center">
+                    <div class="w-10 h-10 rounded-full bg-white/10"></div>
+                  </div>
+                  <div class="w-1/2 h-2.5 bg-white/20 rounded"></div>
+                </div>
+              )}
+            </div>
+
+            <!-- Gradient protection for caption -->
+            <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#091414] via-[#091414]/90 to-transparent pointer-events-none"></div>
+          </div>
+
+          <!-- Visible Caption: Title and Label Pill always visible -->
+          <div class="relative z-10 flex flex-col gap-2">
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-3 py-1 rounded-full bg-[#E5F0E1] text-[#326262] text-xs font-semibold">
+                {p.label}
+              </span>
+              <span class="w-7 h-7 rounded-full bg-white/10 backdrop-blur-sm text-white flex items-center justify-center opacity-80 group-hover:opacity-100 group-hover:bg-[#6BBF9A] group-hover:text-[#091414] transition-all">
+                <svg class="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </span>
+            </div>
+
+            <h3 class="text-lg sm:text-xl font-medium text-white group-hover:text-[#6BBF9A] transition-colors leading-snug">
+              {p.title}
+            </h3>
+          </div>
+        </a>
+      );
+    })}
+  </div>
+
+  <!-- Featured Project Details Area below the bento grid for S.N. Public School -->
+  <div class="mt-12 bg-white rounded-[24px] p-8 lg:p-12 border border-[#326262]/10 shadow-[0_4px_24px_-2px_rgba(50,98,98,0.06)]">
+    <div class="flex flex-col lg:flex-row items-start justify-between gap-8">
+      <div class="lg:w-1/2">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="px-3 py-1 rounded-full bg-[#E5F0E1] text-[#326262] text-xs font-semibold">
+            {featuredProject.label}
+          </span>
+          <span class="text-xs text-[#586261] font-medium">Bokaro Steel City</span>
+        </div>
+
+        <h3 class="text-2xl sm:text-3xl font-medium text-[#1C1B1B] mb-3 leading-snug">
+          {featuredProject.title}
+        </h3>
+
+        <p class="text-base text-[#586261] leading-relaxed mb-6">
+          {featuredProject.description}
+        </p>
+
+        <!-- Tech Badges -->
+        <div class="flex flex-wrap gap-2 mb-6">
+          {featuredProject.tech.map((t) => (
+            <span class="px-3 py-1 rounded-full bg-[#E5F0E1] text-[#326262] text-xs font-semibold">
+              {t}
+            </span>
+          ))}
+        </div>
+
+        <a
+          href={featuredProject.liveUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#326262] hover:bg-[#3E6161] text-white text-sm font-semibold transition-all shadow-sm"
+        >
+          <span>Open Live School Website</span>
+          <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Features List -->
+      <div class="lg:w-1/2 flex flex-col gap-3">
+        <h4 class="text-xs uppercase tracking-widest text-[#326262] font-bold mb-2">
+          KEY FEATURES &amp; MODULES
+        </h4>
+        {featuredProject.features?.map((feat) => (
+          <div class="flex items-start gap-3 p-3.5 rounded-2xl bg-[#FAF9F8] border border-[#326262]/5">
+            <svg class="w-5 h-5 text-[#6BBF9A] shrink-0 mt-0.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span class="text-sm text-[#1C1B1B] font-medium leading-relaxed">
+              {feat}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</div>

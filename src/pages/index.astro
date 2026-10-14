@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import CategoriesSection from '../components/CategoriesSection.astro';
+import AboutSection from '../components/AboutSection.astro';
+import FactBand from '../components/FactBand.astro';
+import TechStackSection from '../components/TechStackSection.astro';
+import ProcessSection from '../components/ProcessSection.astro';
+import WorkPreviewSection from '../components/WorkPreviewSection.astro';
+import TeamPreviewSection from '../components/TeamPreviewSection.astro';
+import ContactBand from '../components/ContactBand.astro';
+import FaqSection from '../components/FaqSection.astro';
+import { siteData } from '../data/site';
+---
+
+<Base currentPage="home" title="SAGA16 | Web Design & Development Studio">
+  <!-- 1. Hero -->
+  <Hero />
+
+  <!-- 2. Categories & Single-Row Bracket Marquee -->
+  <CategoriesSection />
+
+  <!-- 3. About SAGA16 -->
+  <AboutSection />
+
+  <!-- 4. Fact Band (Count-Up) -->
+  <FactBand />
+
+  <!-- 5. Tech Stack (Two-Row Opposite-Direction Carousel) -->
+  <TechStackSection />
+
+  <!-- 6. Process (Sticky Column Layout) -->
+  <ProcessSection />
+
+  <!-- 7. Our Work Preview Grid -->
+  <WorkPreviewSection />
+
+  <!-- 8. Team Preview -->
+  <TeamPreviewSection />
+
+  <!-- 9. Closing Contact Band with Oversized Brand Type Behind -->
+  <ContactBand
+    heading={siteData.contactBands.home.heading}
+    showEmail={true}
+  />
+
+  <!-- 10. FAQ Accordion -->
+  <FaqSection />
+</Base>

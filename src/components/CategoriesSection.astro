@@ -1,0 +1,89 @@
+---
+import { siteData } from '../data/site';
+const { categories } = siteData;
+---
+
+<section class="w-full bg-[#091414] text-white py-20 lg:py-28 border-t border-white/10">
+  <div class="max-w-[1280px] mx-auto px-6 lg:px-12">
+    <!-- Header -->
+    <div class="mb-14">
+      <h2
+        data-reveal="text"
+        class="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-white mb-4 leading-[1.1]"
+      >
+        {categories.heading}
+      </h2>
+      <p
+        data-reveal="text"
+        class="text-base sm:text-lg text-[#A9B5B4] max-w-2xl font-normal leading-relaxed"
+      >
+        {categories.description}
+      </p>
+    </div>
+
+    <!-- Rows with hairline dividers -->
+    <div class="flex flex-col border-t border-white/10">
+      {categories.rows.map((row) => (
+        <div class="py-10 lg:py-12 border-b border-white/10 flex flex-col md:flex-row items-start justify-between gap-6">
+          <div class="md:w-1/2">
+            <h3
+              data-reveal="text"
+              class="text-2xl sm:text-3xl font-medium tracking-tight text-white leading-tight"
+            >
+              {row.title}
+            </h3>
+          </div>
+          <div class="md:w-1/2 flex md:justify-start">
+            <p
+              data-reveal="text"
+              class="text-base sm:text-lg text-[#A9B5B4] max-w-lg leading-relaxed font-normal"
+            >
+              {row.description}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Effect 3: Infinite carousel, single row framed with thin corner brackets -->
+    <div class="mt-16 pt-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+      <div class="shrink-0">
+        <span class="block text-xs uppercase tracking-[0.2em] text-[#A9B5B4] font-semibold leading-relaxed">
+          {categories.marqueeLabel}
+        </span>
+      </div>
+
+      <!-- Marquee container with corner brackets -->
+      <div class="relative w-full overflow-hidden p-4 rounded-xl border border-white/10 bg-white/[0.02] marquee-container marquee-fade-mask">
+        <!-- Thin corner brackets -->
+        <span class="absolute top-2 left-2 w-3 h-3 border-t-2 border-l-2 border-[#6BBF9A] pointer-events-none" aria-hidden="true"></span>
+        <span class="absolute top-2 right-2 w-3 h-3 border-t-2 border-r-2 border-[#6BBF9A] pointer-events-none" aria-hidden="true"></span>
+        <span class="absolute bottom-2 left-2 w-3 h-3 border-b-2 border-l-2 border-[#6BBF9A] pointer-events-none" aria-hidden="true"></span>
+        <span class="absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-[#6BBF9A] pointer-events-none" aria-hidden="true"></span>
+
+        <!-- Continuous left scroll with duplicate set for seamless loop -->
+        <div class="marquee-track-left items-center gap-8 py-1 select-none">
+          <!-- Loop Set 1 -->
+          {categories.marqueeProjects.map((project) => (
+            <div class="inline-flex items-center gap-8 shrink-0">
+              <span class="text-sm sm:text-base font-semibold text-white tracking-widest whitespace-nowrap">
+                {project}
+              </span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[#6BBF9A] shrink-0" aria-hidden="true"></span>
+            </div>
+          ))}
+
+          <!-- Loop Set 2 (duplicated, aria-hidden for accessibility) -->
+          {categories.marqueeProjects.map((project) => (
+            <div class="inline-flex items-center gap-8 shrink-0" aria-hidden="true">
+              <span class="text-sm sm:text-base font-semibold text-white tracking-widest whitespace-nowrap">
+                {project}
+              </span>
+              <span class="w-1.5 h-1.5 rounded-full bg-[#6BBF9A] shrink-0"></span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

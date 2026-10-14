@@ -1,0 +1,198 @@
+---
+import '../styles/global.css';
+import { siteData } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  currentPage?: 'home' | 'our-work' | 'team' | 'contact';
+}
+
+const {
+  title = 'SAGA16 | Web Design & Development Studio',
+  description = siteData.company.description,
+  currentPage = 'home',
+} = Astro.props;
+
+const { company, nav } = siteData;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Progressive enhancement: immediately add 'js' class before rendering styles -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body class="bg-[#FAF9F8] text-[#1C1B1B] selection:bg-[#E5F0E1] selection:text-[#326262]">
+    <!-- Accessible Skip Link -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 z-[100] px-4 py-2 bg-[#326262] text-white rounded-full font-medium shadow-lg"
+    >
+      Skip to main content
+    </a>
+
+    <!-- Sticky Navbar -->
+    <header
+      data-site-header
+      class="fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 bg-[#FAF9F8]/90 backdrop-blur-md border-b border-[#326262]/5"
+    >
+      <div class="max-w-[1280px] mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
+        <!-- Logo: SAGA16 in heavy, italic, uppercase, wide-tracked letters, shown ONCE -->
+        <a
+          href="/"
+          class="font-black italic uppercase tracking-widest text-2xl lg:text-3xl text-[#326262] hover:text-[#1c4e4e] transition-colors select-none"
+          aria-label="SAGA16 Home"
+        >
+          SAGA16
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-1.5 p-1 rounded-full bg-[#E5F0E1]/60 border border-[#326262]/10 shadow-sm" aria-label="Main Navigation">
+          {nav.map((item) => {
+            const isActive =
+              (item.href === '/' && currentPage === 'home') ||
+              (item.href === '/our-work' && currentPage === 'our-work') ||
+              (item.href === '/team' && currentPage === 'team') ||
+              (item.href === '/contact' && currentPage === 'contact');
+
+            return (
+              <a
+                href={item.href}
+                class:list={[
+                  'px-5 py-2 rounded-full text-sm font-semibold transition-all duration-200',
+                  isActive
+                    ? 'bg-[#326262] text-white shadow-sm'
+                    : 'text-[#586261] hover:text-[#1C1B1B] hover:bg-white/80',
+                ]}
+                aria-current={isActive ? 'page' : undefined}
+              >
+                {item.title}
+              </a>
+            );
+          })}
+        </nav>
+
+        <!-- CTA & Mobile Toggle -->
+        <div class="flex items-center gap-3">
+          <a
+            href={company.tel}
+            class="hidden sm:inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-[#326262] text-white hover:bg-[#3E6161] text-sm font-semibold transition-all shadow-[0_4px_14px_-2px_rgba(50,98,98,0.25)] hover:-translate-y-0.5 active:translate-y-0"
+          >
+            Call Now
+          </a>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button
+            type="button"
+            data-mobile-menu-toggle
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+            aria-label="Toggle navigation menu"
+            class="md:hidden p-2.5 rounded-full bg-[#E5F0E1] text-[#326262] hover:bg-[#326262] hover:text-white transition-colors"
+          >
+            <svg class="w-6 h-6 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Dropdown -->
+      <div
+        id="mobile-menu"
+        data-mobile-menu
+        class="hidden md:hidden fixed inset-x-0 top-20 bg-[#FAF9F8] border-b border-[#326262]/10 shadow-xl px-6 py-6"
+      >
+        <nav class="flex flex-col gap-2">
+          {nav.map((item) => {
+            const isActive =
+              (item.href === '/' && currentPage === 'home') ||
+              (item.href === '/our-work' && currentPage === 'our-work') ||
+              (item.href === '/team' && currentPage === 'team') ||
+              (item.href === '/contact' && currentPage === 'contact');
+
+            return (
+              <a
+                href={item.href}
+                class:list={[
+                  'px-4 py-3 rounded-2xl text-base font-semibold transition-colors',
+                  isActive
+                    ? 'bg-[#326262] text-white'
+                    : 'text-[#586261] hover:text-[#1C1B1B] hover:bg-[#E5F0E1]',
+                ]}
+                aria-current={isActive ? 'page' : undefined}
+              >
+                {item.title}
+              </a>
+            );
+          })}
+          <div class="pt-4 border-t border-[#326262]/10">
+            <a
+              href={company.tel}
+              class="w-full flex items-center justify-center py-3 rounded-full bg-[#326262] text-white font-semibold shadow-md"
+            >
+              Call Now
+            </a>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main id="main-content" class="w-full pt-20">
+      <slot />
+    </main>
+
+    <!-- Footer: Exactly as specified: logo, links Home, Our Work, Team, Contact, GitHub, LinkedIn, text "Bokaro Steel City, Jharkhand", text "© 2026 SAGA16", oversized SAGA16 type. Nothing else. -->
+    <footer class="relative w-full overflow-hidden bg-[#091414] text-white pt-20 pb-12 border-t border-white/10">
+      <div class="relative max-w-[1280px] mx-auto px-6 lg:px-12 z-10">
+        <!-- Top Row: Logo & Links -->
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-12 border-b border-white/10">
+          <a
+            href="/"
+            class="font-black italic uppercase tracking-widest text-2xl lg:text-3xl text-white select-none hover:text-[#6BBF9A] transition-colors"
+          >
+            SAGA16
+          </a>
+
+          <nav class="flex flex-wrap items-center gap-6 text-sm text-[#A9B5B4]" aria-label="Footer Navigation">
+            <a href="/" class="hover:text-white transition-colors">Home</a>
+            <a href="/our-work" class="hover:text-white transition-colors">Our Work</a>
+            <a href="/team" class="hover:text-white transition-colors">Team</a>
+            <a href="/contact" class="hover:text-white transition-colors">Contact</a>
+            <a href={company.github} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">GitHub</a>
+            <a href={company.linkedin} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>
+          </nav>
+        </div>
+
+        <!-- Middle Row: Location and Copyright -->
+        <div class="py-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-sm text-[#A9B5B4]">
+          <span>{company.location}</span>
+          <span>{company.copyright}</span>
+        </div>
+      </div>
+
+      <!-- Effect 8: Oversized Brand Typography fitted to full page width, partly cropped at bottom edge -->
+      <div class="relative w-full overflow-hidden pointer-events-none select-none flex justify-center -mb-8 lg:-mb-16 pt-6">
+        <span
+          data-reveal="letters"
+          class="font-black italic uppercase tracking-tighter text-[22vw] leading-none text-transparent bg-clip-text bg-gradient-to-b from-white/[0.08] to-transparent whitespace-nowrap block"
+        >
+          SAGA16
+        </span>
+      </div>
+    </footer>
+
+    <!-- Client Scripts -->
+    <script src="../scripts/main.ts"></script>
+  </body>
+</html>

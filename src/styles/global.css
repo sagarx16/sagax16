@@ -1,0 +1,210 @@
+@import "tailwindcss";
+@import "@fontsource/plus-jakarta-sans/index.css";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  --color-dark-teal: #091414;
+  --color-hero-bg: #101012;
+  --color-off-white: #FAF9F8;
+  --color-mint: #E5F0E1;
+  --color-mint-card: #E5EFE6;
+  --color-deep-teal: #326262;
+  --color-deep-teal-hover: #3E6161;
+  --color-accent-green: #6BBF9A;
+  --color-accent-green-hover: #92CDAB;
+  --color-muted-dark: #A9B5B4;
+  --color-text-main: #1C1B1B;
+  --color-text-muted: #586261;
+}
+
+:root {
+  --color-dark-teal: #091414;
+  --color-hero-bg: #101012;
+  --color-off-white: #FAF9F8;
+  --color-mint: #E5F0E1;
+  --color-mint-card: #E5EFE6;
+  --color-deep-teal: #326262;
+  --color-accent-green: #6BBF9A;
+  --color-muted-dark: #A9B5B4;
+  --color-text-main: #1C1B1B;
+  --color-text-muted: #586261;
+}
+
+html {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: #FAF9F8;
+  color: #1C1B1B;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Headings typography specification: medium weight (500), tracking -0.03em, line-height 1.1 */
+h1, h2, h3, .heading-spec {
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+/* Focus styles for keyboard accessibility (WCAG AA) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid #6BBF9A;
+  outline-offset: 3px;
+}
+
+/* Progressive enhancement: With JS disabled, all content is fully visible */
+/* Only when html has class 'js' do initial hidden states apply */
+.js [data-reveal="text"]:not(.is-revealed) .reveal-word {
+  transform: translateY(115%);
+  opacity: 0;
+}
+
+.js [data-reveal="text"].is-revealed .reveal-word {
+  transform: translateY(0%);
+  opacity: 1;
+}
+
+/* Box Reveal */
+.box-reveal-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.box-curtain {
+  transform-origin: right center;
+  transition: transform 0.75s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.js [data-reveal="box"]:not(.is-revealed) .box-curtain {
+  transform: scaleX(1);
+}
+
+.js [data-reveal="box"].is-revealed .box-curtain {
+  transform: scaleX(0);
+}
+
+.box-content {
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease-out;
+}
+
+.js [data-reveal="box"]:not(.is-revealed) .box-content {
+  opacity: 0;
+  transform: scale(1.04);
+}
+
+.js [data-reveal="box"].is-revealed .box-content {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Oversized Brand Typography Reveal */
+.js [data-reveal="letters"]:not(.is-revealed) .brand-letter {
+  transform: translateY(120%);
+  opacity: 0;
+}
+
+.js [data-reveal="letters"].is-revealed .brand-letter {
+  transform: translateY(0%);
+  opacity: 1;
+}
+
+/* Tilt 3D Card */
+.tilt-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* Marquee Animations (Effect 3 & Effect 4) */
+@keyframes marquee-scroll-left {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-scroll-right {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+.marquee-track-left {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll-left 32s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track-right {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll-right 32s linear infinite;
+  will-change: transform;
+}
+
+.marquee-container:hover .marquee-track-left,
+.marquee-container:hover .marquee-track-right {
+  animation-play-state: paused;
+}
+
+/* Marquee edge fade masks */
+.marquee-fade-mask {
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+/* Sticky column styling (Effect 9) */
+@media (min-width: 1024px) {
+  .sticky-column {
+    position: sticky;
+    top: 110px;
+    align-self: start;
+  }
+}
+
+/* Header blur state */
+header.is-scrolled {
+  background-color: rgba(250, 249, 248, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(50, 98, 98, 0.12);
+  box-shadow: 0 4px 20px -2px rgba(50, 98, 98, 0.05);
+}
+
+/* Filter pill active state */
+.active-filter-pill {
+  background-color: #326262 !important;
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px -1px rgba(50, 98, 98, 0.25);
+}
+
+/* Prefers-reduced-motion: stop marquees, disable transforms and instant show */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .marquee-track-left,
+  .marquee-track-right {
+    animation: none !important;
+  }
+
+  .js [data-reveal="text"]:not(.is-revealed) .reveal-word,
+  .js [data-reveal="letters"]:not(.is-revealed) .brand-letter,
+  .js [data-reveal="box"]:not(.is-revealed) .box-content {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .js [data-reveal="box"]:not(.is-revealed) .box-curtain {
+    display: none !important;
+  }
+}

@@ -1,0 +1,45 @@
+---
+import { siteData } from '../data/site';
+const { techStack } = siteData;
+
+const ribbonRow1 = techStack.ribbonRow1;
+const ribbonRow2 = techStack.ribbonRow2;
+---
+
+<section class="w-full bg-[#FAF9F8] py-16 overflow-hidden border-t border-[#326262]/5">
+  <div class="max-w-[1280px] mx-auto px-6 lg:px-12 flex flex-col gap-4 marquee-container marquee-fade-mask">
+    <!-- Row 1: Left -->
+    <div class="marquee-track-left items-center gap-4 select-none">
+      {ribbonRow1.map((item) => (
+        <div class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white border border-[#326262]/10 shadow-sm text-sm font-semibold text-[#1C1B1B] shrink-0">
+          <span class="w-2 h-2 rounded-full bg-[#6BBF9A]"></span>
+          <span>{item}</span>
+        </div>
+      ))}
+      <!-- Duplicated for seamless loop -->
+      {ribbonRow1.map((item) => (
+        <div class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white border border-[#326262]/10 shadow-sm text-sm font-semibold text-[#1C1B1B] shrink-0" aria-hidden="true">
+          <span class="w-2 h-2 rounded-full bg-[#6BBF9A]"></span>
+          <span>{item}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- Row 2: Right, offset -->
+    <div class="marquee-track-right items-center gap-4 select-none -ml-12">
+      {ribbonRow2.map((item) => (
+        <div class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white border border-[#326262]/10 shadow-sm text-sm font-semibold text-[#1C1B1B] shrink-0">
+          <span class="w-2 h-2 rounded-full bg-[#326262]"></span>
+          <span>{item}</span>
+        </div>
+      ))}
+      <!-- Duplicated for seamless loop -->
+      {ribbonRow2.map((item) => (
+        <div class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white border border-[#326262]/10 shadow-sm text-sm font-semibold text-[#1C1B1B] shrink-0" aria-hidden="true">
+          <span class="w-2 h-2 rounded-full bg-[#326262]"></span>
+          <span>{item}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

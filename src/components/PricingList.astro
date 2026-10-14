@@ -1,0 +1,41 @@
+---
+import { siteData } from '../data/site';
+const { pricing } = siteData;
+---
+
+<div class="w-full bg-white rounded-[24px] p-8 lg:p-12 border border-[#326262]/10 shadow-[0_4px_24px_-2px_rgba(50,98,98,0.06)] flex flex-col justify-between">
+  <div>
+    <span class="inline-block text-xs uppercase tracking-widest text-[#326262] font-bold mb-3">
+      TRANSPARENT RATES
+    </span>
+    <h3 class="text-2xl sm:text-3xl font-medium tracking-tight text-[#1C1B1B] mb-8 leading-tight">
+      {pricing.heading}
+    </h3>
+
+    <!-- Pricing rows with hairline dividers -->
+    <div class="flex flex-col border-t border-[#326262]/10">
+      {pricing.items.map((item) => (
+        <div class="py-4 border-b border-[#326262]/10 flex items-center justify-between gap-4">
+          <span class="text-base text-[#1C1B1B] font-medium">
+            {item.service}
+          </span>
+          <span class="text-base sm:text-lg font-bold text-[#326262] whitespace-nowrap">
+            {item.price}
+          </span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <!-- Note -->
+  <div class="mt-8 pt-6 border-t border-[#326262]/10">
+    <div class="flex items-start gap-3 p-4 rounded-2xl bg-[#E5F0E1]/50 border border-[#326262]/10">
+      <svg class="w-5 h-5 text-[#326262] shrink-0 mt-0.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <p class="text-xs sm:text-sm text-[#586261] font-normal leading-relaxed">
+        {pricing.note}
+      </p>
+    </div>
+  </div>
+</div>

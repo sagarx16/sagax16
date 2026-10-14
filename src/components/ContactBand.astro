@@ -1,0 +1,64 @@
+---
+interface Props {
+  heading?: string;
+  showEmail?: boolean;
+}
+
+const {
+  heading = "Ready to build your website? Let's talk.",
+  showEmail = true,
+} = Astro.props;
+---
+
+<section class="relative w-full overflow-hidden bg-[#091414] py-24 lg:py-32 text-white border-t border-white/10">
+  <!-- Soft Teal Radial Glow Overlay -->
+  <div class="pointer-events-none absolute inset-0 flex items-center justify-center opacity-40">
+    <div class="w-[500px] h-[500px] lg:w-[800px] lg:h-[800px] rounded-full bg-[radial-gradient(circle,rgba(107,191,154,0.3)_0%,rgba(9,20,20,0)_70%)]"></div>
+  </div>
+
+  <!-- Effect 8: Giant Oversized Brand Typography behind closing CTA band -->
+  <div class="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden select-none opacity-20">
+    <span
+      data-reveal="letters"
+      class="font-black italic uppercase tracking-tighter text-[26vw] leading-none text-transparent bg-clip-text bg-gradient-to-b from-white/20 to-transparent whitespace-nowrap block translate-y-6"
+    >
+      SAGA16
+    </span>
+  </div>
+
+  <div class="relative max-w-[1280px] mx-auto px-6 lg:px-12 flex flex-col items-center text-center z-10">
+    <h2
+      data-reveal="text"
+      class="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-white mb-10 max-w-2xl leading-[1.1]"
+    >
+      {heading}
+    </h2>
+
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <a
+        href="tel:+917050836284"
+        class="px-8 py-3.5 rounded-full bg-white text-[#091414] font-semibold text-base hover:bg-neutral-100 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-lg"
+      >
+        Call +91 7050836284
+      </a>
+
+      <a
+        href="https://wa.me/917050836284"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="px-8 py-3.5 rounded-full bg-[#6BBF9A] text-[#091414] font-semibold text-base hover:bg-[#92CDAB] transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-lg"
+      >
+        WhatsApp Us
+      </a>
+
+      {showEmail && (
+        <a
+          href="mailto:sagarixa@gmail.com"
+          class="px-8 py-3.5 rounded-full border border-white/25 hover:border-white/60 hover:bg-white/5 text-white font-semibold text-base transition-all duration-200"
+        >
+          sagarixa@gmail.com
+        </a>
+      )}
+    </div>
+  </div>
+</section>

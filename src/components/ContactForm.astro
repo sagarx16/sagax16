@@ -1,0 +1,133 @@
+---
+import { siteData } from '../data/site';
+const { form } = siteData.contactPage;
+---
+
+<div class="w-full bg-white rounded-[24px] p-8 lg:p-12 border border-[#326262]/10 shadow-[0_4px_24px_-2px_rgba(50,98,98,0.06)]">
+  <!-- Form Header -->
+  <div class="mb-8">
+    <h3 class="text-2xl sm:text-3xl font-medium tracking-tight text-[#1C1B1B] mb-2 leading-tight">
+      {form.heading}
+    </h3>
+    <p class="text-base text-[#586261] font-normal">
+      {form.subheading}
+    </p>
+  </div>
+
+  <!-- Thank You State (Hidden by default, shown on valid submit) -->
+  <div
+    data-form-thank-you
+    class="hidden p-8 rounded-2xl bg-[#E5F0E1] border border-[#6BBF9A]/40 text-center"
+  >
+    <div class="w-16 h-16 rounded-full bg-[#6BBF9A]/20 text-[#326262] flex items-center justify-center mx-auto mb-4">
+      <svg class="w-8 h-8 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
+    <h4 class="text-2xl font-bold text-[#1C1B1B] mb-2">
+      {form.thankYouMessage}
+    </h4>
+    <p class="text-sm text-[#586261] max-w-md mx-auto">
+      Your project details were prepared for WhatsApp. We will review your requirements and respond promptly.
+    </p>
+  </div>
+
+  <!-- The Enquiry Form -->
+  <form data-contact-form class="flex flex-col gap-6" novalidate>
+    <!-- Full Name -->
+    <div>
+      <label for="fullName" class="block text-xs uppercase tracking-wider font-bold text-[#1C1B1B] mb-2">
+        Full name <span class="text-red-500">*</span>
+      </label>
+      <input
+        type="text"
+        id="fullName"
+        name="fullName"
+        placeholder="Enter your full name"
+        class="w-full px-5 py-3.5 rounded-2xl border border-[#326262]/20 bg-[#FAF9F8] text-[#1C1B1B] text-base placeholder-[#586261]/60 focus:bg-white focus:border-[#6BBF9A] transition-colors"
+      />
+      <p id="nameError" class="hidden text-xs text-red-600 mt-1 font-medium">Please enter your name.</p>
+    </div>
+
+    <!-- Phone Number & Email -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label for="phone" class="block text-xs uppercase tracking-wider font-bold text-[#1C1B1B] mb-2">
+          Phone number <span class="text-red-500">*</span>
+        </label>
+        <input
+          type="tel"
+          id="phone"
+          name="phone"
+          placeholder="+91 98765 43210"
+          class="w-full px-5 py-3.5 rounded-2xl border border-[#326262]/20 bg-[#FAF9F8] text-[#1C1B1B] text-base placeholder-[#586261]/60 focus:bg-white focus:border-[#6BBF9A] transition-colors"
+        />
+        <p id="phoneError" class="hidden text-xs text-red-600 mt-1 font-medium">Please enter a valid phone number.</p>
+      </div>
+
+      <div>
+        <label for="email" class="block text-xs uppercase tracking-wider font-bold text-[#1C1B1B] mb-2">
+          Email <span class="text-red-500">*</span>
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          placeholder="you@example.com"
+          class="w-full px-5 py-3.5 rounded-2xl border border-[#326262]/20 bg-[#FAF9F8] text-[#1C1B1B] text-base placeholder-[#586261]/60 focus:bg-white focus:border-[#6BBF9A] transition-colors"
+        />
+        <p id="emailError" class="hidden text-xs text-red-600 mt-1 font-medium">Please enter a valid email address.</p>
+      </div>
+    </div>
+
+    <!-- Dropdown: What do you need? -->
+    <div>
+      <label for="projectType" class="block text-xs uppercase tracking-wider font-bold text-[#1C1B1B] mb-2">
+        What do you need? <span class="text-red-500">*</span>
+      </label>
+      <div class="relative">
+        <select
+          id="projectType"
+          name="projectType"
+          class="w-full px-5 py-3.5 rounded-2xl border border-[#326262]/20 bg-[#FAF9F8] text-[#1C1B1B] text-base focus:bg-white focus:border-[#6BBF9A] transition-colors appearance-none cursor-pointer"
+        >
+          <option value="">Select an option...</option>
+          {form.dropdownOptions.map((opt) => (
+            <option value={opt}>{opt}</option>
+          ))}
+        </select>
+        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-[#326262]">
+          <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
+      </div>
+      <p id="typeError" class="hidden text-xs text-red-600 mt-1 font-medium">Please select a website type.</p>
+    </div>
+
+    <!-- Project Details -->
+    <div>
+      <label for="projectDetails" class="block text-xs uppercase tracking-wider font-bold text-[#1C1B1B] mb-2">
+        Project details <span class="text-red-500">*</span>
+      </label>
+      <textarea
+        id="projectDetails"
+        name="projectDetails"
+        rows="4"
+        placeholder="Tell us what you'd like your website to include..."
+        class="w-full px-5 py-3.5 rounded-2xl border border-[#326262]/20 bg-[#FAF9F8] text-[#1C1B1B] text-base placeholder-[#586261]/60 focus:bg-white focus:border-[#6BBF9A] transition-colors resize-y"
+      ></textarea>
+      <p id="detailsError" class="hidden text-xs text-red-600 mt-1 font-medium">Please share a few details about your project.</p>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="pt-2">
+      <button
+        type="submit"
+        class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-[#326262] hover:bg-[#3E6161] text-white font-semibold text-base transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 shadow-md cursor-pointer"
+      >
+        {form.submitButton}
+      </button>
+    </div>
+  </form>
+</div>
