@@ -13,6 +13,7 @@ export interface Project {
   features?: string[];
   tech: string[];
   liveUrl: string;
+  image: string;
 }
 
 export interface TeamMember {
@@ -192,6 +193,7 @@ export const siteData = {
       ],
       tech: ['Next.js', 'TypeScript'],
       liveUrl: 'https://sharda-academy-smoky.vercel.app',
+      image: '/projects/sn-public-school.png',
     },
     {
       id: 'royal-wedding',
@@ -208,6 +210,7 @@ export const siteData = {
       ],
       tech: ['Astro'],
       liveUrl: 'https://invifestx16.vercel.app',
+      image: '/projects/royal-wedding.png',
     },
     {
       id: 'civic-voice',
@@ -223,6 +226,7 @@ export const siteData = {
       ],
       tech: ['Next.js', 'TypeScript'],
       liveUrl: 'https://civic-voicex16.vercel.app',
+      image: '/projects/civic-voice.png',
     },
     {
       id: 'pocketbank',
@@ -238,6 +242,7 @@ export const siteData = {
       ],
       tech: ['Next.js', 'TypeScript'],
       liveUrl: 'https://hackathon-pocketmoney-main.vercel.app',
+      image: '/projects/pocketbank.png',
     },
     {
       id: 'sachet',
@@ -254,6 +259,7 @@ export const siteData = {
       ],
       tech: ['MERN stack'],
       liveUrl: 'https://sachet-five.vercel.app',
+      image: '/projects/sachet.png',
     },
     {
       id: 'ghibli-tribute',
@@ -269,6 +275,7 @@ export const siteData = {
       ],
       tech: ['Next.js'],
       liveUrl: 'https://ghiblix16.vercel.app/movies',
+      image: '/projects/ghibli-tribute.png',
     },
   ] as Project[],
 

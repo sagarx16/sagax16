@@ -37,35 +37,32 @@ const { projects } = siteData;
           class="bg-white rounded-[24px] p-6 border border-[#326262]/10 shadow-[0_4px_20px_-2px_rgba(50,98,98,0.06)] hover:border-[#6BBF9A]/40 transition-colors flex flex-col justify-between"
         >
           <div>
-            <!-- Abstract Wireframe Mockup with Box Reveal (Effect 2) -->
-            <!-- TODO: Replace abstract wireframes with real screenshots of live client projects -->
+            <!-- Live Project Screenshot with Box Reveal (Effect 2) -->
             <div
               data-reveal="box"
               data-box-color={idx % 2 === 0 ? 'teal' : 'green'}
-              class="w-full h-44 bg-[#F0EDED] rounded-2xl p-4 flex flex-col justify-between mb-6 overflow-hidden"
+              class="w-full h-48 bg-[#121316] rounded-2xl mb-6 overflow-hidden relative group/img border border-[#326262]/10"
             >
-              <div class="box-content w-full h-full flex flex-col justify-between">
-                <!-- Browser Bar -->
-                <div class="flex items-center justify-between border-b border-[#326262]/5 pb-2">
+              <div class="box-content w-full h-full relative">
+                <!-- Browser Bar Overlay -->
+                <div class="absolute top-0 inset-x-0 px-3 py-2 bg-gradient-to-b from-black/60 to-transparent flex items-center justify-between z-10">
                   <div class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-[#1C1B1B]/20"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#1C1B1B]/20"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#1C1B1B]/20"></span>
+                    <span class="w-2 h-2 rounded-full bg-[#EF4444]/80"></span>
+                    <span class="w-2 h-2 rounded-full bg-[#F59E0B]/80"></span>
+                    <span class="w-2 h-2 rounded-full bg-[#10B981]/80"></span>
                   </div>
-                  <div class="w-20 h-2 bg-[#1C1B1B]/10 rounded-full"></div>
+                  <span class="px-2 py-0.5 rounded-full bg-white/10 text-[9px] text-white/70 font-mono">
+                    {project.tech[0]}
+                  </span>
                 </div>
 
-                <!-- Abstract UI Blocks without readable text -->
-                <div class="flex flex-col gap-2 my-auto">
-                  <div class="w-3/4 h-3.5 bg-[#326262]/20 rounded"></div>
-                  <div class="w-1/2 h-2.5 bg-[#326262]/10 rounded"></div>
-                </div>
-
-                <div class="grid grid-cols-3 gap-2 pt-2">
-                  <div class="h-6 bg-[#326262]/5 rounded"></div>
-                  <div class="h-6 bg-[#326262]/5 rounded"></div>
-                  <div class="h-6 bg-[#6BBF9A]/20 rounded"></div>
-                </div>
+                <!-- Real Screenshot -->
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  class="w-full h-full object-cover object-top group-hover/img:scale-105 transition-transform duration-500 ease-out"
+                  loading="lazy"
+                />
               </div>
             </div>
 
