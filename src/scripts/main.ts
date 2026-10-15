@@ -4,8 +4,10 @@ import { initCounters } from './counters';
 import { initTilt } from './tilt';
 import { initLettersReveal } from './lettersReveal';
 import { initBlockWipe } from './blockWipe';
+import { initSmoothScroll } from './smoothScroll';
 
 export function initSite(): void {
+  initSmoothScroll();
   initNavbar();
   initTextReveal();
   initBoxReveal();
@@ -53,6 +55,13 @@ function initNavbar(): void {
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', updateHeaderState, { passive: true });
 
+    // Connect with Lenis smooth scroll if active
+    if (window.lenis) {
+      window.lenis.on('scroll', () => {
+        updateHeaderState();
+      });
+    }
+
     // Initial check on page load & after DOM is ready
     updateHeaderState();
   }
@@ -63,6 +72,9 @@ function initNavbar(): void {
     menuButton.setAttribute('aria-expanded', 'true');
     iconMenu?.classList.add('hidden');
     iconClose?.classList.remove('hidden');
+
+    // Pause smooth scrolling while menu is open
+    window.lenis?.stop();
 
     // Force solid white state while mobile menu is open
     if (header) {
@@ -93,9 +105,13 @@ function initNavbar(): void {
     iconClose?.classList.add('hidden');
     iconMenu?.classList.remove('hidden');
 
-    // Return header to transparent if still at top (<40px)
+    // Resume smooth scrolling
+    window.lenis?.start();
+
+    // Return header to transparent if still at top (<30px)
     if (header) {
-      const isScrolled = window.scrollY > 40;
+      const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+      const isScrolled = scrollY > 30;
       header.setAttribute('data-scrolled', String(isScrolled));
       header.classList.toggle('is-scrolled', isScrolled);
     }
