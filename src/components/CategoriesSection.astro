@@ -3,24 +3,24 @@ import { siteData } from '../data/site';
 const { categories } = siteData;
 ---
 
-<section class="w-full bg-[#091414] text-white py-14 sm:py-20 lg:py-28 border-t border-white/10">
+<section class="w-full bg-[#091414] text-white py-14 sm:py-20 lg:py-24 border-t border-white/10">
   <div class="max-w-[1280px] mx-auto px-5 sm:px-6 lg:px-12">
-    <!-- Heading Block -->
-    <div class="mb-14 sm:mb-16 md:mb-20">
+    <!-- Heading Block (Matched with other site section headings) -->
+    <div class="mb-10 sm:mb-12 md:mb-16">
       <h2
         data-reveal="text"
-        class="text-3xl sm:text-4xl md:text-5xl lg:text-[56px] font-normal tracking-[-0.02em] text-white leading-[1.1]"
+        class="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-white leading-[1.15]"
       >
         {categories.heading}
       </h2>
       <p
-        class="mt-4 text-[16px] sm:text-[18px] text-white/75 leading-[1.5] max-w-[900px] font-normal"
+        class="mt-3 sm:mt-4 text-sm sm:text-base text-white/70 leading-relaxed max-w-2xl font-normal"
       >
         {categories.description}
       </p>
     </div>
 
-    <!-- Rows with Hairline Dividers (leveingroup.com pattern) -->
+    <!-- Rows with Hairline Dividers -->
     <div class="flex flex-col border-t border-white/[0.12]">
       {categories.rows.map((row, index) => (
         <div
@@ -28,22 +28,22 @@ const { categories } = siteData;
           style={`transition-delay: ${index * 80}ms;`}
         >
           <div class="grid grid-cols-1 md:grid-cols-2 md:gap-0 items-center">
-            <!-- Left Column: Title in large type (starts at 0%) -->
+            <!-- Left Column: Title (Matched in scale: clamp 24px - 32px) -->
             <div class="pr-0 md:pr-8">
               <h3 class="category-title select-none">
                 {row.title}
               </h3>
             </div>
 
-            <!-- Right Column: Description starts exactly at 50% mark, vertically centered -->
-            <div class="relative mt-3 md:mt-0 flex items-center justify-between pr-0 md:pr-10">
+            <!-- Right Column: Description starts at 50% mark, vertically centered -->
+            <div class="relative mt-2.5 md:mt-0 flex items-center justify-between pr-0 md:pr-10">
               <p class="category-desc">
                 {row.description || (row as any).text}
               </p>
 
-              <!-- 20px Arrow Icon (→) at far right edge of the row, vertically centered, fades in on hover -->
+              <!-- Arrow Icon (→) at far right edge of the row, vertically centered, fades in on hover -->
               <span class="category-arrow" aria-hidden="true">
-                <svg class="w-5 h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
                   <line x1="5" y1="12" x2="19" y2="12"></line>
                   <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
@@ -54,18 +54,18 @@ const { categories } = siteData;
       ))}
     </div>
 
-    <!-- Part 2: Marquee Strip (Matching Levein's logo strip) -->
-    <div class="mt-20 mb-20 flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
-      <!-- Left: Label wrapping into 2 lines (~320px) -->
-      <div class="shrink-0 max-w-[320px]">
-        <span class="block text-[14px] uppercase tracking-[0.25em] font-medium text-white/90 leading-[1.6]">
+    <!-- Part 2: Marquee Strip (Compact, Refined & Matched) -->
+    <div class="mt-14 sm:mt-16 md:mt-20 mb-8 sm:mb-12 flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
+      <!-- Left: Label wrapping into 2 lines (~280px) -->
+      <div class="shrink-0 max-w-[280px]">
+        <span class="block text-xs sm:text-[13px] uppercase tracking-[0.2em] font-medium text-white/80 leading-[1.6]">
           {categories.marqueeLabel}
         </span>
       </div>
 
       <!-- Right: Marquee Viewport with 4 Corner Brackets & Edge Fade -->
-      <div class="marquee-box relative flex-1 h-[90px] md:h-[120px] flex items-center">
-        <!-- 4 L-shaped Corner Brackets (16px arm length, 1px solid rgba(255,255,255,0.5)) -->
+      <div class="marquee-box relative flex-1 h-[72px] sm:h-[80px] flex items-center">
+        <!-- 4 L-shaped Corner Brackets (12px arm length, 1px solid rgba(255,255,255,0.4)) -->
         <span class="corner-bracket corner-tl" aria-hidden="true"></span>
         <span class="corner-bracket corner-tr" aria-hidden="true"></span>
         <span class="corner-bracket corner-bl" aria-hidden="true"></span>
@@ -78,7 +78,7 @@ const { categories } = siteData;
             <div class="marquee-group flex items-center shrink-0">
               {categories.marqueeProjects.map((project) => (
                 <div class="inline-flex items-center shrink-0">
-                  <span class="marquee-item uppercase font-medium tracking-[0.12em] text-white whitespace-nowrap">
+                  <span class="marquee-item uppercase font-medium tracking-[0.14em] text-white/90 whitespace-nowrap">
                     {project}
                   </span>
                   <span class="marquee-dot shrink-0" aria-hidden="true"></span>
@@ -90,7 +90,7 @@ const { categories } = siteData;
             <div class="marquee-group flex items-center shrink-0" aria-hidden="true">
               {categories.marqueeProjects.map((project) => (
                 <div class="inline-flex items-center shrink-0">
-                  <span class="marquee-item uppercase font-medium tracking-[0.12em] text-white whitespace-nowrap">
+                  <span class="marquee-item uppercase font-medium tracking-[0.14em] text-white/90 whitespace-nowrap">
                     {project}
                   </span>
                   <span class="marquee-dot shrink-0" aria-hidden="true"></span>
@@ -105,10 +105,10 @@ const { categories } = siteData;
 </section>
 
 <style>
-  /* --- PART 1: ROW STYLES --- */
+  /* --- ROW STYLES --- */
   .category-row {
-    padding-top: 28px;
-    padding-bottom: 28px;
+    padding-top: 22px;
+    padding-bottom: 22px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     transition: opacity 500ms ease-out, transform 500ms ease-out, border-color 250ms ease;
     will-change: opacity, transform;
@@ -119,8 +119,8 @@ const { categories } = siteData;
 
   @media (min-width: 768px) {
     .category-row {
-      padding-top: 40px;
-      padding-bottom: 40px;
+      padding-top: 30px;
+      padding-bottom: 30px;
     }
   }
 
@@ -139,39 +139,39 @@ const { categories } = siteData;
     transform: none;
   }
 
-  /* Row Title: clamp(30px, 3.4vw, 50px), font-weight 400, line-height 1.1, letter-spacing -0.01em, static */
+  /* Row Title: Scaled to match the site's design hierarchy (24px - 32px) */
   .category-title {
-    font-size: 30px;
-    font-weight: 400 !important;
-    line-height: 1.1 !important;
-    letter-spacing: -0.01em !important;
+    font-size: 24px;
+    font-weight: 500 !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.02em !important;
     color: #ffffff;
     transform: none !important;
-    transition: none;
+    transition: color 200ms ease;
   }
 
   @media (min-width: 768px) {
     .category-title {
-      font-size: clamp(30px, 3.4vw, 50px);
+      font-size: clamp(24px, 2.2vw, 32px);
     }
   }
 
-  /* Row Description: 18px (16px mobile), line-height 1.6, color rgba(255,255,255,0.85), max-width 620px */
+  /* Row Description: Matched to body size (14px - 15px) */
   .category-desc {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.6;
-    color: rgba(255, 255, 255, 0.85);
-    max-width: 620px;
+    color: rgba(255, 255, 255, 0.78);
+    max-width: 560px;
     font-weight: 400;
   }
 
   @media (min-width: 768px) {
     .category-desc {
-      font-size: 18px;
+      font-size: 15px;
     }
   }
 
-  /* 20px Arrow: far right edge, vertically centered, fades in on hover (hidden on mobile) */
+  /* Arrow: far right edge, vertically centered, fades in on hover (hidden on mobile) */
   .category-arrow {
     position: absolute;
     right: 0;
@@ -198,38 +198,38 @@ const { categories } = siteData;
     opacity: 1;
   }
 
-  /* --- PART 2: MARQUEE STRIP STYLES --- */
-  /* 4 Corner Brackets: 16px arm length, 1px solid rgba(255, 255, 255, 0.5) */
+  /* --- MARQUEE STRIP STYLES --- */
+  /* 4 Corner Brackets: 12px arm length, 1px solid rgba(255, 255, 255, 0.4) */
   .corner-bracket {
     position: absolute;
-    width: 16px;
-    height: 16px;
+    width: 12px;
+    height: 12px;
     pointer-events: none;
     z-index: 10;
   }
   .corner-tl {
     top: 0;
     left: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.5);
-    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    border-left: 1px solid rgba(255, 255, 255, 0.4);
   }
   .corner-tr {
     top: 0;
     right: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.5);
-    border-right: 1px solid rgba(255, 255, 255, 0.5);
+    border-top: 1px solid rgba(255, 255, 255, 0.4);
+    border-right: 1px solid rgba(255, 255, 255, 0.4);
   }
   .corner-bl {
     bottom: 0;
     left: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-    border-left: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    border-left: 1px solid rgba(255, 255, 255, 0.4);
   }
   .corner-br {
     bottom: 0;
     right: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-    border-right: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    border-right: 1px solid rgba(255, 255, 255, 0.4);
   }
 
   /* Edge fade mask on the inner scroller: transparent 0, #000 12%, #000 88%, transparent 100% */
@@ -252,35 +252,35 @@ const { categories } = siteData;
     display: flex;
     width: max-content;
     will-change: transform;
-    animation: marquee-infinite-scroll 30s linear infinite;
+    animation: marquee-infinite-scroll 28s linear infinite;
   }
 
   .marquee-box:hover .marquee-track {
     animation-play-state: paused;
   }
 
-  /* Marquee item typography: uppercase, 20px (16px mobile), font-weight 500, letter-spacing 0.12em, #fff */
+  /* Marquee item typography: matched to 14px - 15px */
   .marquee-item {
-    font-size: 16px;
+    font-size: 13px;
     font-weight: 500;
-    letter-spacing: 0.12em;
-    color: #ffffff;
+    letter-spacing: 0.14em;
+    color: rgba(255, 255, 255, 0.9);
   }
 
   @media (min-width: 768px) {
     .marquee-item {
-      font-size: 20px;
+      font-size: 15px;
     }
   }
 
-  /* Separator dot: 6px circle in brand accent green with 40px margin on both sides */
+  /* Separator dot: 5px circle in brand accent green with 32px margin on both sides */
   .marquee-dot {
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
     border-radius: 9999px;
     background-color: #6BBF9A;
-    margin-left: 40px;
-    margin-right: 40px;
+    margin-left: 32px;
+    margin-right: 32px;
   }
 
   @media (prefers-reduced-motion: reduce) {
