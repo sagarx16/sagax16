@@ -34,7 +34,7 @@ export function initTextReveal(): void {
       maskSpan.className = 'inline-block overflow-hidden align-top mr-[0.25em] pb-[0.05em]';
 
       const innerSpan = document.createElement('span');
-      innerSpan.className = 'reveal-word inline-block transition-transform duration-700 ease-out will-change-transform';
+      innerSpan.className = 'reveal-word inline-block';
       innerSpan.style.transitionDelay = `${Math.min(index * 35, 600)}ms`;
       innerSpan.textContent = word;
 
@@ -54,7 +54,7 @@ export function initTextReveal(): void {
         }
       });
     },
-    { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+    { threshold: 0.1, rootMargin: '0px 0px -30px 0px' }
   );
 
   elements.forEach((el) => observer.observe(el));
