@@ -1,5 +1,7 @@
 ---
 import { siteData } from '../data/site';
+import { Picture } from 'astro:assets';
+import { projectImageByPath } from '../assets/images';
 const { projects } = siteData;
 
 const featuredProject = projects[0]; // S.N. Public School & Tuition Center
@@ -239,12 +241,29 @@ const projectThemes = [
             {index === 0 && (
               /* Card 0: S.N. Public School - Large Floating Desktop Showcase */
               <div class="w-full h-full max-h-[540px] rounded-2xl border border-white/20 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] overflow-hidden transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-[1.01]">
-                <img
-                  src={theme.imgSrc}
-                  alt={p.title}
-                  class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
-                  loading="lazy"
-                />
+                {projectImageByPath[theme.imgSrc] ? (
+                  <Picture
+                    src={projectImageByPath[theme.imgSrc]}
+                    formats={['avif', 'webp']}
+                    widths={[480, 800, 1200, 1376]}
+                    sizes="(max-width: 1024px) 100vw, 800px"
+                    quality={85}
+                    alt={p.title}
+                    class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    loading="eager"
+                    fetchpriority="high"
+                    decoding="async"
+                  />
+                ) : (
+                  <img
+                    src={theme.imgSrc}
+                    alt={p.title}
+                    class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                    loading="eager"
+                    fetchpriority="high"
+                    decoding="async"
+                  />
+                )}
               </div>
             )}
 
@@ -258,12 +277,27 @@ const projectThemes = [
                 </div>
                 <!-- Phone Screen with Royal Wedding Mobile Screenshot -->
                 <div class="w-full rounded-[2.3rem] overflow-hidden aspect-[9/17] relative bg-black shadow-inner">
-                  <img
-                    src={theme.imgSrc}
-                    alt={p.title}
-                    class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
-                    loading="lazy"
-                  />
+                  {projectImageByPath[theme.imgSrc] ? (
+                    <Picture
+                      src={projectImageByPath[theme.imgSrc]}
+                      formats={['avif', 'webp']}
+                      widths={[240, 480, 768]}
+                      sizes="255px"
+                      quality={85}
+                      alt={p.title}
+                      class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <img
+                      src={theme.imgSrc}
+                      alt={p.title}
+                      class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
                   <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.05] to-white/[0.15] pointer-events-none"></div>
                 </div>
               </div>
@@ -272,12 +306,27 @@ const projectThemes = [
             {index > 1 && (
               /* Cards 2-3: Floating Sleek Showcase Windows */
               <div class="w-full h-full max-h-[360px] sm:max-h-[380px] lg:max-h-[410px] rounded-xl sm:rounded-2xl border border-white/20 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.85)] overflow-hidden relative transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-[1.02]">
-                <img
-                  src={theme.imgSrc}
-                  alt={p.title}
-                  class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
-                  loading="lazy"
-                />
+                {projectImageByPath[theme.imgSrc] ? (
+                  <Picture
+                    src={projectImageByPath[theme.imgSrc]}
+                    formats={['avif', 'webp']}
+                    widths={[380, 600, 900, 1376]}
+                    sizes="(max-width: 1024px) 100vw, 600px"
+                    quality={84}
+                    alt={p.title}
+                    class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                ) : (
+                  <img
+                    src={theme.imgSrc}
+                    alt={p.title}
+                    class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
               </div>
             )}
           </div>
@@ -371,15 +420,29 @@ const projectThemes = [
                   'w-full h-full rounded-xl sm:rounded-2xl border border-white/20 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.85)] overflow-hidden relative transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-[1.02]',
                   isOddCount && isLast ? 'max-w-[1040px] mx-auto max-h-[460px] sm:max-h-[520px] lg:max-h-[580px]' : 'max-h-[360px] sm:max-h-[380px] lg:max-h-[410px]'
                 ]}>
-                  <img
-                    src={theme.imgSrc}
-                    alt={p.title}
-                    width="1200"
-                    height="800"
-                    class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  {projectImageByPath[theme.imgSrc] ? (
+                    <Picture
+                      src={projectImageByPath[theme.imgSrc]}
+                      formats={['avif', 'webp']}
+                      widths={[380, 600, 900, 1376]}
+                      sizes="(max-width: 1024px) 100vw, 600px"
+                      quality={84}
+                      alt={p.title}
+                      class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  ) : (
+                    <img
+                      src={theme.imgSrc}
+                      alt={p.title}
+                      width="1200"
+                      height="800"
+                      class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  )}
                 </div>
               </div>
             </a>

@@ -46,6 +46,7 @@ export function createExpandCollapse(config: ExpandCollapseConfig): ExpandCollap
   let isExpandedState = false;
   let isAnimatingState = false;
   let animationTimeoutId: ReturnType<typeof setTimeout> | null = null;
+  let scrollRafId: number | null = null;
 
   const prefersReducedMotion = (): boolean =>
     window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -168,6 +169,9 @@ export function createExpandCollapse(config: ExpandCollapseConfig): ExpandCollap
       buttonIcon.classList.remove('rotate-180');
     }
 
+    // Capture the button's exact viewport top before collapse starts
+    const initialButtonTop = button.getBoundingClientRect().top;
+
     if (prefersReducedMotion()) {
       cards.forEach((card) => {
         card.style.transition = 'opacity 150ms ease';
@@ -179,8 +183,10 @@ export function createExpandCollapse(config: ExpandCollapseConfig): ExpandCollap
       wrapper.setAttribute('inert', '');
       wrapper.setAttribute('aria-hidden', 'true');
 
-      if (scrollTarget) {
-        scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Compensate scroll so button stays right where it was
+      const delta = button.getBoundingClientRect().top - initialButtonTop;
+      if (Math.abs(delta) >= 1) {
+        window.scrollBy({ top: delta, behavior: 'instant' });
       }
 
       animationTimeoutId = setTimeout(() => {
@@ -213,16 +219,48 @@ export function createExpandCollapse(config: ExpandCollapseConfig): ExpandCollap
     wrapper.classList.remove('is-open');
     wrapper.classList.add('is-collapsing');
 
-    // 5. Smoothly scroll back so the top of the project section is in view
-    if (scrollTarget) {
-      const targetRect = scrollTarget.getBoundingClientRect();
-      if (targetRect.top < 96) {
-        scrollTarget.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+    // 5. Keep the button pinned at its exact viewport position throughout collapse
+    // This guarantees the mouse cursor / arrow remains directly over the button without jumping
+    if (scrollRafId !== null) {
+      cancelAnimationFrame(scrollRafId);
+      scrollRafId = null;
     }
+
+    const startTime = performance.now();
+    const pinDuration = 680;
+
+    const stopPinning = () => {
+      if (scrollRafId !== null) {
+        cancelAnimationFrame(scrollRafId);
+        scrollRafId = null;
+      }
+      window.removeEventListener('wheel', stopPinning);
+      window.removeEventListener('touchmove', stopPinning);
+    };
+
+    window.addEventListener('wheel', stopPinning, { passive: true, once: true });
+    window.addEventListener('touchmove', stopPinning, { passive: true, once: true });
+
+    const keepButtonPinned = (now: number) => {
+      const elapsed = now - startTime;
+      const currentButtonTop = button.getBoundingClientRect().top;
+      const delta = currentButtonTop - initialButtonTop;
+
+      if (Math.abs(delta) >= 0.5) {
+        window.scrollBy({ top: delta, behavior: 'instant' });
+      }
+
+      if (elapsed < pinDuration) {
+        scrollRafId = requestAnimationFrame(keepButtonPinned);
+      } else {
+        stopPinning();
+      }
+    };
+    scrollRafId = requestAnimationFrame(keepButtonPinned);
 
     // 6. Complete cleanup after animation finishes (750ms)
     animationTimeoutId = setTimeout(() => {
+      stopPinning();
       wrapper.classList.remove('is-collapsing');
       wrapper.setAttribute('hidden', '');
       wrapper.setAttribute('inert', '');
@@ -267,6 +305,7 @@ export function createExpandCollapse(config: ExpandCollapseConfig): ExpandCollap
     destroy: () => {
       button.removeEventListener('click', handleClick);
       if (animationTimeoutId) clearTimeout(animationTimeoutId);
+      if (scrollRafId !== null) cancelAnimationFrame(scrollRafId);
     },
   };
 }

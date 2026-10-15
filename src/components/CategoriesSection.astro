@@ -37,18 +37,10 @@ const { categories } = siteData;
             </div>
 
             <!-- Right Column: Description starts at 50% mark, vertically centered -->
-            <div class="relative mt-2.5 md:mt-0 flex items-center justify-between pr-0 md:pr-10">
+            <div class="relative mt-2.5 md:mt-0 flex items-center">
               <p data-reveal="text" class="category-desc">
                 {row.description || (row as any).text}
               </p>
-
-              <!-- Arrow Icon (→) at far right edge of the row, vertically centered, fades in on hover -->
-              <span class="category-arrow" aria-hidden="true">
-                <svg class="w-4 h-4 sm:w-5 sm:h-5 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </span>
             </div>
           </div>
         </div>
@@ -176,32 +168,6 @@ const { categories } = siteData;
     }
   }
 
-  /* Arrow: far right edge, vertically centered, fades in on hover (hidden on mobile) */
-  .category-arrow {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    color: #6BBF9A;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 250ms ease;
-  }
-
-  @media (min-width: 768px) {
-    .category-arrow {
-      display: inline-flex;
-    }
-  }
-
-  .category-row:hover .category-arrow {
-    opacity: 1;
-  }
 
   /* --- MARQUEE STRIP STYLES --- */
   /* 4 Corner Brackets: 12px arm length, 1.5px solid rgba(255, 255, 255, 0.45) */
@@ -263,7 +229,7 @@ const { categories } = siteData;
     display: flex;
     width: max-content;
     will-change: transform;
-    animation: marquee-infinite-scroll 28s linear infinite;
+    animation: marquee-infinite-scroll 64s linear infinite;
     pointer-events: none !important;
     user-select: none !important;
     touch-action: pan-y !important;

@@ -1,5 +1,7 @@
 ---
 import { siteData } from "../data/site";
+import { Picture } from "astro:assets";
+import { projectImages } from "../assets/images";
 const { hero } = siteData;
 ---
 
@@ -53,7 +55,7 @@ const { hero } = siteData;
 
     <!-- Effect 2: Box Reveal for Project Mockups (Laptop and Phone - Modern Titanium Restyling) -->
     <div
-      class="device-showcase-wrapper group w-full max-w-5xl flex items-end justify-center pt-2 sm:pt-4 relative"
+      class="device-showcase-wrapper group w-[calc(100%+1.25rem)] -mx-2.5 sm:mx-0 sm:w-full max-w-5xl flex items-end justify-center pt-2 sm:pt-4 relative"
     >
       <!-- Ambient Radial Glow Behind Both Devices -->
       <div
@@ -77,7 +79,7 @@ const { hero } = siteData;
       <div
         data-reveal="box"
         data-box-color="teal"
-        class="laptop-mockup relative w-full max-w-[560px] sm:max-w-[650px] lg:max-w-[720px] rounded-2xl sm:rounded-3xl p-2 sm:p-3 backdrop-blur-md z-10"
+        class="laptop-mockup relative w-[78%] xs:w-[76%] sm:w-full max-w-[560px] sm:max-w-[650px] lg:max-w-[720px] rounded-2xl sm:rounded-3xl p-2 sm:p-3 backdrop-blur-md z-10"
       >
         <div class="box-content">
           <!-- Real Screenshot with Screen Bezel & Soft Glass Sheen -->
@@ -86,11 +88,17 @@ const { hero } = siteData;
             style="background-color: var(--device-bezel); padding: 2px;"
           >
             <div class="w-full h-full rounded-[10px] sm:rounded-[14px] overflow-hidden relative">
-              <img
-                src="/projects/pocketbank.png"
+              <Picture
+                src={projectImages.pocketbank}
+                formats={['avif', 'webp']}
+                widths={[360, 600, 900, 1376]}
+                sizes="(max-width: 640px) 92vw, (max-width: 1024px) 580px, 680px"
+                quality={84}
                 alt="PocketBank - Student Banking App by SAGA16"
                 class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
                 loading="eager"
+                fetchpriority="high"
+                decoding="async"
               />
               <!-- Soft glass sheen over screen -->
               <div
@@ -114,52 +122,61 @@ const { hero } = siteData;
 
       <!-- Phone Mockup Container (PocketBank Mobile - Titanium Finish, Side Buttons & Floating) -->
       <div
-        class="phone-float-container shrink-0 relative z-20 -ml-12 xs:-ml-16 sm:-ml-10 lg:-ml-16 w-[140px] xs:w-[170px] sm:w-[220px] md:w-[250px] lg:w-[275px]"
+        class="phone-float-container shrink-0 relative z-20 -ml-10 xs:-ml-12 sm:-ml-10 lg:-ml-16 w-[125px] xs:w-[145px] sm:w-[220px] md:w-[250px] lg:w-[275px]"
       >
         <div class="phone-lift-layer w-full">
           <div
             data-reveal="box"
             data-box-color="green"
-            class="phone-mockup w-full rounded-[2.2rem] sm:rounded-[3rem] p-2 sm:p-3 pb-3 sm:pb-4 relative"
+            class="phone-mockup w-full rounded-[2.1rem] sm:rounded-[3.2rem] p-1.5 sm:p-2 relative"
           >
-            <!-- Tiny side buttons (volume & power) -->
-            <span class="phone-side-button phone-button-left-1" aria-hidden="true"></span>
-            <span class="phone-side-button phone-button-left-2" aria-hidden="true"></span>
-            <span class="phone-side-button phone-button-right" aria-hidden="true"></span>
+            <!-- Speaker earpiece slit -->
+            <div class="phone-speaker-slit" aria-hidden="true"></div>
+
+            <!-- iPhone 16 Pro Side Buttons -->
+            <!-- Left: Action Button & Volume Up / Down -->
+            <span class="phone-side-button phone-action-button" aria-hidden="true"></span>
+            <span class="phone-side-button phone-button-volume-up" aria-hidden="true"></span>
+            <span class="phone-side-button phone-button-volume-down" aria-hidden="true"></span>
+
+            <!-- Right: Power/Side Button & Camera Control -->
+            <span class="phone-side-button phone-button-power" aria-hidden="true"></span>
+            <span class="phone-side-button phone-camera-control" aria-hidden="true"></span>
 
             <div class="box-content relative">
-              <!-- Dynamic Island -->
+              <!-- Edge-to-Edge Screen Container with Ultra-Thin Bezel -->
               <div
-                class="phone-dynamic-island w-12 sm:w-20 h-3 sm:h-4.5 rounded-full mx-auto mb-2 sm:mb-2.5 flex items-center justify-between px-2 sm:px-2.5"
+                class="w-full bg-[#f7fafd] rounded-[1.7rem] sm:rounded-[2.7rem] overflow-hidden aspect-[612/1024] relative group shadow-inner border border-black/50"
               >
-                <span class="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#162736]"></span>
-                <span class="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-[#233544]"></span>
-              </div>
 
-              <!-- Real Mobile Screenshot of PocketBank -->
-              <div
-                class="w-full bg-[#f7fafd] rounded-[1.6rem] sm:rounded-[2.4rem] overflow-hidden aspect-[612/1024] relative group shadow-inner border border-white/10"
-              >
-                <img
-                  src="/projects/pocketbank-mobile.png"
+                <!-- Real Mobile Screenshot of PocketBank -->
+                <Picture
+                  src={projectImages.pocketbankMobile}
+                  formats={['avif', 'webp']}
+                  widths={[180, 280, 420, 612]}
+                  sizes="(max-width: 640px) 170px, 275px"
+                  quality={84}
                   alt="PocketBank - Student Banking Mobile App by SAGA16"
                   class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
                   loading="eager"
+                  fetchpriority="high"
+                  decoding="async"
                 />
-                <!-- Screen glass sheen overlay (0.10) -->
+
+                <!-- Screen glass sheen overlay -->
                 <div
-                  class="pointer-events-none absolute inset-0 rounded-[1.6rem] sm:rounded-[2.4rem] z-10"
-                  style="background: linear-gradient(120deg, rgba(255,255,255,0.10), transparent 40%);"
+                  class="pointer-events-none absolute inset-0 z-10"
+                  style="background: linear-gradient(120deg, rgba(255,255,255,0.08), transparent 45%);"
                   aria-hidden="true"
                 >
                 </div>
-              </div>
 
-              <!-- Phone Home Indicator Bar at the bottom -->
-              <div
-                class="w-10 sm:w-16 h-1 rounded-full mx-auto mt-2 sm:mt-2.5"
-                style="background-color: rgba(255, 255, 255, 0.7);"
-              ></div>
+                <!-- Floating Home Indicator Bar inside screen -->
+                <div
+                  class="phone-home-indicator absolute bottom-1.5 sm:bottom-2 left-1/2 -translate-x-1/2 z-20 pointer-events-none"
+                  aria-hidden="true"
+                ></div>
+              </div>
             </div>
           </div>
         </div>
@@ -201,43 +218,125 @@ const { hero } = siteData;
     box-shadow: 0 40px 60px -20px rgba(0, 0, 0, 0.6);
   }
 
-  /* Phone Mockup Frame */
+  /* Phone Mockup Frame (iPhone 16 Pro Black Titanium) */
   .phone-mockup {
-    background: linear-gradient(160deg, #3a4645, #101818);
-    box-shadow: inset 0 0 0 1.5px var(--device-edge), 0 30px 70px -15px rgba(0, 0, 0, 0.7);
+    background: linear-gradient(160deg, #323d3c 0%, #172221 40%, #0d1414 100%);
+    box-shadow: 
+      inset 0 0 0 1px rgba(255, 255, 255, 0.28),
+      inset 0 0 0 2px rgba(5, 9, 10, 0.9),
+      0 30px 80px -15px rgba(0, 0, 0, 0.85),
+      0 10px 30px -10px rgba(0, 0, 0, 0.6);
   }
 
-  /* Side Buttons */
-  .phone-side-button {
+  /* Micro Speaker Slit at Top Edge */
+  .phone-speaker-slit {
     position: absolute;
-    width: 2.5px;
-    background: linear-gradient(180deg, #3a4645, #101818);
-    box-shadow: inset 0 0 0 0.5px var(--device-edge);
+    top: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 28px;
+    height: 1.5px;
+    border-radius: 9999px;
+    background-color: rgba(255, 255, 255, 0.2);
+    z-index: 30;
     pointer-events: none;
   }
-  .phone-button-left-1 {
-    left: -2.5px;
-    top: 18%;
-    height: 6%;
+
+  @media (min-width: 640px) {
+    .phone-speaker-slit {
+      top: 4px;
+      width: 38px;
+      height: 2px;
+    }
+  }
+
+  /* Side Buttons (Titanium precision finish) */
+  .phone-side-button {
+    position: absolute;
+    background: linear-gradient(180deg, #3a4746, #141c1c);
+    box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.25);
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* Left: Action Button */
+  .phone-action-button {
+    left: -2px;
+    top: 15%;
+    width: 2px;
+    height: 4%;
     border-radius: 2px 0 0 2px;
   }
-  .phone-button-left-2 {
-    left: -2.5px;
-    top: 26%;
-    height: 6%;
-    border-radius: 2px 0 0 2px;
-  }
-  .phone-button-right {
-    right: -2.5px;
+
+  /* Left: Volume Up */
+  .phone-button-volume-up {
+    left: -2px;
     top: 22%;
-    height: 9%;
+    width: 2px;
+    height: 6.5%;
+    border-radius: 2px 0 0 2px;
+  }
+
+  /* Left: Volume Down */
+  .phone-button-volume-down {
+    left: -2px;
+    top: 31%;
+    width: 2px;
+    height: 6.5%;
+    border-radius: 2px 0 0 2px;
+  }
+
+  /* Right: Side / Power Button */
+  .phone-button-power {
+    right: -2px;
+    top: 21%;
+    width: 2px;
+    height: 9.5%;
     border-radius: 0 2px 2px 0;
   }
 
-  /* Dynamic Island */
-  .phone-dynamic-island {
-    background-color: #000000;
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  /* Right: Camera Control (iPhone 16 Pro signature recessed sensor) */
+  .phone-camera-control {
+    right: -1.5px;
+    top: 66%;
+    width: 1.5px;
+    height: 8%;
+    border-radius: 0 1px 1px 0;
+    background: linear-gradient(180deg, #283332, #161e1e);
+    box-shadow: inset 0 0 0 0.5px rgba(255, 255, 255, 0.18);
+  }
+
+  @media (min-width: 640px) {
+    .phone-action-button,
+    .phone-button-volume-up,
+    .phone-button-volume-down {
+      left: -2.5px;
+      width: 2.5px;
+    }
+    .phone-button-power {
+      right: -2.5px;
+      width: 2.5px;
+    }
+    .phone-camera-control {
+      right: -2px;
+      width: 2px;
+    }
+  }
+
+
+  /* Home Indicator Bar inside screen */
+  .phone-home-indicator {
+    width: 38%;
+    height: 3px;
+    border-radius: 9999px;
+    background-color: rgba(0, 0, 0, 0.65);
+    box-shadow: 0 1px 2px rgba(255, 255, 255, 0.2);
+  }
+
+  @media (min-width: 640px) {
+    .phone-home-indicator {
+      height: 3.5px;
+    }
   }
 
   /* Phone Idle Floating Animation */
