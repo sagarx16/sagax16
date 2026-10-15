@@ -5,6 +5,7 @@ import { initTilt } from './tilt';
 import { initLettersReveal } from './lettersReveal';
 import { initBlockWipe } from './blockWipe';
 import { initSmoothScroll } from './smoothScroll';
+import { createExpandCollapse } from './expandCollapse';
 
 export function initSite(): void {
   initSmoothScroll();
@@ -215,167 +216,21 @@ function initProjectFilters(): void {
 
   if (!projectTiles.length) return;
 
-  let isExpanded = false;
-  let isAnimating = false;
   let currentFilter = 'all';
 
-  const expand = () => {
-    if (!extraWrapper || isAnimating) return;
-    isExpanded = true;
+  const extraCards = Array.from(extraWrapper?.querySelectorAll<HTMLElement>('[data-bento-extra-card]') || []);
+  const scrollTarget = document.querySelector<HTMLElement>('[data-bento-grid]') || document.querySelector<HTMLElement>('#projects-grid');
 
-    if (moreBtn) moreBtn.setAttribute('aria-expanded', 'true');
-    if (moreText) moreText.textContent = 'View Less';
-    if (moreIcon) moreIcon.classList.add('rotate-180');
+  let expandCollapseController: ReturnType<typeof createExpandCollapse> | null = null;
 
-    // Keep current View More behavior instant as required
-    extraWrapper.removeAttribute('hidden');
-    extraWrapper.removeAttribute('inert');
-    extraWrapper.classList.remove('is-collapsing');
-    extraWrapper.classList.add('is-open');
-
-    const extraCards = extraWrapper.querySelectorAll<HTMLElement>('[data-bento-extra-card]');
-    extraCards.forEach((c) => {
-      c.style.transition = '';
-      c.style.opacity = '1';
-      c.style.transform = 'translateY(0)';
-    });
-  };
-
-// Cubic-bezier (0.4, 0, 0.2, 1) analytical solver matching CSS ease-in-out curve
-function createCubicBezier(p1x: number, p1y: number, p2x: number, p2y: number) {
-  const cx = 3 * p1x;
-  const bx = 3 * (p2x - p1x) - cx;
-  const ax = 1 - cx - bx;
-
-  const cy = 3 * p1y;
-  const by = 3 * (p2y - p1y) - cy;
-  const ay = 1 - cy - by;
-
-  const sampleX = (t: number) => ((ax * t + bx) * t + cx) * t;
-  const sampleY = (t: number) => ((ay * t + by) * t + cy) * t;
-  const derivativeX = (t: number) => (3 * ax * t + 2 * bx) * t + cx;
-
-  return (x: number) => {
-    if (x <= 0) return 0;
-    if (x >= 1) return 1;
-    let t = x;
-    for (let i = 0; i < 6; i++) {
-      const x2 = sampleX(t) - x;
-      if (Math.abs(x2) < 1e-4) return sampleY(t);
-      const d2 = derivativeX(t);
-      if (Math.abs(d2) < 1e-4) break;
-      t -= x2 / d2;
-    }
-    return sampleY(t);
-  };
-}
-
-const bezierEase = createCubicBezier(0.4, 0, 0.2, 1);
-
-  const collapse = () => {
-    if (!extraWrapper || isAnimating) return;
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-      isExpanded = false;
-      if (moreBtn) moreBtn.setAttribute('aria-expanded', 'false');
-      if (moreText) moreText.textContent = 'View More';
-      if (moreIcon) moreIcon.classList.remove('rotate-180');
-      extraWrapper.classList.remove('is-open', 'is-collapsing');
-      extraWrapper.setAttribute('hidden', '');
-      extraWrapper.setAttribute('inert', '');
-      return;
-    }
-
-    isAnimating = true;
-
-    // 1. Update button state immediately
-    if (moreBtn) moreBtn.setAttribute('aria-expanded', 'false');
-    if (moreText) moreText.textContent = 'View More';
-    if (moreIcon) moreIcon.classList.remove('rotate-180');
-
-    // 2. Measure dimensions ONCE before animation begins to completely eliminate layout thrashing
-    const collapseHeight = extraWrapper.offsetHeight;
-    const startScrollY = window.scrollY;
-    const duration = 500;
-    const startTime = performance.now();
-
-    // 3. Staggered fade out and slight slide up of cards in reverse order (last card first)
-    const extraCards = Array.from(extraWrapper.querySelectorAll<HTMLElement>('[data-bento-extra-card]'));
-    const reversedCards = [...extraCards].reverse();
-    reversedCards.forEach((card, index) => {
-      const delay = index * 50; // Smooth stagger: 0ms for last card, 50ms for previous
-      card.style.transition = `opacity 280ms cubic-bezier(0.4, 0, 0.2, 1) ${delay}ms, transform 280ms cubic-bezier(0.4, 0, 0.2, 1) ${delay}ms`;
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(-14px)';
-    });
-
-    // 4. Pre-register transition style before removing is-open to prevent frame drops in WebKit/Safari
-    extraWrapper.classList.add('is-collapsing');
-    void extraWrapper.offsetHeight; // Flush layout once so transition starts cleanly from frame 0
-    extraWrapper.classList.remove('is-open');
-
-    // 5. Smooth mathematical scroll sync following exact same cubic-bezier curve (0 reflows)
-    let isLoopRunning = true;
-    let rafId: number;
-
-    const syncScroll = (now: number) => {
-      if (!isLoopRunning) return;
-      const elapsed = now - startTime;
-      const progress = Math.min(1, Math.max(0, elapsed / duration));
-      const easedProgress = bezierEase(progress);
-
-      if (startScrollY > 0) {
-        const targetScrollY = Math.max(0, startScrollY - (collapseHeight * easedProgress));
-        window.scrollTo(0, targetScrollY);
-      }
-
-      if (progress < 1 && isLoopRunning) {
-        rafId = requestAnimationFrame(syncScroll);
-      }
-    };
-    rafId = requestAnimationFrame(syncScroll);
-
-    // 6. Cleanup when collapse completes (transitionend with fallback timeout)
-    let hasCleanedUp = false;
-    const cleanup = () => {
-      if (hasCleanedUp) return;
-      hasCleanedUp = true;
-      isLoopRunning = false;
-      cancelAnimationFrame(rafId);
-
-      extraWrapper.classList.remove('is-collapsing');
-      extraWrapper.setAttribute('hidden', '');
-      extraWrapper.setAttribute('inert', '');
-
-      extraCards.forEach((c) => {
-        c.style.transition = '';
-        c.style.opacity = '';
-        c.style.transform = '';
-      });
-
-      isExpanded = false;
-      isAnimating = false;
-    };
-
-    const onTransitionEnd = (e: TransitionEvent) => {
-      if (e.target === extraWrapper && e.propertyName === 'grid-template-rows') {
-        extraWrapper.removeEventListener('transitionend', onTransitionEnd);
-        cleanup();
-      }
-    };
-    extraWrapper.addEventListener('transitionend', onTransitionEnd);
-    setTimeout(cleanup, 550);
-  };
-
-  if (moreBtn) {
-    moreBtn.addEventListener('click', () => {
-      if (isAnimating) return; // Prevent breaking on rapid clicks
-      if (isExpanded) {
-        collapse();
-      } else {
-        expand();
-      }
+  if (extraWrapper && moreBtn && moreText) {
+    expandCollapseController = createExpandCollapse({
+      wrapper: extraWrapper,
+      button: moreBtn,
+      buttonText: moreText,
+      buttonIcon: moreIcon,
+      cards: extraCards,
+      scrollTarget: scrollTarget,
     });
   }
 
@@ -400,7 +255,7 @@ const bezierEase = createCubicBezier(0.4, 0, 0.2, 1);
         });
 
         if (extraWrapper) {
-          if (!isExpanded) {
+          if (!expandCollapseController?.isExpanded()) {
             extraWrapper.classList.remove('is-open', 'is-collapsing');
             extraWrapper.setAttribute('hidden', '');
             extraWrapper.setAttribute('inert', '');
