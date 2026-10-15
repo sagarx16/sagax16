@@ -162,23 +162,50 @@ textarea:focus-visible {
   100% { transform: translateX(0%); }
 }
 
-.marquee-track-left {
+/* Marquee Containers: Unimpeded vertical scroll, no text selection, default cursor */
+.marquee-container,
+.marquee-box,
+.tech-marquee,
+.mobile-tech-field,
+[data-marquee] {
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: default;
+}
+
+/* Marquee Tracks: purely decorative, GPU-accelerated continuous scrolling */
+.marquee-track-left,
+.marquee-track-right,
+.marquee-track,
+.tech-track {
   display: flex;
   width: max-content;
-  animation: marquee-scroll-left 32s linear infinite;
   will-change: transform;
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  cursor: default !important;
+  touch-action: pan-y !important;
+}
+
+.marquee-track-left {
+  animation: marquee-scroll-left 32s linear infinite;
 }
 
 .marquee-track-right {
-  display: flex;
-  width: max-content;
   animation: marquee-scroll-right 32s linear infinite;
-  will-change: transform;
 }
 
-.marquee-container:hover .marquee-track-left,
-.marquee-container:hover .marquee-track-right {
-  animation-play-state: paused;
+/* All children inside marquee tracks are strictly non-interactive */
+.marquee-track-left *,
+.marquee-track-right *,
+.marquee-track *,
+.tech-track * {
+  pointer-events: none !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  cursor: default !important;
 }
 
 /* Marquee edge fade masks */

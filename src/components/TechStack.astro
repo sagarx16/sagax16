@@ -431,8 +431,26 @@ const mobileRow3 = ['javascript', 'html5', 'css3', 'vscode', 'postman', 'npm', '
     animation: marquee-right 48s linear infinite;
   }
 
-  .tech-marquee:hover .tech-track {
-    animation-play-state: paused;
+  .tech-marquee,
+  .mobile-tech-field {
+    touch-action: pan-y;
+    user-select: none;
+    cursor: default;
+  }
+
+  .tech-track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    pointer-events: none !important;
+    user-select: none !important;
+    touch-action: pan-y !important;
+    cursor: default !important;
+  }
+
+  .tech-track * {
+    pointer-events: none !important;
+    user-select: none !important;
   }
 
   /* ================= LEVEIN-STYLE FIELD STYLES ================= */

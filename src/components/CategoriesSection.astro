@@ -253,15 +253,26 @@ const { categories } = siteData;
     }
   }
 
+  .marquee-box {
+    touch-action: pan-y;
+    user-select: none;
+    cursor: default;
+  }
+
   .marquee-track {
     display: flex;
     width: max-content;
     will-change: transform;
     animation: marquee-infinite-scroll 28s linear infinite;
+    pointer-events: none !important;
+    user-select: none !important;
+    touch-action: pan-y !important;
+    cursor: default !important;
   }
 
-  .marquee-box:hover .marquee-track {
-    animation-play-state: paused;
+  .marquee-track * {
+    pointer-events: none !important;
+    user-select: none !important;
   }
 
   /* Marquee item typography: matched to 14px - 15px */

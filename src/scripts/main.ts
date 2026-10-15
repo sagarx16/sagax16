@@ -6,10 +6,12 @@ import { initLettersReveal } from './lettersReveal';
 import { initBlockWipe } from './blockWipe';
 import { initSmoothScroll } from './smoothScroll';
 import { createExpandCollapse } from './expandCollapse';
+import { initMarquees } from './marquee';
 
 export function initSite(): void {
   initSmoothScroll();
   initNavbar();
+  initMarquees();
   initTextReveal();
   initBoxReveal();
   initCounters();
