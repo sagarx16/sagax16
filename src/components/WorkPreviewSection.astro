@@ -1,40 +1,40 @@
 ---
 import { siteData } from '../data/site';
-const { projects } = siteData;
+
+// Home page shows only 3 featured projects in exact order:
+// 1. S.N. Public School & Tuition Center
+// 2. Royal Wedding Invitation
+// 3. Sage Wellness (Dr. Maya Reynolds, PsyD)
+const featuredOrder = ['sn-public-school', 'royal-wedding', 'sage-wellness'];
+const featuredProjects = featuredOrder
+  .map((id) => siteData.projects.find((p) => p.id === id && p.featuredOnHome))
+  .filter((p): p is typeof siteData.projects[number] => Boolean(p));
 ---
 
 <section class="w-full bg-[#FAF9F8] py-14 sm:py-20 lg:py-28 text-[#1C1B1B]">
   <div class="max-w-[1280px] mx-auto px-5 sm:px-6 lg:px-12">
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6 mb-8 sm:mb-12">
-      <div>
-        <span class="inline-block text-xs uppercase tracking-widest text-[#326262] font-bold mb-2 sm:mb-3">
-          PORTFOLIO
-        </span>
-        <h2
-          data-reveal="text"
-          class="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#1C1B1B] leading-[1.15]"
-        >
-          Our Work
-        </h2>
-      </div>
-
-      <a
-        href="/our-work"
-        class="hidden sm:inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-[#326262]/20 hover:bg-[#326262] hover:text-white text-[#326262] font-semibold text-sm transition-all"
+    <!-- Section Header -->
+    <div class="mb-8 sm:mb-12">
+      <span class="inline-block text-xs uppercase tracking-widest text-[#326262] font-bold mb-2 sm:mb-3">
+        PORTFOLIO
+      </span>
+      <h2
+        data-reveal="text"
+        class="text-3xl sm:text-4xl lg:text-5xl font-medium tracking-tight text-[#1C1B1B] leading-[1.15]"
       >
-        <span>See All Projects</span>
-        <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
-      </a>
+        Our Work
+      </h2>
     </div>
 
-    <!-- 6 Project Cards Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8 mb-8 sm:mb-12">
-      {projects.map((project, idx) => (
+    <!-- 3 Featured Project Cards Grid: 1 col on mobile, 2 cols on tablet (3rd spans full width), 3 cols on desktop -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-8">
+      {featuredProjects.map((project, idx) => (
         <div
           data-tilt
-          class="bg-white rounded-[20px] sm:rounded-[24px] p-5 sm:p-6 border border-[#326262]/10 shadow-[0_4px_20px_-2px_rgba(50,98,98,0.06)] hover:border-[#6BBF9A]/40 transition-colors flex flex-col justify-between"
+          class:list={[
+            "bg-white rounded-[20px] sm:rounded-[24px] p-5 sm:p-6 border border-[#326262]/10 shadow-[0_4px_20px_-2px_rgba(50,98,98,0.06)] hover:border-[#6BBF9A]/40 transition-colors flex flex-col justify-between",
+            idx === 2 && "md:col-span-2 lg:col-span-1"
+          ]}
         >
           <div>
             <!-- Live Project Screenshot in Sleek Browser Frame -->
@@ -98,13 +98,21 @@ const { projects } = siteData;
       ))}
     </div>
 
-    <!-- Mobile See All Projects -->
-    <div class="flex sm:hidden justify-center">
+    <!-- Centered View More Button linking to /our-work -->
+    <div class="mt-12 sm:mt-14 lg:mt-16 flex justify-center">
       <a
         href="/our-work"
-        class="px-8 py-3 rounded-full bg-[#326262] text-white font-semibold text-sm shadow-md"
+        class="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#326262] hover:bg-[#254c4c] text-white font-semibold text-sm transition-all duration-200 shadow-[0_4px_18px_-2px_rgba(50,98,98,0.35)] hover:shadow-[0_8px_24px_-2px_rgba(50,98,98,0.45)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#6BBF9A]"
       >
-        See All Projects
+        <span>View More</span>
+        <span class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center transition-transform duration-200">
+          <svg
+            class="w-3.5 h-3.5 fill-none stroke-current stroke-2 transition-transform duration-200 group-hover:translate-x-[3px]"
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </span>
       </a>
     </div>
   </div>

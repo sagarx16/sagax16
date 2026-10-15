@@ -14,6 +14,7 @@ export interface Project {
   tech: string[];
   liveUrl: string;
   image: string;
+  featuredOnHome?: boolean;
 }
 
 export interface TeamMember {
@@ -207,6 +208,7 @@ export const siteData = {
       tech: ['Next.js', 'TypeScript'],
       liveUrl: 'https://sharda-academy-smoky.vercel.app',
       image: '/projects/sn-public-school.png',
+      featuredOnHome: true,
     },
     {
       id: 'royal-wedding',
@@ -224,6 +226,7 @@ export const siteData = {
       tech: ['Astro'],
       liveUrl: 'https://invifestx16.vercel.app',
       image: '/projects/royal-wedding.png',
+      featuredOnHome: true,
     },
     {
       id: 'civic-voice',
@@ -305,6 +308,7 @@ export const siteData = {
       tech: ['Next.js'],
       liveUrl: 'https://sage-wellness.vercel.app',
       image: '/projects/sage-wellness.png',
+      featuredOnHome: true,
     },
   ] as Project[],
 
