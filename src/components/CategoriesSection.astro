@@ -56,7 +56,7 @@ const { categories } = siteData;
     </div>
 
     <!-- Part 2: Marquee Strip (Compact, Refined & Matched) -->
-    <div class="mt-14 sm:mt-16 md:mt-20 mb-8 sm:mb-12 flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
+    <div class="mt-14 sm:mt-16 md:mt-20 mb-8 sm:mb-12 flex flex-col md:flex-row md:items-center gap-6 md:gap-12 w-full min-w-0 max-w-full">
       <!-- Left: Label wrapping into 2 lines (~280px) -->
       <div class="shrink-0 max-w-[280px]">
         <span data-reveal="text" class="block text-xs sm:text-[13px] uppercase tracking-[0.2em] font-medium text-white/80 leading-[1.6]">
@@ -64,40 +64,44 @@ const { categories } = siteData;
         </span>
       </div>
 
-      <!-- Right: Marquee Viewport with 4 Corner Brackets & Edge Fade -->
-      <div class="marquee-box relative flex-1 h-[72px] sm:h-[80px] flex items-center">
-        <!-- 4 L-shaped Corner Brackets (12px arm length, 1px solid rgba(255,255,255,0.4)) -->
+      <!-- Right: Marquee Viewport with 4 Corner Brackets & Edge Fade (Strictly bounded with min-w-0) -->
+      <div class="marquee-box relative flex-1 min-w-0 w-full max-w-full h-[72px] sm:h-[80px] flex items-center">
+        <!-- 4 L-shaped Corner Brackets (12px arm length, 1.5px solid rgba(255,255,255,0.45)) -->
         <span class="corner-bracket corner-tl" aria-hidden="true"></span>
         <span class="corner-bracket corner-tr" aria-hidden="true"></span>
         <span class="corner-bracket corner-bl" aria-hidden="true"></span>
         <span class="corner-bracket corner-br" aria-hidden="true"></span>
 
-        <!-- Inner Masked Scroller (Edge fade mask applied here) -->
+        <!-- Inner Masked Scroller (Symmetric edge fade mask applied here) -->
         <div class="marquee-scroller w-full h-full overflow-hidden flex items-center">
           <div class="marquee-track flex items-center select-none">
-            <!-- Loop Set 1 -->
-            <div class="marquee-group flex items-center shrink-0">
-              {categories.marqueeProjects.map((project) => (
-                <div class="inline-flex items-center shrink-0">
-                  <span class="marquee-item uppercase font-medium tracking-[0.14em] text-white/90 whitespace-nowrap">
-                    {project}
-                  </span>
-                  <span class="marquee-dot shrink-0" aria-hidden="true"></span>
-                </div>
-              ))}
-            </div>
+            <!-- First Half (50%) -->
+            {Array.from({ length: 2 }).map((_, i) => (
+              <div class="marquee-group flex items-center shrink-0" aria-hidden={i > 0 ? "true" : undefined}>
+                {categories.marqueeProjects.map((project) => (
+                  <div class="inline-flex items-center shrink-0">
+                    <span class="marquee-item uppercase font-medium tracking-[0.14em] text-white/90 whitespace-nowrap">
+                      {project}
+                    </span>
+                    <span class="marquee-dot shrink-0" aria-hidden="true"></span>
+                  </div>
+                ))}
+              </div>
+            ))}
 
-            <!-- Loop Set 2 (duplicated for seamless loop) -->
-            <div class="marquee-group flex items-center shrink-0" aria-hidden="true">
-              {categories.marqueeProjects.map((project) => (
-                <div class="inline-flex items-center shrink-0">
-                  <span class="marquee-item uppercase font-medium tracking-[0.14em] text-white/90 whitespace-nowrap">
-                    {project}
-                  </span>
-                  <span class="marquee-dot shrink-0" aria-hidden="true"></span>
-                </div>
-              ))}
-            </div>
+            <!-- Second Half (50% - duplicate for infinite seamless loop) -->
+            {Array.from({ length: 2 }).map(() => (
+              <div class="marquee-group flex items-center shrink-0" aria-hidden="true">
+                {categories.marqueeProjects.map((project) => (
+                  <div class="inline-flex items-center shrink-0">
+                    <span class="marquee-item uppercase font-medium tracking-[0.14em] text-white/90 whitespace-nowrap">
+                      {project}
+                    </span>
+                    <span class="marquee-dot shrink-0" aria-hidden="true"></span>
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -200,7 +204,7 @@ const { categories } = siteData;
   }
 
   /* --- MARQUEE STRIP STYLES --- */
-  /* 4 Corner Brackets: 12px arm length, 1px solid rgba(255, 255, 255, 0.4) */
+  /* 4 Corner Brackets: 12px arm length, 1.5px solid rgba(255, 255, 255, 0.45) */
   .corner-bracket {
     position: absolute;
     width: 12px;
@@ -211,32 +215,32 @@ const { categories } = siteData;
   .corner-tl {
     top: 0;
     left: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.4);
-    border-left: 1px solid rgba(255, 255, 255, 0.4);
+    border-top: 1.5px solid rgba(255, 255, 255, 0.45);
+    border-left: 1.5px solid rgba(255, 255, 255, 0.45);
   }
   .corner-tr {
     top: 0;
     right: 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.4);
-    border-right: 1px solid rgba(255, 255, 255, 0.4);
+    border-top: 1.5px solid rgba(255, 255, 255, 0.45);
+    border-right: 1.5px solid rgba(255, 255, 255, 0.45);
   }
   .corner-bl {
     bottom: 0;
     left: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-    border-left: 1px solid rgba(255, 255, 255, 0.4);
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.45);
+    border-left: 1.5px solid rgba(255, 255, 255, 0.45);
   }
   .corner-br {
     bottom: 0;
     right: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-    border-right: 1px solid rgba(255, 255, 255, 0.4);
+    border-bottom: 1.5px solid rgba(255, 255, 255, 0.45);
+    border-right: 1.5px solid rgba(255, 255, 255, 0.45);
   }
 
-  /* Edge fade mask on the inner scroller: transparent 0, #000 12%, #000 88%, transparent 100% */
+  /* Symmetric edge fade mask on the inner scroller: 48px smooth fade on both left & right ends */
   .marquee-scroller {
-    mask-image: linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 12%, #000 88%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
   }
 
   /* Seamless continuous loop translateX(0) to translateX(-50%) */
