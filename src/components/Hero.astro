@@ -4,7 +4,7 @@ const { hero } = siteData;
 ---
 
 <section
-  class="relative w-full overflow-hidden bg-[#101012] text-white py-14 sm:py-20 lg:py-32"
+  class="relative w-full overflow-hidden bg-[#101012] text-white pt-[136px] sm:pt-[160px] lg:pt-[208px] pb-14 sm:pb-20 lg:pb-32"
 >
   <!-- Soft Teal Radial Glow Overlay -->
   <div
@@ -59,7 +59,7 @@ const { hero } = siteData;
       <div
         data-reveal="box"
         data-box-color="teal"
-        class="relative w-full max-w-[540px] sm:max-w-[620px] rounded-t-xl sm:rounded-t-2xl bg-[#1A1C1E] p-2.5 sm:p-4 border-t border-x border-white/10 shadow-2xl"
+        class="relative w-full max-w-[540px] sm:max-w-[620px] rounded-xl sm:rounded-2xl bg-[#1A1C1E] p-2.5 sm:p-4 pb-3 sm:pb-3.5 border border-white/20 shadow-2xl"
       >
         <div class="box-content">
           <!-- Window Controls & URL bar -->
@@ -70,7 +70,7 @@ const { hero } = siteData;
               <span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#10B981]/80"></span>
             </div>
             <div
-              class="px-2.5 sm:px-3 py-0.5 rounded-full bg-white/10 text-[10px] sm:text-[11px] text-white/70 font-mono tracking-tight flex items-center gap-1 sm:gap-1.5 border border-white/5"
+              class="px-2.5 sm:px-3 py-0.5 rounded-full bg-white/10 text-[10px] sm:text-[11px] text-white/70 font-mono tracking-tight flex items-center gap-1 sm:gap-1.5 border border-white/10"
             >
               <svg
                 class="w-2.5 sm:w-3 h-2.5 sm:h-3 text-[#6BBF9A]"
@@ -89,7 +89,7 @@ const { hero } = siteData;
 
           <!-- Real Screenshot of PocketBank -->
           <div
-            class="w-full bg-[#121316] rounded-lg sm:rounded-xl overflow-hidden aspect-[16/10] relative group"
+            class="w-full bg-[#121316] rounded-lg sm:rounded-xl overflow-hidden aspect-[16/10] relative group border border-white/5"
           >
             <img
               src="/projects/pocketbank.png"
@@ -99,17 +99,17 @@ const { hero } = siteData;
             />
           </div>
 
-          <!-- Base of Laptop -->
-          <div class="w-full h-2 sm:h-2.5 bg-[#0D0E10] rounded-b-md sm:rounded-b-lg mt-1.5 sm:mt-2 mx-auto">
+          <!-- Base of Laptop with visible highlight & border -->
+          <div class="w-full h-2 sm:h-2.5 bg-[#25282D] border-t border-white/15 rounded-b-md sm:rounded-b-lg mt-1.5 sm:mt-2 mx-auto">
           </div>
         </div>
       </div>
 
-      <!-- Phone Mockup (Ghibli Tribute Dark Mode Mobile) - Scaled with elegant overlap on mobile -->
+      <!-- Phone Mockup (Ghibli Tribute Dark Mode Mobile) - Scaled with elegant overlap on mobile, complete with full border & bottom frame -->
       <div
         data-reveal="box"
         data-box-color="green"
-        class="w-[105px] xs:w-[130px] sm:w-[190px] lg:w-[224px] shrink-0 rounded-t-[1.6rem] sm:rounded-t-[2.8rem] bg-[#18191D] p-1.5 sm:p-2.5 border-t-2 border-x-2 border-white/20 shadow-[0_-12px_45px_rgba(0,0,0,0.85)] relative z-20 -ml-8 xs:-ml-12 sm:-ml-6 lg:-ml-10 transition-transform duration-500 hover:-translate-y-2 ring-1 ring-black/50"
+        class="w-[105px] xs:w-[130px] sm:w-[190px] lg:w-[224px] shrink-0 rounded-[1.8rem] sm:rounded-[2.8rem] bg-[#18191D] p-1.5 sm:p-2.5 pb-2.5 sm:pb-3.5 border-2 border-white/25 shadow-[0_16px_50px_rgba(0,0,0,0.9)] relative z-20 -ml-8 xs:-ml-12 sm:-ml-6 lg:-ml-10 transition-transform duration-500 hover:-translate-y-2 ring-1 ring-white/10"
       >
         <div class="box-content relative">
           <!-- Dynamic Island -->
@@ -122,7 +122,7 @@ const { hero } = siteData;
 
           <!-- Real Mobile Screenshot of Ghibli Tribute Dark Mode -->
           <div
-            class="w-full bg-[#1b122c] rounded-t-[1.2rem] sm:rounded-t-[2.2rem] overflow-hidden aspect-[9/18] relative group shadow-inner"
+            class="w-full bg-[#1b122c] rounded-[1.2rem] sm:rounded-[2.2rem] overflow-hidden aspect-[9/18] relative group shadow-inner border border-white/10"
           >
             <img
               src="/projects/ghibli-mobile-dark.png"
@@ -132,10 +132,13 @@ const { hero } = siteData;
             />
             <!-- Gloss / Sheen overlay -->
             <div
-              class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.12] rounded-t-[1.2rem] sm:rounded-t-[2.2rem]"
+              class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.12] rounded-[1.2rem] sm:rounded-[2.2rem]"
             >
             </div>
           </div>
+
+          <!-- Phone Home Indicator Bar at the bottom -->
+          <div class="w-8 sm:w-14 h-1 bg-white/40 rounded-full mx-auto mt-1.5 sm:mt-2"></div>
         </div>
       </div>
     </div>

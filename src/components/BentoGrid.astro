@@ -95,6 +95,21 @@ const projectThemes = [
     arrowStyle: 'bg-purple-400 text-black shadow-[0_4px_16px_rgba(192,132,252,0.45)] group-hover:bg-purple-300 group-hover:scale-110 group-hover:shadow-[0_0_24px_rgba(192,132,252,0.8)]',
     summary: 'Dark-mode interactive cinematic archive honoring Hayao Miyazaki’s 23 timeless films.',
     accentDot: 'bg-purple-400'
+  },
+  {
+    // Project 6: Sage Wellness (Dr. Maya Reynolds, PsyD)
+    tag: 'Therapy & Healthcare',
+    mockUrl: 'sage-wellness.app',
+    imgSrc: '/projects/sage-wellness.png',
+    cardBg: 'from-[#0E241E] via-[#091A15] to-[#040D0B]',
+    spotlight: 'radial-gradient(circle at 65% 40%, rgba(107, 191, 154, 0.28) 0%, rgba(35, 75, 60, 0.12) 45%, transparent 70%)',
+    borderColor: 'border-[#6BBF9A]/30 hover:border-[#6BBF9A]/80',
+    shadowHover: 'hover:shadow-[0_22px_55px_-12px_rgba(107,191,154,0.3)]',
+    pillBg: 'bg-[#6BBF9A]/15 text-[#6BBF9A] border-[#6BBF9A]/30',
+    titleHover: 'group-hover:text-[#A7E3C8]',
+    arrowStyle: 'bg-[#6BBF9A] text-black shadow-[0_4px_16px_rgba(107,191,154,0.45)] group-hover:bg-[#85d4b1] group-hover:scale-110 group-hover:shadow-[0_0_24px_rgba(107,191,154,0.8)]',
+    summary: 'Calming, trauma-informed therapy practice website with telehealth booking, specialties and consultation flow.',
+    accentDot: 'bg-[#6BBF9A]'
   }
 ];
 ---
@@ -151,9 +166,9 @@ const projectThemes = [
     </div>
   </div>
 
-  <!-- Stripe / Keynote Gradient Stage Bento Grid -->
+  <!-- Primary 4 Cards Bento Grid (Rows 1 & 2) -->
   <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6">
-    {projects.map((p, index) => {
+    {projects.slice(0, 4).map((p, index) => {
       // Bento layout spans & heights optimized for mobile & desktop
       let cardClasses = 'lg:col-span-6 min-h-[380px] xs:min-h-[420px] sm:min-h-[500px] lg:min-h-[550px]';
       if (index === 0) cardClasses = 'lg:col-span-8 min-h-[440px] xs:min-h-[480px] sm:min-h-[580px] lg:min-h-[660px]';
@@ -166,7 +181,9 @@ const projectThemes = [
           href={p.liveUrl}
           target="_blank"
           rel="noopener noreferrer"
+          aria-label={`View ${p.title} live site`}
           data-project-category={p.category}
+          data-project-index={index}
           class:list={[
             'group relative rounded-[24px] sm:rounded-[28px] overflow-hidden border bg-gradient-to-br transition-all duration-500 flex flex-col justify-between p-5 xs:p-6 sm:p-8',
             theme.cardBg,
@@ -272,7 +289,7 @@ const projectThemes = [
             )}
 
             {index > 1 && (
-              /* Cards 2-5: Floating Sleek Browser Windows with Theme Accents (Expanded Size) */
+              /* Cards 2-3: Floating Sleek Browser Windows with Theme Accents */
               <div class="w-full h-full max-h-[360px] sm:max-h-[380px] lg:max-h-[410px] rounded-xl sm:rounded-2xl border border-white/20 bg-black/40 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.85)] overflow-hidden flex flex-col transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-[1.02]">
                 <!-- Browser Bar -->
                 <div class="px-4 py-2 bg-black/70 border-b border-white/10 flex items-center justify-between shrink-0">
@@ -303,6 +320,167 @@ const projectThemes = [
       );
     })}
   </div>
+
+  <!-- Collapsible Extra Projects Wrapper (CSS Grid 1fr to 0fr transition) -->
+  <div
+    id="bento-extra-wrapper"
+    data-bento-extra-wrapper
+    class="bento-extra-wrapper"
+    hidden
+    inert
+  >
+    <div class="bento-extra-inner">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 sm:gap-6 pt-5 sm:pt-6">
+        {projects.slice(4).map((p, offset, arr) => {
+          const index = offset + 4;
+          const isOddCount = arr.length % 2 !== 0;
+          const isLast = offset === arr.length - 1;
+          const spanClass = isOddCount && isLast ? 'lg:col-span-12' : 'lg:col-span-6';
+          const cardClasses = `${spanClass} min-h-[380px] xs:min-h-[420px] sm:min-h-[500px] lg:min-h-[550px]`;
+          const theme = projectThemes[index] || projectThemes[0];
+
+          return (
+            <a
+              href={p.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`View ${p.title} live site`}
+              data-project-category={p.category}
+              data-project-index={index}
+              data-bento-extra-card
+              class:list={[
+                'group relative rounded-[24px] sm:rounded-[28px] overflow-hidden border bg-gradient-to-br transition-all duration-500 flex flex-col justify-between p-5 xs:p-6 sm:p-8',
+                theme.cardBg,
+                theme.borderColor,
+                theme.shadowHover,
+                cardClasses,
+              ]}
+            >
+              {/* Ambient Spotlight Glow Background */}
+              <div
+                class="pointer-events-none absolute inset-0 opacity-80 group-hover:opacity-100 transition-opacity duration-700"
+                style={`background: ${theme.spotlight};`}
+              ></div>
+
+              {/* Subtle Keynote Grid Pattern Overlay */}
+              <div
+                class="pointer-events-none absolute inset-0 opacity-[0.12] group-hover:opacity-[0.18] transition-opacity duration-700"
+                style="background-image: radial-gradient(rgba(255, 255, 255, 0.4) 1px, transparent 1px); background-size: 24px 24px;"
+              ></div>
+
+              {/* Top Header: Tag Pill, Tech Chip, Arrow Button, Title, Subtitle */}
+              <div class="relative z-10 flex flex-col gap-2 mb-4 shrink-0">
+                <div class="flex items-center justify-between gap-3">
+                  <div class="flex items-center gap-2">
+                    <span class:list={['px-3 py-1 rounded-full text-xs font-mono font-medium tracking-tight border shadow-sm', theme.pillBg]}>
+                      {p.label}
+                    </span>
+                    <span class="hidden sm:inline-block px-2.5 py-1 rounded-full bg-white/5 border border-white/10 text-white/50 text-[11px] font-mono">
+                      {p.tech[0]}
+                    </span>
+                  </div>
+                  <!-- Light Glassmorphism Arrow Button -->
+                  <span class="w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center transition-all duration-300 shrink-0 cursor-pointer bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/20 hover:border-white/40 text-white shadow-[0_4px_16px_rgba(0,0,0,0.25),inset_0_1px_1px_rgba(255,255,255,0.4)] group-hover:bg-white/25 group-hover:border-white/50 group-hover:scale-110 group-hover:shadow-[0_0_24px_rgba(255,255,255,0.35)]">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5 fill-none stroke-current stroke-[2.5] transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1 text-white" viewBox="0 0 24 24">
+                      <line x1="7" y1="17" x2="17" y2="7"></line>
+                      <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                  </span>
+                </div>
+
+                <div>
+                  <h3 class:list={['text-2xl sm:text-3xl font-semibold text-white transition-colors leading-snug', theme.titleHover]}>
+                    {p.title}
+                  </h3>
+                  <p class="text-xs sm:text-sm text-white/60 mt-1 line-clamp-1 font-normal leading-relaxed">
+                    {theme.summary}
+                  </p>
+                </div>
+              </div>
+
+              {/* Centered Floating Mockup Stage */}
+              <div class="relative w-full flex-1 flex items-center justify-center overflow-hidden">
+                <div class:list={[
+                  'w-full h-full max-h-[360px] sm:max-h-[380px] lg:max-h-[410px] rounded-xl sm:rounded-2xl border border-white/20 bg-black/40 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.85)] overflow-hidden flex flex-col transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-[1.02]',
+                  isOddCount && isLast ? 'max-w-[880px] mx-auto' : ''
+                ]}>
+                  <!-- Browser Bar -->
+                  <div class="px-4 py-2 bg-black/70 border-b border-white/10 flex items-center justify-between shrink-0">
+                    <div class="flex items-center gap-1.5">
+                      <span class="w-2.5 h-2.5 rounded-full bg-[#EF4444]/90"></span>
+                      <span class="w-2.5 h-2.5 rounded-full bg-[#F59E0B]/90"></span>
+                      <span class="w-2.5 h-2.5 rounded-full bg-[#10B981]/90"></span>
+                    </div>
+                    <div class="px-3.5 py-0.5 rounded-full bg-white/10 text-[11px] text-white/85 font-mono tracking-tight flex items-center gap-1.5 border border-white/5">
+                      <span class:list={['w-1.5 h-1.5 rounded-full', theme.accentDot]}></span>
+                      <span>{theme.mockUrl}</span>
+                    </div>
+                    <span class="text-[11px] text-white/50 font-mono uppercase font-semibold">{p.tech[0]}</span>
+                  </div>
+                  <!-- Screen Content -->
+                  <div class="w-full flex-1 relative overflow-hidden bg-black">
+                    <!-- TODO: Place screenshot here: /public/projects/sage-wellness.png (served as /projects/sage-wellness.png) -->
+                    <img
+                      src={theme.imgSrc}
+                      alt={p.title}
+                      width="1200"
+                      height="800"
+                      class="w-full h-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                </div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </div>
+
+  <!-- View More Button -->
+  <div class="mt-8 sm:mt-10 flex justify-center" data-bento-more-container>
+    <button
+      type="button"
+      id="bento-more-btn"
+      data-bento-more-btn
+      aria-expanded="false"
+      aria-controls="bento-extra-wrapper"
+      class="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#326262] hover:bg-[#254c4c] text-white font-semibold text-sm transition-all duration-300 shadow-[0_4px_18px_-2px_rgba(50,98,98,0.35)] hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] cursor-pointer"
+    >
+      <span data-bento-more-text class="inline-block min-w-[72px] text-center">View More</span>
+      <span class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold transition-transform duration-300" data-bento-more-icon>
+        <svg class="w-4 h-4 fill-none stroke-current stroke-2 transition-transform duration-300" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+      </span>
+    </button>
+  </div>
+
+<style>
+  .bento-extra-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    transition: grid-template-rows 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .bento-extra-wrapper.is-open {
+    grid-template-rows: 1fr;
+    transition: none;
+  }
+  .bento-extra-wrapper.is-collapsing {
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .bento-extra-inner {
+    overflow: hidden;
+    min-height: 0;
+  }
+  [data-bento-extra-card] {
+    will-change: transform, opacity;
+  }
+</style>
 
   <!-- Featured Project Details Area below the bento grid for S.N. Public School -->
   <div class="mt-12 bg-white rounded-[24px] p-8 lg:p-12 border border-[#326262]/10 shadow-[0_4px_24px_-2px_rgba(50,98,98,0.06)]">

@@ -3,6 +3,7 @@ import { initBoxReveal } from './boxReveal';
 import { initCounters } from './counters';
 import { initTilt } from './tilt';
 import { initLettersReveal } from './lettersReveal';
+import { initBlockWipe } from './blockWipe';
 
 export function initSite(): void {
   initNavbar();
@@ -11,40 +12,78 @@ export function initSite(): void {
   initCounters();
   initTilt();
   initLettersReveal();
+  initBlockWipe();
   initFaqAccordion();
   initProjectFilters();
   initContactForm();
 }
 
 /**
- * Sticky Navbar scroll blur and mobile menu
+ * Sticky Navbar: transparent over dark hero at top, glassy solid white when scrolled (>40px)
  */
 function initNavbar(): void {
   const header = document.querySelector<HTMLElement>('header[data-site-header]');
-  if (header) {
-    const onScroll = () => {
-      if (window.scrollY > 20) {
-        header.classList.add('is-scrolled');
-      } else {
-        header.classList.remove('is-scrolled');
-      }
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
-
-  // Mobile menu toggle & backdrop
   const menuButton = document.querySelector<HTMLButtonElement>('[data-mobile-menu-toggle]');
   const mobileMenu = document.querySelector<HTMLElement>('[data-mobile-menu]');
   const mobileBackdrop = document.querySelector<HTMLElement>('[data-mobile-backdrop]');
   const iconMenu = menuButton?.querySelector<SVGElement>('[data-icon-menu]');
   const iconClose = menuButton?.querySelector<SVGElement>('[data-icon-close]');
 
+  const updateHeaderState = () => {
+    if (!header) return;
+    const isMenuOpen = menuButton?.getAttribute('aria-expanded') === 'true';
+    const isScrolled = window.scrollY > 40 || isMenuOpen;
+    header.setAttribute('data-scrolled', String(isScrolled));
+    header.classList.toggle('is-scrolled', isScrolled);
+  };
+
+  if (header) {
+    // 1. IntersectionObserver on 1px sentinel element at top of page (preferred)
+    const sentinel = document.querySelector<HTMLElement>('[data-scroll-sentinel]');
+    if (sentinel && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          const isAtTop = entry.isIntersecting;
+          const isMenuOpen = menuButton?.getAttribute('aria-expanded') === 'true';
+          const isScrolled = !isAtTop || isMenuOpen;
+          header.setAttribute('data-scrolled', String(isScrolled));
+          header.classList.toggle('is-scrolled', isScrolled);
+        },
+        { rootMargin: '-40px 0px 0px 0px' }
+      );
+      observer.observe(sentinel);
+    }
+
+    // 2. Passive scroll listener with requestAnimationFrame for fast feedback & scroll restore
+    let ticking = false;
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          updateHeaderState();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Initial check on page load / browser scroll restoration
+    updateHeaderState();
+  }
+
+  // Mobile menu toggle & backdrop
   const openMobileMenu = () => {
     if (!menuButton || !mobileMenu) return;
     menuButton.setAttribute('aria-expanded', 'true');
     iconMenu?.classList.add('hidden');
     iconClose?.classList.remove('hidden');
+
+    // Force solid white state while mobile menu is open
+    if (header) {
+      header.setAttribute('data-scrolled', 'true');
+      header.classList.add('is-scrolled');
+    }
 
     if (mobileBackdrop) {
       mobileBackdrop.classList.remove('hidden');
@@ -68,6 +107,13 @@ function initNavbar(): void {
     menuButton.setAttribute('aria-expanded', 'false');
     iconClose?.classList.add('hidden');
     iconMenu?.classList.remove('hidden');
+
+    // Return header to transparent if still at top (<40px)
+    if (header) {
+      const isScrolled = window.scrollY > 40;
+      header.setAttribute('data-scrolled', String(isScrolled));
+      header.classList.toggle('is-scrolled', isScrolled);
+    }
 
     if (mobileBackdrop) {
       mobileBackdrop.classList.remove('opacity-100');
@@ -155,17 +201,186 @@ function initFaqAccordion(): void {
 }
 
 /**
- * Filter chips for Our Work bento grid
+ * Filter chips & View More toggle for Our Work bento grid
  */
 function initProjectFilters(): void {
   const filterButtons = document.querySelectorAll<HTMLButtonElement>('[data-filter-btn]');
   const projectTiles = document.querySelectorAll<HTMLElement>('[data-project-category]');
+  const moreContainer = document.querySelector<HTMLElement>('[data-bento-more-container]');
+  const moreBtn = document.querySelector<HTMLButtonElement>('[data-bento-more-btn]');
+  const moreText = document.querySelector<HTMLElement>('[data-bento-more-text]');
+  const moreIcon = document.querySelector<HTMLElement>('[data-bento-more-icon]');
+  const extraWrapper = document.querySelector<HTMLElement>('[data-bento-extra-wrapper]');
 
-  if (!filterButtons.length || !projectTiles.length) return;
+  if (!projectTiles.length) return;
+
+  let isExpanded = false;
+  let isAnimating = false;
+  let currentFilter = 'all';
+
+  const expand = () => {
+    if (!extraWrapper || isAnimating) return;
+    isExpanded = true;
+
+    if (moreBtn) moreBtn.setAttribute('aria-expanded', 'true');
+    if (moreText) moreText.textContent = 'View Less';
+    if (moreIcon) moreIcon.classList.add('rotate-180');
+
+    // Keep current View More behavior instant as required
+    extraWrapper.removeAttribute('hidden');
+    extraWrapper.removeAttribute('inert');
+    extraWrapper.classList.remove('is-collapsing');
+    extraWrapper.classList.add('is-open');
+
+    const extraCards = extraWrapper.querySelectorAll<HTMLElement>('[data-bento-extra-card]');
+    extraCards.forEach((c) => {
+      c.style.transition = '';
+      c.style.opacity = '1';
+      c.style.transform = 'translateY(0)';
+    });
+  };
+
+// Cubic-bezier (0.4, 0, 0.2, 1) analytical solver matching CSS ease-in-out curve
+function createCubicBezier(p1x: number, p1y: number, p2x: number, p2y: number) {
+  const cx = 3 * p1x;
+  const bx = 3 * (p2x - p1x) - cx;
+  const ax = 1 - cx - bx;
+
+  const cy = 3 * p1y;
+  const by = 3 * (p2y - p1y) - cy;
+  const ay = 1 - cy - by;
+
+  const sampleX = (t: number) => ((ax * t + bx) * t + cx) * t;
+  const sampleY = (t: number) => ((ay * t + by) * t + cy) * t;
+  const derivativeX = (t: number) => (3 * ax * t + 2 * bx) * t + cx;
+
+  return (x: number) => {
+    if (x <= 0) return 0;
+    if (x >= 1) return 1;
+    let t = x;
+    for (let i = 0; i < 6; i++) {
+      const x2 = sampleX(t) - x;
+      if (Math.abs(x2) < 1e-4) return sampleY(t);
+      const d2 = derivativeX(t);
+      if (Math.abs(d2) < 1e-4) break;
+      t -= x2 / d2;
+    }
+    return sampleY(t);
+  };
+}
+
+const bezierEase = createCubicBezier(0.4, 0, 0.2, 1);
+
+  const collapse = () => {
+    if (!extraWrapper || isAnimating) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      isExpanded = false;
+      if (moreBtn) moreBtn.setAttribute('aria-expanded', 'false');
+      if (moreText) moreText.textContent = 'View More';
+      if (moreIcon) moreIcon.classList.remove('rotate-180');
+      extraWrapper.classList.remove('is-open', 'is-collapsing');
+      extraWrapper.setAttribute('hidden', '');
+      extraWrapper.setAttribute('inert', '');
+      return;
+    }
+
+    isAnimating = true;
+
+    // 1. Update button state immediately
+    if (moreBtn) moreBtn.setAttribute('aria-expanded', 'false');
+    if (moreText) moreText.textContent = 'View More';
+    if (moreIcon) moreIcon.classList.remove('rotate-180');
+
+    // 2. Measure dimensions ONCE before animation begins to completely eliminate layout thrashing
+    const collapseHeight = extraWrapper.offsetHeight;
+    const startScrollY = window.scrollY;
+    const duration = 500;
+    const startTime = performance.now();
+
+    // 3. Staggered fade out and slight slide up of cards in reverse order (last card first)
+    const extraCards = Array.from(extraWrapper.querySelectorAll<HTMLElement>('[data-bento-extra-card]'));
+    const reversedCards = [...extraCards].reverse();
+    reversedCards.forEach((card, index) => {
+      const delay = index * 50; // Smooth stagger: 0ms for last card, 50ms for previous
+      card.style.transition = `opacity 280ms cubic-bezier(0.4, 0, 0.2, 1) ${delay}ms, transform 280ms cubic-bezier(0.4, 0, 0.2, 1) ${delay}ms`;
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(-14px)';
+    });
+
+    // 4. Pre-register transition style before removing is-open to prevent frame drops in WebKit/Safari
+    extraWrapper.classList.add('is-collapsing');
+    void extraWrapper.offsetHeight; // Flush layout once so transition starts cleanly from frame 0
+    extraWrapper.classList.remove('is-open');
+
+    // 5. Smooth mathematical scroll sync following exact same cubic-bezier curve (0 reflows)
+    let isLoopRunning = true;
+    let rafId: number;
+
+    const syncScroll = (now: number) => {
+      if (!isLoopRunning) return;
+      const elapsed = now - startTime;
+      const progress = Math.min(1, Math.max(0, elapsed / duration));
+      const easedProgress = bezierEase(progress);
+
+      if (startScrollY > 0) {
+        const targetScrollY = Math.max(0, startScrollY - (collapseHeight * easedProgress));
+        window.scrollTo(0, targetScrollY);
+      }
+
+      if (progress < 1 && isLoopRunning) {
+        rafId = requestAnimationFrame(syncScroll);
+      }
+    };
+    rafId = requestAnimationFrame(syncScroll);
+
+    // 6. Cleanup when collapse completes (transitionend with fallback timeout)
+    let hasCleanedUp = false;
+    const cleanup = () => {
+      if (hasCleanedUp) return;
+      hasCleanedUp = true;
+      isLoopRunning = false;
+      cancelAnimationFrame(rafId);
+
+      extraWrapper.classList.remove('is-collapsing');
+      extraWrapper.setAttribute('hidden', '');
+      extraWrapper.setAttribute('inert', '');
+
+      extraCards.forEach((c) => {
+        c.style.transition = '';
+        c.style.opacity = '';
+        c.style.transform = '';
+      });
+
+      isExpanded = false;
+      isAnimating = false;
+    };
+
+    const onTransitionEnd = (e: TransitionEvent) => {
+      if (e.target === extraWrapper && e.propertyName === 'grid-template-rows') {
+        extraWrapper.removeEventListener('transitionend', onTransitionEnd);
+        cleanup();
+      }
+    };
+    extraWrapper.addEventListener('transitionend', onTransitionEnd);
+    setTimeout(cleanup, 550);
+  };
+
+  if (moreBtn) {
+    moreBtn.addEventListener('click', () => {
+      if (isAnimating) return; // Prevent breaking on rapid clicks
+      if (isExpanded) {
+        collapse();
+      } else {
+        expand();
+      }
+    });
+  }
 
   filterButtons.forEach((btn) => {
     btn.addEventListener('click', () => {
-      const filter = btn.dataset.filterBtn;
+      currentFilter = btn.dataset.filterBtn || 'all';
 
       // Update active button styling
       filterButtons.forEach((b) => {
@@ -174,42 +389,70 @@ function initProjectFilters(): void {
         b.setAttribute('aria-pressed', String(isActive));
       });
 
-      // Filter project tiles with smooth transition
-      projectTiles.forEach((tile) => {
-        const category = tile.dataset.projectCategory;
-        const shouldShow = filter === 'all' || category === filter;
+      if (currentFilter === 'all') {
+        // Show View More button container
+        if (moreContainer) moreContainer.classList.remove('hidden');
 
-        if (shouldShow) {
+        // Reset tiles visibility
+        projectTiles.forEach((tile) => {
           tile.classList.remove('hidden');
-          requestAnimationFrame(() => {
-            tile.style.opacity = '1';
-            tile.style.transform = 'scale(1)';
-          });
-        } else {
-          tile.style.opacity = '0';
-          tile.style.transform = 'scale(0.96)';
-          setTimeout(() => {
-            if (tile.style.opacity === '0') {
-              tile.classList.add('hidden');
-            }
-          }, 250);
+        });
+
+        if (extraWrapper) {
+          if (!isExpanded) {
+            extraWrapper.classList.remove('is-open', 'is-collapsing');
+            extraWrapper.setAttribute('hidden', '');
+            extraWrapper.setAttribute('inert', '');
+          } else {
+            extraWrapper.removeAttribute('hidden');
+            extraWrapper.removeAttribute('inert');
+            extraWrapper.classList.add('is-open');
+            extraWrapper.classList.remove('is-collapsing');
+          }
         }
-      });
+      } else {
+        // Specific category filtered:
+        // Hide View More button since filter shows all matching projects
+        if (moreContainer) moreContainer.classList.add('hidden');
+
+        if (extraWrapper) {
+          extraWrapper.removeAttribute('hidden');
+          extraWrapper.removeAttribute('inert');
+          extraWrapper.classList.add('is-open');
+          extraWrapper.classList.remove('is-collapsing');
+        }
+
+        projectTiles.forEach((tile) => {
+          const category = tile.dataset.projectCategory;
+          const shouldShow = category === currentFilter;
+          tile.classList.toggle('hidden', !shouldShow);
+        });
+      }
     });
   });
 }
 
 /**
- * Contact Form validation and WhatsApp prefill
+ * Contact Form submission via Web3Forms API
  */
 function initContactForm(): void {
   const form = document.querySelector<HTMLFormElement>('[data-contact-form]');
   const thankYouBox = document.querySelector<HTMLElement>('[data-form-thank-you]');
+  const errorBox = document.querySelector<HTMLElement>('[data-form-error]');
+  const submitButton = form?.querySelector<HTMLButtonElement>('[data-submit-button]');
+  const submitText = form?.querySelector<HTMLElement>('[data-submit-text]');
 
   if (!form) return;
 
-  form.addEventListener('submit', (e) => {
+  const originalSubmitText = submitText?.textContent || 'Send Enquiry';
+  let isSubmitting = false;
+
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+
+    // Reset general error box
+    if (errorBox) errorBox.classList.add('hidden');
 
     let isValid = true;
 
@@ -218,6 +461,7 @@ function initContactForm(): void {
     const emailInput = form.querySelector<HTMLInputElement>('#email');
     const projectTypeInput = form.querySelector<HTMLSelectElement>('#projectType');
     const detailsInput = form.querySelector<HTMLTextAreaElement>('#projectDetails');
+    const botcheckInput = form.querySelector<HTMLInputElement>('#botcheck');
 
     // Validation helper
     const setError = (input: HTMLElement | null, errorId: string, hasError: boolean) => {
@@ -236,26 +480,95 @@ function initContactForm(): void {
 
     // Validate fields
     setError(nameInput, 'nameError', !nameInput?.value.trim());
-    setError(phoneInput, 'phoneError', !phoneInput?.value.trim() || phoneInput.value.trim().length < 8);
+
+    // Phone validation: require at least 10 digits
+    const phoneDigits = phoneInput ? phoneInput.value.replace(/\D/g, '') : '';
+    setError(phoneInput, 'phoneError', phoneDigits.length < 10);
+
+    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setError(emailInput, 'emailError', !emailInput?.value.trim() || !emailRegex.test(emailInput.value.trim()));
+
+    // Dropdown validation
     setError(projectTypeInput, 'typeError', !projectTypeInput?.value);
+
+    // Details validation
     setError(detailsInput, 'detailsError', !detailsInput?.value.trim());
 
     if (!isValid) return;
 
-    // Build WhatsApp message
-    const message = `Hello SAGA16 team,\n\nName: ${nameInput?.value.trim()}\nPhone: ${phoneInput?.value.trim()}\nEmail: ${emailInput?.value.trim()}\nProject Type: ${projectTypeInput?.value}\nDetails: ${detailsInput?.value.trim()}`;
-    const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/917050836284?text=${encodedMessage}`;
+    // Honeypot check: silently exit and pretend success if bot filled honeypot
+    if (botcheckInput && botcheckInput.checked) {
+      form.reset();
+      form.classList.add('hidden');
+      if (thankYouBox) thankYouBox.classList.remove('hidden');
+      return;
+    }
 
-    // Open WhatsApp in new tab
-    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+    // Access key from environment variable (inlined at build time by Astro)
+    const accessKey = import.meta.env.PUBLIC_WEB3FORMS_KEY;
+    if (!accessKey) {
+      console.error('[SAGA16 Contact] Missing PUBLIC_WEB3FORMS_KEY environment variable.');
+      if (errorBox) {
+        const descEl = errorBox.querySelector<HTMLElement>('[data-form-error-desc]');
+        if (descEl) {
+          descEl.innerHTML = 'Form service is temporarily unavailable. Please contact us directly at <a href="tel:+917050836284" class="underline font-medium hover:text-red-900">+91 7050836284</a> or via WhatsApp.';
+        }
+        errorBox.classList.remove('hidden');
+      }
+      return;
+    }
 
-    // Show thank you state
-    form.classList.add('hidden');
-    if (thankYouBox) {
-      thankYouBox.classList.remove('hidden');
+    // UI state: Sending...
+    isSubmitting = true;
+    if (submitButton) submitButton.disabled = true;
+    if (submitText) submitText.textContent = 'Sending...';
+
+    const payload = {
+      access_key: accessKey,
+      name: nameInput?.value.trim(),
+      phone: phoneInput?.value.trim(),
+      email: emailInput?.value.trim(),
+      service: projectTypeInput?.value,
+      message: detailsInput?.value.trim(),
+      subject: 'New enquiry from SAGA16 website',
+      from_name: 'SAGA16 Website',
+      botcheck: false,
+    };
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        form.reset();
+        form.classList.add('hidden');
+        if (errorBox) errorBox.classList.add('hidden');
+        if (thankYouBox) {
+          thankYouBox.classList.remove('hidden');
+          thankYouBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      } else {
+        throw new Error(result.message || 'Submission failed');
+      }
+    } catch (err) {
+      console.error('[SAGA16 Contact] Web3Forms submission error:', err);
+      if (errorBox) {
+        errorBox.classList.remove('hidden');
+        errorBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    } finally {
+      isSubmitting = false;
+      if (submitButton) submitButton.disabled = false;
+      if (submitText) submitText.textContent = originalSubmitText;
     }
   });
 }

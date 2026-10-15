@@ -40,6 +40,9 @@ const {
     </script>
   </head>
   <body class="bg-[#FAF9F8] text-[#1C1B1B] selection:bg-[#E5F0E1] selection:text-[#326262]">
+    <!-- 1px Scroll Sentinel for IntersectionObserver threshold detection (40px) -->
+    <div data-scroll-sentinel class="absolute top-0 left-0 w-full h-[1px] pointer-events-none" aria-hidden="true"></div>
+
     <!-- Accessible Skip Link -->
     <a
       href="#main-content"
@@ -51,8 +54,8 @@ const {
     <!-- Sticky Navbar Component -->
     <Nav currentPage={currentPage} />
 
-    <!-- Main Content Container -->
-    <main id="main-content" class="w-full pt-20">
+    <!-- Main Content Container: Hero sits directly underneath header without white top strip -->
+    <main id="main-content" class="w-full">
       <slot />
     </main>
 

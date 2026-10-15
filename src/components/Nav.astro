@@ -12,13 +12,14 @@ const { company, nav } = siteData;
 <!-- Sticky Navbar -->
 <header
   data-site-header
-  class="site-nav fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300"
+  data-scrolled="false"
+  class="site-nav fixed top-0 left-0 right-0 z-50 w-full"
 >
   <div class="max-w-[1280px] mx-auto px-6 lg:px-12 h-20 flex items-center justify-between">
     <!-- Logo: SAGA16 in bold italic style -->
     <a
       href="/"
-      class="nav-logo text-2xl lg:text-3xl text-[#326262] hover:text-[#1c4e4e] transition-colors select-none"
+      class="nav-logo text-2xl lg:text-3xl transition-colors select-none"
       aria-label="SAGA16 Home"
     >
       SAGA16
@@ -54,7 +55,7 @@ const { company, nav } = siteData;
     <div class="flex items-center gap-3">
       <a
         href={company.tel}
-        class="hidden sm:inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-[#326262] text-white hover:bg-[#3E6161] text-sm font-semibold transition-all shadow-[0_4px_14px_-2px_rgba(50,98,98,0.25)] hover:-translate-y-0.5 active:translate-y-0"
+        class="nav-cta-btn hidden sm:inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-[#326262] text-white hover:bg-[#3E6161] text-sm font-semibold transition-all shadow-[0_4px_14px_-2px_rgba(50,98,98,0.25)] hover:-translate-y-0.5 active:translate-y-0"
       >
         Call Now
       </a>
@@ -66,7 +67,7 @@ const { company, nav } = siteData;
         aria-expanded="false"
         aria-controls="mobile-menu"
         aria-label="Toggle navigation menu"
-        class="md:hidden relative w-11 h-11 flex items-center justify-center rounded-full bg-[#E5F0E1] text-[#326262] hover:bg-[#326262] hover:text-white transition-all active:scale-95 shadow-sm cursor-pointer"
+        class="nav-mobile-btn md:hidden relative w-11 h-11 flex items-center justify-center rounded-full bg-[#E5F0E1] text-[#326262] hover:bg-[#326262] hover:text-white transition-all active:scale-95 shadow-sm cursor-pointer"
       >
         <!-- Hamburger Icon -->
         <svg data-icon-menu class="w-6 h-6 fill-none stroke-current stroke-2 transition-all duration-200" viewBox="0 0 24 24">
@@ -157,6 +158,22 @@ const { company, nav } = siteData;
     font-weight: 800;
     font-style: italic;
     letter-spacing: -0.04em;
+    color: #FAF9F8;
+    transition: color 300ms ease;
+  }
+
+  .nav-logo:hover {
+    color: #6BBF9A;
+  }
+
+  .nav-cta-btn {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transition: border-color 300ms ease, background-color 200ms ease, transform 200ms ease;
+  }
+
+  .nav-mobile-btn {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: border-color 300ms ease, background-color 200ms ease, color 200ms ease;
   }
 
   .nav-pill-container {
@@ -168,5 +185,26 @@ const { company, nav } = siteData;
   .nav-pill-mobile {
     background-color: #e8f0e6;
     border: 1px solid rgba(47, 93, 98, 0.08);
+  }
+
+  /* Scrolled state transitions */
+  :global(header[data-site-header][data-scrolled="true"] .nav-logo),
+  :global(header.is-scrolled .nav-logo) {
+    color: #326262;
+  }
+
+  :global(header[data-site-header][data-scrolled="true"] .nav-logo:hover),
+  :global(header.is-scrolled .nav-logo:hover) {
+    color: #1c4e4e;
+  }
+
+  :global(header[data-site-header][data-scrolled="true"] .nav-cta-btn),
+  :global(header.is-scrolled .nav-cta-btn) {
+    border-color: transparent;
+  }
+
+  :global(header[data-site-header][data-scrolled="true"] .nav-mobile-btn),
+  :global(header.is-scrolled .nav-mobile-btn) {
+    border-color: transparent;
   }
 </style>

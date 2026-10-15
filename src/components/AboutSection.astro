@@ -13,15 +13,17 @@ const icons = ['code', 'palette', 'chat'];
       {about.eyebrow}
     </span>
 
-    <!-- Cards with Effect 6: 3D Tilt on hover -->
+    <!-- Cards with Effect 6: 3D Tilt on hover & Green Block Wipe reveal -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
       {about.cards.map((card, i) => (
         <div
           data-tilt
+          data-block-wipe
+          data-card-index={i}
           class="bg-white rounded-[20px] sm:rounded-[24px] p-6 sm:p-8 border border-[#326262]/10 shadow-[0_4px_20px_-2px_rgba(50,98,98,0.06)] hover:border-[#6BBF9A]/40 transition-colors flex flex-col justify-between"
         >
           <!-- Icon badge -->
-          <div class="w-12 h-12 rounded-full bg-[#E5F0E1] flex items-center justify-center text-[#326262] mb-6">
+          <div class="block-wipe-icon w-12 h-12 rounded-full bg-[#E5F0E1] flex items-center justify-center text-[#326262] mb-6">
             {i === 0 && (
               <svg class="w-6 h-6 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
@@ -40,10 +42,10 @@ const icons = ['code', 'palette', 'chat'];
           </div>
 
           <div>
-            <h3 class="text-xl font-medium text-[#1C1B1B] mb-3 leading-snug">
+            <h3 data-block-wipe-text class="text-xl font-medium text-[#1C1B1B] mb-3 leading-snug">
               {card.title}
             </h3>
-            <p class="text-base text-[#586261] leading-relaxed font-normal">
+            <p data-block-wipe-text class="text-base text-[#586261] leading-relaxed font-normal">
               {card.description}
             </p>
           </div>

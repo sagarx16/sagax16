@@ -22,3 +22,6 @@ Thumbs.db
 # Temporary screenshot crops in root
 /*.png
 
+.vercel
+.env*
+!.env.example

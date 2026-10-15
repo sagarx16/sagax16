@@ -62,7 +62,7 @@ export const siteData = {
 
   hero: {
     heading: 'Professional websites for institutions, businesses and celebrations.',
-    subheading: 'SAGA16 is a web design and development studio in Bokaro Steel City. Our full-stack engineers and UI/UX designer deliver fast, polished, mobile-ready websites for schools, companies, civic bodies and families.',
+    subheading: 'Our full-stack engineers and UI/UX designer deliver fast, polished, mobile-ready websites for schools, companies, civic bodies and families.',
     primaryButton: { text: 'Talk to Our Team', href: '/contact' },
     secondaryButton: { text: 'View Our Work', href: '/our-work' },
   },
@@ -104,6 +104,7 @@ export const siteData = {
       'POCKETBANK',
       'SACHET',
       'GHIBLI TRIBUTE',
+      'SAGE WELLNESS',
     ],
   },
 
@@ -127,7 +128,7 @@ export const siteData = {
   },
 
   facts: [
-    { value: '6', label: 'live projects' },
+    { value: '7', label: 'live projects' },
     { value: '6', label: 'website categories' },
     { value: '₹599', label: 'starting price' },
   ],
@@ -288,6 +289,22 @@ export const siteData = {
       tech: ['Next.js'],
       liveUrl: 'https://ghiblix16.vercel.app/movies',
       image: '/projects/ghibli-tribute.png',
+    },
+    {
+      id: 'sage-wellness',
+      title: 'Sage Wellness (Dr. Maya Reynolds, PsyD)',
+      label: 'Concept project',
+      category: 'institutional-business',
+      categoryLabel: 'Institutional & Business',
+      description: 'Calming, trauma-informed therapy practice website with telehealth booking, specialties and consultation flow.',
+      features: [
+        'Telehealth & in-person consultation booking flow',
+        'Specialties & clinical approach breakdown',
+        'Trauma-informed calming aesthetics',
+      ],
+      tech: ['Next.js'],
+      liveUrl: 'https://sage-wellness.vercel.app',
+      image: '/projects/sage-wellness.png',
     },
   ] as Project[],
 
