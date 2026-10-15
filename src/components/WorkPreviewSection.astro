@@ -37,33 +37,16 @@ const featuredProjects = featuredOrder
           ]}
         >
           <div>
-            <!-- Live Project Screenshot in Sleek Browser Frame -->
+            <!-- Project Screenshot -->
             <div
-              class="w-full h-48 sm:h-56 bg-[#0E1216] rounded-2xl mb-5 sm:mb-6 overflow-hidden relative group/img border border-[#326262]/15 shadow-md flex flex-col"
+              class="w-full h-48 sm:h-56 rounded-2xl mb-5 sm:mb-6 overflow-hidden relative group/img border border-[#326262]/10 shadow-[0_2px_10px_-2px_rgba(50,98,98,0.08)] bg-[#FAF9F8]"
             >
-              <div class="w-full h-full relative flex flex-col bg-[#14181D]">
-                <!-- Browser Bar Overlay -->
-                <div class="w-full px-3.5 py-2 bg-[#101418] border-b border-white/10 flex items-center justify-between z-10 shrink-0">
-                  <div class="flex items-center gap-1.5">
-                    <span class="w-2 h-2 rounded-full bg-[#EF4444]/90"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#F59E0B]/90"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#10B981]/90"></span>
-                  </div>
-                  <div class="px-2.5 py-0.5 rounded-full bg-white/5 text-[10px] text-white/60 font-mono tracking-tight flex items-center gap-1 border border-white/5">
-                    <span>{project.tech[0]}</span>
-                  </div>
-                </div>
-
-                <!-- Real Screenshot -->
-                <div class="w-full flex-1 relative overflow-hidden bg-black">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    class="w-full h-full object-cover object-top group-hover/img:scale-105 transition-transform duration-500 ease-out"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
+              <img
+                src={project.image}
+                alt={project.title}
+                class="w-full h-full object-cover object-top group-hover/img:scale-105 transition-transform duration-500 ease-out"
+                loading="lazy"
+              />
             </div>
 
             <!-- Label Pill -->
