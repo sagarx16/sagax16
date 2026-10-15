@@ -73,28 +73,16 @@ export const siteData = {
     description: 'From schools and civic bodies to weddings and birthdays, we design and build the website that fits.',
     rows: [
       {
-        title: 'Wedding Invitation Websites',
-        text: 'Wedding and anniversary invitation sites with schedules, countdowns, galleries and WhatsApp sharing. Starting at ₹1,600.',
+        title: 'Family & Celebrations',
+        description: 'Wedding, anniversary and birthday invitation websites with schedules, countdowns, photo galleries and WhatsApp sharing. Wedding sites start at ₹1,600 and birthday sites start at ₹599.',
       },
       {
-        title: 'Birthday and Event Invitations',
-        text: 'Birthday and event invitation sites with details, countdowns, galleries and WhatsApp sharing. Birthday sites start at ₹599. Event pricing is as per your requirements.',
+        title: 'Business & Institutions',
+        description: 'Websites for small businesses, companies, schools, colleges and civic bodies, with services, galleries, notices and enquiry forms. Mobile-ready and priced as per your requirements.',
       },
       {
-        title: 'Business Websites',
-        text: 'Company, school, college and institute websites with programmes, galleries, notices and enquiry forms. Institutional sites start at ₹5,999. Business sites are priced as per your requirements.',
-      },
-      {
-        title: 'Personal Portfolio Websites',
-        text: 'Clean, fast portfolio websites that present your work, skills and contact details. Priced as per your requirements.',
-      },
-      {
-        title: 'Small-Business Websites',
-        text: 'Simple, mobile-ready websites for local and small businesses. Priced as per your requirements.',
-      },
-      {
-        title: 'Custom Branding and Graphic Design',
-        text: 'Logos, brand identity and graphics that match your website. Priced as per your requirements.',
+        title: 'Personal Portfolio',
+        description: 'Clean, fast portfolio websites that present your work, skills and contact details. Priced as per your requirements.',
       },
     ],
     marqueeLabel: 'WEBSITES WE HAVE BUILT AND LAUNCHED',
