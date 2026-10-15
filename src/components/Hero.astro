@@ -51,45 +51,20 @@ const { hero } = siteData;
       </a>
     </div>
 
-    <!-- Effect 2: Box Reveal for Project Mockups (Laptop and Phone - BOTH visible and beautifully balanced on mobile!) -->
+    <!-- Effect 2: Box Reveal for Project Mockups (Laptop and Phone - Modern, Sleek & Fully Visible!) -->
     <div
-      class="w-full max-w-4xl flex items-end justify-center pt-2 sm:pt-4 relative"
+      class="w-full max-w-5xl flex items-end justify-center pt-2 sm:pt-4 relative"
     >
-      <!-- Laptop Mockup (PocketBank) -->
+      <!-- Modern Showcase Display (PocketBank Desktop) -->
       <div
         data-reveal="box"
         data-box-color="teal"
-        class="relative w-full max-w-[540px] sm:max-w-[620px] rounded-xl sm:rounded-2xl bg-[#1A1C1E] p-2.5 sm:p-4 pb-3 sm:pb-3.5 border border-white/20 shadow-2xl"
+        class="relative w-full max-w-[560px] sm:max-w-[650px] lg:max-w-[720px] rounded-2xl sm:rounded-3xl bg-[#0e1616]/90 p-2 sm:p-3 border border-white/20 shadow-[0_30px_90px_-20px_rgba(0,0,0,0.9)] backdrop-blur-md transition-all duration-500 hover:-translate-y-1"
       >
         <div class="box-content">
-          <!-- Window Controls & URL bar -->
-          <div class="flex items-center justify-between gap-1.5 sm:gap-2 mb-2 sm:mb-3 px-1">
-            <div class="flex items-center gap-1 sm:gap-1.5">
-              <span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#EF4444]/80"></span>
-              <span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#F59E0B]/80"></span>
-              <span class="w-2 sm:w-2.5 h-2 sm:h-2.5 rounded-full bg-[#10B981]/80"></span>
-            </div>
-            <div
-              class="px-2.5 sm:px-3 py-0.5 rounded-full bg-white/10 text-[10px] sm:text-[11px] text-white/70 font-mono tracking-tight flex items-center gap-1 sm:gap-1.5 border border-white/10"
-            >
-              <svg
-                class="w-2.5 sm:w-3 h-2.5 sm:h-3 text-[#6BBF9A]"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
-                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                <path d="M7 11V7a5 5 0 0110 0v4"></path>
-              </svg>
-              <span>pocketbank.app</span>
-            </div>
-            <div class="w-8 sm:w-16"></div>
-          </div>
-
-          <!-- Real Screenshot of PocketBank -->
+          <!-- Real Screenshot of PocketBank with clean rounded frame -->
           <div
-            class="w-full bg-[#121316] rounded-lg sm:rounded-xl overflow-hidden aspect-[16/10] relative group border border-white/5"
+            class="w-full bg-[#121316] rounded-xl sm:rounded-2xl overflow-hidden aspect-[16/10] relative group border border-white/10 shadow-inner"
           >
             <img
               src="/projects/pocketbank.png"
@@ -99,30 +74,30 @@ const { hero } = siteData;
             />
           </div>
 
-          <!-- Base of Laptop with visible highlight & border -->
-          <div class="w-full h-2 sm:h-2.5 bg-[#25282D] border-t border-white/15 rounded-b-md sm:rounded-b-lg mt-1.5 sm:mt-2 mx-auto">
+          <!-- Base of Laptop with subtle metallic highlight -->
+          <div class="w-[92%] h-2 sm:h-2.5 bg-gradient-to-r from-[#182022] via-[#283638] to-[#182022] border-t border-white/15 rounded-b-lg sm:rounded-b-xl mt-2 mx-auto shadow-md">
           </div>
         </div>
       </div>
 
-      <!-- Phone Mockup (PocketBank Mobile) - Scaled with elegant overlap on mobile, complete with full border & bottom frame -->
+      <!-- Phone Mockup (PocketBank Mobile - Enlarged & Fully Visible) -->
       <div
         data-reveal="box"
         data-box-color="green"
-        class="w-[105px] xs:w-[130px] sm:w-[190px] lg:w-[224px] shrink-0 rounded-[1.8rem] sm:rounded-[2.8rem] bg-[#18191D] p-1.5 sm:p-2.5 pb-2.5 sm:pb-3.5 border-2 border-white/25 shadow-[0_16px_50px_rgba(0,0,0,0.9)] relative z-20 -ml-8 xs:-ml-12 sm:-ml-6 lg:-ml-10 transition-transform duration-500 hover:-translate-y-2 ring-1 ring-white/10"
+        class="w-[140px] xs:w-[170px] sm:w-[220px] md:w-[250px] lg:w-[275px] shrink-0 rounded-[2.2rem] sm:rounded-[3rem] bg-[#121819] p-2 sm:p-3 pb-3 sm:pb-4 border-2 border-white/30 shadow-[0_25px_70px_rgba(0,0,0,0.95),0_0_30px_rgba(107,191,154,0.15)] relative z-20 -ml-12 xs:-ml-16 sm:-ml-10 lg:-ml-16 transition-all duration-500 hover:-translate-y-2 ring-1 ring-white/15"
       >
         <div class="box-content relative">
           <!-- Dynamic Island -->
           <div
-            class="w-10 sm:w-16 h-2.5 sm:h-4 bg-black rounded-full mx-auto mb-1.5 sm:mb-2 flex items-center justify-between px-1.5 sm:px-2 shadow-inner ring-1 ring-white/10"
+            class="w-12 sm:w-20 h-3 sm:h-4.5 bg-black rounded-full mx-auto mb-2 sm:mb-2.5 flex items-center justify-between px-2 sm:px-2.5 shadow-inner ring-1 ring-white/15"
           >
-            <span class="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-[#162736]"></span>
-            <span class="w-0.5 sm:w-1 h-0.5 sm:h-1 rounded-full bg-[#233544]"></span>
+            <span class="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#162736]"></span>
+            <span class="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-[#233544]"></span>
           </div>
 
-          <!-- Real Mobile Screenshot of PocketBank -->
+          <!-- Real Mobile Screenshot of PocketBank (Aspect matched to 612/1024 so entire mobile UI displays completely) -->
           <div
-            class="w-full bg-[#f7fafd] rounded-[1.2rem] sm:rounded-[2.2rem] overflow-hidden aspect-[9/18] relative group shadow-inner border border-white/10"
+            class="w-full bg-[#f7fafd] rounded-[1.6rem] sm:rounded-[2.4rem] overflow-hidden aspect-[612/1024] relative group shadow-inner border border-white/10"
           >
             <img
               src="/projects/pocketbank-mobile.png"
@@ -132,13 +107,13 @@ const { hero } = siteData;
             />
             <!-- Gloss / Sheen overlay -->
             <div
-              class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.12] rounded-[1.2rem] sm:rounded-[2.2rem]"
+              class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-white/[0.14] rounded-[1.6rem] sm:rounded-[2.4rem]"
             >
             </div>
           </div>
 
           <!-- Phone Home Indicator Bar at the bottom -->
-          <div class="w-8 sm:w-14 h-1 bg-white/40 rounded-full mx-auto mt-1.5 sm:mt-2"></div>
+          <div class="w-10 sm:w-16 h-1 bg-white/40 rounded-full mx-auto mt-2 sm:mt-2.5"></div>
         </div>
       </div>
     </div>

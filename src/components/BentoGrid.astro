@@ -301,7 +301,9 @@ const projectThemes = [
           const isOddCount = arr.length % 2 !== 0;
           const isLast = offset === arr.length - 1;
           const spanClass = isOddCount && isLast ? 'lg:col-span-12' : 'lg:col-span-6';
-          const cardClasses = `${spanClass} min-h-[380px] xs:min-h-[420px] sm:min-h-[500px] lg:min-h-[550px]`;
+          const cardClasses = isOddCount && isLast
+            ? 'lg:col-span-12 min-h-[440px] xs:min-h-[480px] sm:min-h-[560px] lg:min-h-[660px]'
+            : `${spanClass} min-h-[380px] xs:min-h-[420px] sm:min-h-[500px] lg:min-h-[550px]`;
           const theme = projectThemes[index] || projectThemes[0];
 
           return (
@@ -366,8 +368,8 @@ const projectThemes = [
               {/* Centered Floating Mockup Stage */}
               <div class="relative w-full flex-1 flex items-center justify-center overflow-hidden">
                 <div class:list={[
-                  'w-full h-full max-h-[360px] sm:max-h-[380px] lg:max-h-[410px] rounded-xl sm:rounded-2xl border border-white/20 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.85)] overflow-hidden relative transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-[1.02]',
-                  isOddCount && isLast ? 'max-w-[880px] mx-auto' : ''
+                  'w-full h-full rounded-xl sm:rounded-2xl border border-white/20 shadow-[0_20px_50px_-10px_rgba(0,0,0,0.85)] overflow-hidden relative transition-all duration-500 ease-out group-hover:-translate-y-2 group-hover:scale-[1.02]',
+                  isOddCount && isLast ? 'max-w-[1040px] mx-auto max-h-[460px] sm:max-h-[520px] lg:max-h-[580px]' : 'max-h-[360px] sm:max-h-[380px] lg:max-h-[410px]'
                 ]}>
                   <img
                     src={theme.imgSrc}
