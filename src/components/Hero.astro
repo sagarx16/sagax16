@@ -51,71 +51,230 @@ const { hero } = siteData;
       </a>
     </div>
 
-    <!-- Effect 2: Box Reveal for Project Mockups (Laptop and Phone - Modern, Sleek & Fully Visible!) -->
+    <!-- Effect 2: Box Reveal for Project Mockups (Laptop and Phone - Modern Titanium Restyling) -->
     <div
-      class="w-full max-w-5xl flex items-end justify-center pt-2 sm:pt-4 relative"
+      class="device-showcase-wrapper group w-full max-w-5xl flex items-end justify-center pt-2 sm:pt-4 relative"
     >
-      <!-- Modern Showcase Display (PocketBank Desktop) -->
+      <!-- Ambient Radial Glow Behind Both Devices -->
+      <div
+        class="showcase-ambient-glow pointer-events-none absolute inset-0 -bottom-8 flex items-center justify-center z-0"
+        aria-hidden="true"
+      >
+        <div
+          class="w-[88%] max-w-[850px] h-[340px] sm:h-[420px] rounded-full"
+          style="background: radial-gradient(60% 50% at 50% 55%, var(--device-glow), transparent 70%); filter: blur(40px);"
+        ></div>
+      </div>
+
+      <!-- Faint Reflection / Floor Line Under Devices -->
+      <div
+        class="pointer-events-none absolute -bottom-1 sm:-bottom-2 left-1/2 -translate-x-1/2 w-[85%] max-w-[880px] h-[1px] z-0"
+        style="background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);"
+        aria-hidden="true"
+      ></div>
+
+      <!-- Modern Showcase Display (PocketBank Desktop Laptop) -->
       <div
         data-reveal="box"
         data-box-color="teal"
-        class="relative w-full max-w-[560px] sm:max-w-[650px] lg:max-w-[720px] rounded-2xl sm:rounded-3xl bg-[#0e1616]/90 p-2 sm:p-3 border border-white/20 shadow-[0_30px_90px_-20px_rgba(0,0,0,0.9)] backdrop-blur-md transition-all duration-500 hover:-translate-y-1"
+        class="laptop-mockup relative w-full max-w-[560px] sm:max-w-[650px] lg:max-w-[720px] rounded-2xl sm:rounded-3xl p-2 sm:p-3 backdrop-blur-md z-10"
       >
         <div class="box-content">
-          <!-- Real Screenshot of PocketBank with clean rounded frame -->
+          <!-- Real Screenshot with Screen Bezel & Soft Glass Sheen -->
           <div
-            class="w-full bg-[#121316] rounded-xl sm:rounded-2xl overflow-hidden aspect-[16/10] relative group border border-white/10 shadow-inner"
+            class="laptop-screen-bezel w-full rounded-xl sm:rounded-2xl overflow-hidden aspect-[16/10] relative group shadow-inner"
+            style="background-color: var(--device-bezel); padding: 2px;"
           >
-            <img
-              src="/projects/pocketbank.png"
-              alt="PocketBank - Student Banking App by SAGA16"
-              class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
-              loading="eager"
-            />
+            <div class="w-full h-full rounded-[10px] sm:rounded-[14px] overflow-hidden relative">
+              <img
+                src="/projects/pocketbank.png"
+                alt="PocketBank - Student Banking App by SAGA16"
+                class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
+                loading="eager"
+              />
+              <!-- Soft glass sheen over screen -->
+              <div
+                class="pointer-events-none absolute inset-0 z-10"
+                style="background: linear-gradient(120deg, rgba(255,255,255,0.08), transparent 40%);"
+                aria-hidden="true"
+              ></div>
+            </div>
           </div>
 
-          <!-- Base of Laptop with subtle metallic highlight -->
-          <div class="w-[92%] h-2 sm:h-2.5 bg-gradient-to-r from-[#182022] via-[#283638] to-[#182022] border-t border-white/15 rounded-b-lg sm:rounded-b-xl mt-2 mx-auto shadow-md">
+          <!-- Base/keyboard deck: brushed titanium look with thumb notch & contact shadow -->
+          <div class="laptop-base relative w-[92%] h-2 sm:h-2.5 rounded-b-lg sm:rounded-b-xl mt-2 mx-auto">
+            <!-- Centered thumb notch with subtle inner shadow -->
+            <div
+              class="w-10 sm:w-14 h-1 sm:h-1.5 mx-auto rounded-b-md bg-[#05090a] shadow-[inset_0_1px_2px_rgba(0,0,0,0.9)]"
+              aria-hidden="true"
+            ></div>
           </div>
         </div>
       </div>
 
-      <!-- Phone Mockup (PocketBank Mobile - Enlarged & Fully Visible) -->
+      <!-- Phone Mockup Container (PocketBank Mobile - Titanium Finish, Side Buttons & Floating) -->
       <div
-        data-reveal="box"
-        data-box-color="green"
-        class="w-[140px] xs:w-[170px] sm:w-[220px] md:w-[250px] lg:w-[275px] shrink-0 rounded-[2.2rem] sm:rounded-[3rem] bg-[#121819] p-2 sm:p-3 pb-3 sm:pb-4 border-2 border-white/30 shadow-[0_25px_70px_rgba(0,0,0,0.95),0_0_30px_rgba(107,191,154,0.15)] relative z-20 -ml-12 xs:-ml-16 sm:-ml-10 lg:-ml-16 transition-all duration-500 hover:-translate-y-2 ring-1 ring-white/15"
+        class="phone-float-container shrink-0 relative z-20 -ml-12 xs:-ml-16 sm:-ml-10 lg:-ml-16 w-[140px] xs:w-[170px] sm:w-[220px] md:w-[250px] lg:w-[275px]"
       >
-        <div class="box-content relative">
-          <!-- Dynamic Island -->
+        <div class="phone-lift-layer w-full">
           <div
-            class="w-12 sm:w-20 h-3 sm:h-4.5 bg-black rounded-full mx-auto mb-2 sm:mb-2.5 flex items-center justify-between px-2 sm:px-2.5 shadow-inner ring-1 ring-white/15"
+            data-reveal="box"
+            data-box-color="green"
+            class="phone-mockup w-full rounded-[2.2rem] sm:rounded-[3rem] p-2 sm:p-3 pb-3 sm:pb-4 relative"
           >
-            <span class="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#162736]"></span>
-            <span class="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-[#233544]"></span>
-          </div>
+            <!-- Tiny side buttons (volume & power) -->
+            <span class="phone-side-button phone-button-left-1" aria-hidden="true"></span>
+            <span class="phone-side-button phone-button-left-2" aria-hidden="true"></span>
+            <span class="phone-side-button phone-button-right" aria-hidden="true"></span>
 
-          <!-- Real Mobile Screenshot of PocketBank (Aspect matched to 612/1024 so entire mobile UI displays completely) -->
-          <div
-            class="w-full bg-[#f7fafd] rounded-[1.6rem] sm:rounded-[2.4rem] overflow-hidden aspect-[612/1024] relative group shadow-inner border border-white/10"
-          >
-            <img
-              src="/projects/pocketbank-mobile.png"
-              alt="PocketBank - Student Banking Mobile App by SAGA16"
-              class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
-              loading="eager"
-            />
-            <!-- Gloss / Sheen overlay -->
-            <div
-              class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.04] to-white/[0.14] rounded-[1.6rem] sm:rounded-[2.4rem]"
-            >
+            <div class="box-content relative">
+              <!-- Dynamic Island -->
+              <div
+                class="phone-dynamic-island w-12 sm:w-20 h-3 sm:h-4.5 rounded-full mx-auto mb-2 sm:mb-2.5 flex items-center justify-between px-2 sm:px-2.5"
+              >
+                <span class="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#162736]"></span>
+                <span class="w-1 sm:w-1.5 h-1 sm:h-1.5 rounded-full bg-[#233544]"></span>
+              </div>
+
+              <!-- Real Mobile Screenshot of PocketBank -->
+              <div
+                class="w-full bg-[#f7fafd] rounded-[1.6rem] sm:rounded-[2.4rem] overflow-hidden aspect-[612/1024] relative group shadow-inner border border-white/10"
+              >
+                <img
+                  src="/projects/pocketbank-mobile.png"
+                  alt="PocketBank - Student Banking Mobile App by SAGA16"
+                  class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
+                  loading="eager"
+                />
+                <!-- Screen glass sheen overlay (0.10) -->
+                <div
+                  class="pointer-events-none absolute inset-0 rounded-[1.6rem] sm:rounded-[2.4rem] z-10"
+                  style="background: linear-gradient(120deg, rgba(255,255,255,0.10), transparent 40%);"
+                  aria-hidden="true"
+                >
+                </div>
+              </div>
+
+              <!-- Phone Home Indicator Bar at the bottom -->
+              <div
+                class="w-10 sm:w-16 h-1 rounded-full mx-auto mt-2 sm:mt-2.5"
+                style="background-color: rgba(255, 255, 255, 0.7);"
+              ></div>
             </div>
           </div>
-
-          <!-- Phone Home Indicator Bar at the bottom -->
-          <div class="w-10 sm:w-16 h-1 bg-white/40 rounded-full mx-auto mt-2 sm:mt-2.5"></div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .device-showcase-wrapper {
+    --device-frame-1: #2a3433;
+    --device-frame-2: #121a1a;
+    --device-edge: rgba(255, 255, 255, 0.22);
+    --device-bezel: #05090a;
+    --device-base-1: #3b4746;
+    --device-base-2: #1a2322;
+    --device-glow: rgba(58, 160, 140, 0.35);
+  }
+
+  /* Ambient Glow Background */
+  .showcase-ambient-glow {
+    opacity: 0.6;
+    transition: opacity 500ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity;
+  }
+  .device-showcase-wrapper:hover .showcase-ambient-glow {
+    opacity: 0.95;
+  }
+
+  /* Laptop Lid & Base */
+  .laptop-mockup {
+    background: linear-gradient(145deg, var(--device-frame-1), var(--device-frame-2));
+    box-shadow: inset 0 0 0 1px var(--device-edge), 0 30px 90px -20px rgba(0, 0, 0, 0.9);
+  }
+
+  .laptop-base {
+    background: linear-gradient(180deg, var(--device-base-1), var(--device-base-2));
+    border-top: 1px solid var(--device-edge);
+    box-shadow: 0 40px 60px -20px rgba(0, 0, 0, 0.6);
+  }
+
+  /* Phone Mockup Frame */
+  .phone-mockup {
+    background: linear-gradient(160deg, #3a4645, #101818);
+    box-shadow: inset 0 0 0 1.5px var(--device-edge), 0 30px 70px -15px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Side Buttons */
+  .phone-side-button {
+    position: absolute;
+    width: 2.5px;
+    background: linear-gradient(180deg, #3a4645, #101818);
+    box-shadow: inset 0 0 0 0.5px var(--device-edge);
+    pointer-events: none;
+  }
+  .phone-button-left-1 {
+    left: -2.5px;
+    top: 18%;
+    height: 6%;
+    border-radius: 2px 0 0 2px;
+  }
+  .phone-button-left-2 {
+    left: -2.5px;
+    top: 26%;
+    height: 6%;
+    border-radius: 2px 0 0 2px;
+  }
+  .phone-button-right {
+    right: -2.5px;
+    top: 22%;
+    height: 9%;
+    border-radius: 0 2px 2px 0;
+  }
+
+  /* Dynamic Island */
+  .phone-dynamic-island {
+    background-color: #000000;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+  }
+
+  /* Phone Idle Floating Animation */
+  @keyframes phoneIdleFloat {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-8px);
+    }
+  }
+
+  .phone-float-container {
+    animation: phoneIdleFloat 6s ease-in-out infinite alternate;
+    will-change: transform;
+  }
+
+  /* Phone Hover Lift */
+  .phone-lift-layer {
+    transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+  }
+  .device-showcase-wrapper:hover .phone-lift-layer {
+    transform: translateY(-6px);
+  }
+
+  /* Accessibility: Prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    .phone-float-container {
+      animation: none !important;
+    }
+    .phone-lift-layer {
+      transform: none !important;
+      transition: none !important;
+    }
+    .showcase-ambient-glow {
+      transition: none !important;
+    }
+  }
+</style>
