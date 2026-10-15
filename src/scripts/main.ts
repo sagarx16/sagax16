@@ -32,30 +32,13 @@ function initNavbar(): void {
   const updateHeaderState = () => {
     if (!header) return;
     const isMenuOpen = menuButton?.getAttribute('aria-expanded') === 'true';
-    const isScrolled = window.scrollY > 40 || isMenuOpen;
+    const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    const isScrolled = scrollY > 30 || isMenuOpen;
     header.setAttribute('data-scrolled', String(isScrolled));
     header.classList.toggle('is-scrolled', isScrolled);
   };
 
   if (header) {
-    // 1. IntersectionObserver on 1px sentinel element at top of page (preferred)
-    const sentinel = document.querySelector<HTMLElement>('[data-scroll-sentinel]');
-    if (sentinel && 'IntersectionObserver' in window) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          const entry = entries[0];
-          const isAtTop = entry.isIntersecting;
-          const isMenuOpen = menuButton?.getAttribute('aria-expanded') === 'true';
-          const isScrolled = !isAtTop || isMenuOpen;
-          header.setAttribute('data-scrolled', String(isScrolled));
-          header.classList.toggle('is-scrolled', isScrolled);
-        },
-        { rootMargin: '-40px 0px 0px 0px' }
-      );
-      observer.observe(sentinel);
-    }
-
-    // 2. Passive scroll listener with requestAnimationFrame for fast feedback & scroll restore
     let ticking = false;
     const onScroll = () => {
       if (!ticking) {
@@ -66,9 +49,11 @@ function initNavbar(): void {
         ticking = true;
       }
     };
-    window.addEventListener('scroll', onScroll, { passive: true });
 
-    // Initial check on page load / browser scroll restoration
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', updateHeaderState, { passive: true });
+
+    // Initial check on page load & after DOM is ready
     updateHeaderState();
   }
 
